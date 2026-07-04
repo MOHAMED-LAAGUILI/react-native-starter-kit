@@ -1,0 +1,45 @@
+{
+  "app": {
+    "name": "Starter Kit",
+    "tagline": "Production-ready React Native app",
+    "version": "Version {{version}}",
+    "buildNumber": "Build {{number}}",
+    "description": "Built with Expo, Uniwind, and React Native Reusables"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "noResults": "No results found",
+    "pullToRefresh": "Pull to refresh",
+    "close": "Close"
+  },
+  "navigation": {
+    "home": "Home",
+    "search": "Search",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "title": "App Theme",
+    "description": "Choose your preferred appearance"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select your preferred language"
+  },
+  "settings": {
+    "appearance": "Appearance",
+    "about": "About",
+    "info": "App Info"
+  }
+}

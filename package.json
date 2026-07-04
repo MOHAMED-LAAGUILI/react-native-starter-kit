@@ -8,10 +8,14 @@
     "ios": "expo start -c --ios",
     "web": "expo start -c --web",
     "clean": "rm -rf .expo node_modules",
-    "fix:deps":"npx expo install --fix",
-    "doctor":"npx expo-doctor --verbose"
+    "fix:deps": "npx expo install --fix",
+    "doctor": "npx expo-doctor --verbose"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.4.2",
+    "@gorhom/bottom-sheet": "^5",
+    "@react-navigation/drawer": "^7",
+    "@react-navigation/native-stack": "^7",
     "@rn-primitives/accordion": "^1.5.2",
     "@rn-primitives/alert-dialog": "^1.5.2",
     "@rn-primitives/aspect-ratio": "^1.5.2",
@@ -36,41 +40,92 @@
     "@rn-primitives/toggle": "^1.5.2",
     "@rn-primitives/toggle-group": "^1.5.2",
     "@rn-primitives/tooltip": "^1.5.2",
+    "@shopify/flash-list": "2.0.2",
+    "@tanstack/react-form": "^1",
+    "@tanstack/react-query": "^5",
+    "@tanstack/react-query-devtools": "^5",
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/parser": "^8.62.1",
+    "app-icon-badge": "^0.1.2",
+    "axios": "^1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "eslint": "^10.6.0",
+    "eslint-config-expo": "^57.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "expo": "^57.0.0",
     "expo-constants": "~57.0.3",
     "expo-haptics": "~57.0.0",
+    "expo-image": "^57.0.0",
     "expo-linking": "~57.0.1",
+    "expo-localization": "^57.0.0",
     "expo-router": "~57.0.3",
     "expo-splash-screen": "~57.0.2",
     "expo-status-bar": "~57.0.0",
-    "expo-system-ui": "~57.0.0",
+    "expo-system-ui": "^57.0.0",
     "expo-updates": "~57.0.6",
+    "i18next": "^26.3.4",
+    "lint-staged": "^17.0.8",
     "lucide-react-native": "^1.21.0",
+    "moti": "^0.30.0",
+    "nativewind": "^4.2.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-i18next": "^17.0.8",
     "react-native": "0.86.0",
+    "react-native-dotenv": "^3.4.11",
+    "react-native-edge-to-edge": "^1.8.1",
     "react-native-gesture-handler": "~2.32.0",
     "react-native-keyboard-controller": "1.21.9",
-    "react-native-reanimated": "4.5.0",
+    "react-native-mmkv": "^4.3.2",
+    "react-native-nitro-modules": "^0.36.1",
+    "react-native-reanimated": "~4.5.0",
+    "react-native-restart": "^0.0.28",
     "react-native-safe-area-context": "~5.7.0",
-    "react-native-screens": "4.25.2",
+    "react-native-screens": "^4.25.2",
     "react-native-svg": "15.15.4",
+    "react-native-url-polyfill": "^3.0.0",
     "react-native-web": "^0.21.0",
     "react-native-worklets": "0.10.0",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "tailwindcss-animate": "^1.0.7",
     "tw-animate-css": "^1.4.0",
-    "uniwind": "^1.9.0"
+    "uniwind": "^1.10.0",
+    "zod": "^3",
+    "zustand": "^5"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@expo/config": "^57.0.2",
+    "@react-native-community/cli": "^20.2.0",
+    "@types/node": "^26.1.0",
     "@types/react": "~19.2.10",
+    "babel-plugin-module-resolver": "^5.0.3",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
+    "tsx": "^4.23.0",
     "typescript": "~6.0.3"
   },
-  "private": true
+  "private": true,
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false,
+        "exclude": [
+          "react-native-restart"
+        ]
+      }
+    },
+    "install": {
+      "exclude": [
+        "eslint-config-expo",
+        "react-native-worklets"
+      ]
+    }
+  }
 }

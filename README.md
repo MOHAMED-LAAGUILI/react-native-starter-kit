@@ -1,73 +1,132 @@
-# Minimal Uniwind Template
+# React Native Starter Kit
 
-This is a [React Native](https://reactnative.dev/) project built with [Expo](https://expo.dev/) and [React Native Reusables](https://reactnativereusables.com).
+A production-ready [React Native](https://reactnative.dev/) starter built with [Expo SDK 57](https://expo.dev/), [Expo Router](https://expo.dev/router), [Tailwind CSS v4](https://tailwindcss.com/) via [Uniwind](https://uniwind.dev/), [Zustand](https://github.com/pmndrs/zustand), [TanStack Query](https://tanstack.com/query), and [React Native Reusables](https://reactnativereusables.com).
 
-It was initialized using the following command, then the `Minimal (Uniwind)` template was selected when prompted:
-
-```bash
-npx @react-native-reusables/cli@latest init
-```
-
-## Getting Started
-
-To run the development server:
+## Quick Start
 
 ```bash
-    npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm dev
-    # or
-    bun dev
+git clone <repo> my-app
+cd my-app
+bun install
+bun dev
 ```
 
-This will start the Expo Dev Server. Open the app in:
+Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](https://expo.dev/go).
 
-- **iOS**: press `i` to launch in the iOS simulator _(Mac only)_
-- **Android**: press `a` to launch in the Android emulator
-- **Web**: press `w` to run in a browser
+## Commands
 
-You can also scan the QR code using the [Expo Go](https://expo.dev/go) app on your device. This project fully supports running in Expo Go for quick testing on physical devices.
+| Script | Purpose |
+|--------|---------|
+| `bun dev` | Start Expo dev server (fresh cache) |
+| `bun run ios` | Dev server targeting iOS |
+| `bun run android` | Dev server targeting Android |
+| `bun run web` | Dev server targeting Web |
+| `bun run clean` | Remove `.expo` and `node_modules` |
+| `bun run fix:deps` | Fix dependency versions via Expo |
+| `bun run doctor` | Run Expo doctor diagnostics |
+| `bun lint` | Lint with ESLint |
+| `bun run typecheck` | TypeScript type checking (`tsc --noEmit`) |
 
-## Adding components
+## Features
 
-You can add more reusable components using the CLI:
+- **Expo Router** — File-based routing with Stack, Drawer, and Tab navigators
+- **Uniwind + Tailwind v4** — Runtime CSS-in-JS with `className` props, `cn()` utility, dark mode
+- **Zustand** — Lightweight client state with MMKV persistence
+- **TanStack Query** — Server state, caching, and auto-refetching
+- **TanStack Form + Zod** — Type-safe form validation
+- **Axios** — HTTP client with auth token interceptor and refresh queue
+- **i18next** — Internationalization (English, French, Arabic) with RTL support
+- **MMKV** — High-performance key-value storage
+- **Authentication** — Login/register flow with token management, demo mode skip
+- **React Navigation** — Deep linking, typed routes
+- **Bottom Sheet** — Reusable bottom sheet component via `@rn-primitives/dialog`
+- **React Native Reusables** — Accessible, headless UI primitives (Dialog, Portal, Slot)
+- **lucide-react-native** — Icon library
+- **ErrorBoundary** — Structured error handling with logger
+- **Dark/Light/System theme** — CSS variables in oklch, persisted preference
+- **Cross-platform** — iOS, Android, Web
+
+## Project Structure
+
+```
+├── app/                    # Expo Router routes
+│   ├── _layout.tsx         # Root layout (providers, stack)
+│   ├── (auth)/             # Unauthenticated routes
+│   │   └── login.tsx
+│   └── (app)/              # Authenticated routes
+│       ├── _layout.tsx     # Drawer layout + auth guard
+│       ├── settings.tsx
+│       └── (tabs)/         # Bottom tabs
+│           ├── _layout.tsx
+│           ├── index.tsx   # Home
+│           ├── search.tsx
+│           ├── profile.tsx
+│           └── settings.tsx
+├── src/
+│   ├── api/                # Axios client + TanStack Query hooks
+│   ├── components/
+│   │   ├── common/         # LoadingScreen, ErrorFallback
+│   │   ├── forms/          # FormField
+│   │   └── ui/             # Button, Text, BottomSheet
+│   ├── config/             # Constants
+│   ├── errors/             # ErrorBoundary, ApiError
+│   ├── hooks/              # Shared hooks
+│   ├── i18n/               # i18next + locales/{en,fr,ar}
+│   ├── logger/             # Structured logger
+│   ├── providers/          # QueryProvider, ThemeProvider
+│   ├── screens/            # Screen components
+│   ├── storage/            # MMKV wrapper (SSR-safe)
+│   ├── store/              # Zustand stores
+│   ├── types/              # Type declarations
+│   ├── utils/              # Utilities
+│   └── validation/         # Zod schemas
+├── global.css              # Tailwind v4 + Uniwind entry
+├── tsconfig.json
+├── metro.config.js
+└── package.json
+```
+
+## Tech Stack
+
+| Category | Library |
+|----------|---------|
+| Framework | React 19 + React Native 0.86 |
+| Platform | Expo SDK 57 |
+| Language | TypeScript (strict) |
+| Routing | Expo Router (Stack/Drawer/Tabs) |
+| Styling | Tailwind CSS v4 + Uniwind |
+| Client State | Zustand 5 |
+| Server State | TanStack Query 5 |
+| Forms | TanStack Form 1 + Zod 3 |
+| Storage | react-native-mmkv 4 |
+| i18n | i18next 26 + react-i18next |
+| UI | @rn-primitives |
+| Icons | lucide-react-native |
+| HTTP | Axios |
+| Animation | react-native-reanimated + gesture-handler |
+| Linting | ESLint 10 + Prettier |
+| Git Hooks | Husky 9 + lint-staged |
+
+## Adding Components
 
 ```bash
-npx react-native-reusables/cli@latest add [...components]
+npx @react-native-reusables/cli@latest add <component>
 ```
 
-> e.g. `npx react-native-reusables/cli@latest add input textarea`
-
-If you don't specify any component names, you'll be prompted to select which components to add interactively. Use the `--all` flag to install all available components at once.
-
-## Project Features
-
-- ⚛️ Built with [Expo Router](https://expo.dev/router)
-- 🎨 Styled with [Tailwind CSS](https://tailwindcss.com/) via [Uniwind](https://uniwind.dev/)
-- 📦 UI powered by [React Native Reusables](https://github.com/founded-labs/react-native-reusables)
-- 🚀 New Architecture enabled
-- 🔥 Edge to Edge enabled
-- 📱 Runs on iOS, Android, and Web
+Available: `button`, `text`, `card`, `avatar`, `dialog`, `input`, `select`, `tabs`, `switch`, `checkbox`, `radio-group`, `tooltip`, `dropdown-menu`, `popover`, `accordion`, `alert-dialog`, `context-menu`, `hover-card`, `menubar`, `progress`, `separator`, `toggle`, `toggle-group`, `label`, `collapsible`, `aspect-ratio`.
 
 ## Learn More
-
-To dive deeper into the technologies used:
 
 - [React Native Docs](https://reactnative.dev/docs/getting-started)
 - [Expo Docs](https://docs.expo.dev/)
 - [Uniwind Docs](https://docs.uniwind.dev/)
 - [React Native Reusables](https://reactnativereusables.com)
+- [Tailwind CSS v4 Docs](https://tailwindcss.com/docs)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [TanStack Form](https://tanstack.com/form/latest)
+- [Zustand](https://github.com/pmndrs/zustand)
+- [i18next](https://www.i18next.com/)
 
-## Deploy with EAS
+## Deploy
 
-The easiest way to deploy your app is with [Expo Application Services (EAS)](https://expo.dev/eas).
-
-- [EAS Build](https://docs.expo.dev/build/introduction/)
-- [EAS Updates](https://docs.expo.dev/eas-update/introduction/)
-- [EAS Submit](https://docs.expo.dev/submit/introduction/)
-
----
-
-If you enjoy using React Native Reusables, please consider giving it a ⭐ on [GitHub](https://github.com/founded-labs/react-native-reusables). Your support means a lot!
+Use [Expo Application Services (EAS)](https://expo.dev/eas) for builds, updates, and submissions.
