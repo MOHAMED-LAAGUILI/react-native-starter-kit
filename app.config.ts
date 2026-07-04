@@ -1,12 +1,11 @@
-import { readFileSync } from 'fs';
-
 import type { ConfigContext, ExpoConfig } from '@expo/config';
 
 import type { AppIconBadgeConfig } from 'app-icon-badge/types';
 
 import 'tsx/cjs';
 
-const EXPO_PUBLIC_VERSION = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8')).version;
+import pkg from './package.json' with { type: 'json' };
+const EXPO_PUBLIC_VERSION = pkg.version;
 
 const EXPO_PUBLIC_APP_ENV = process.env.EXPO_PUBLIC_APP_ENV ?? 'development';
 const EXPO_PUBLIC_NAME = 'Starter Kit';

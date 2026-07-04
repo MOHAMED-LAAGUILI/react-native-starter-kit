@@ -1,13 +1,11 @@
-import { API_ENDPOINTS } from '@/config/constants';
-import { apiClient } from './client';
-import type { LoginRequest, LoginResponse, User } from '@/types/auth';
+import { API_ENDPOINTS } from "@/config/constants";
+import type { LoginRequest, LoginResponse, User } from "@/types/auth";
+import { apiClient } from "./client";
 
 export const authApi = {
+  getMe: () => apiClient.get<User>(API_ENDPOINTS.AUTH.ME).then(r => r.data),
   login: (data: LoginRequest) =>
-    apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, data).then((r) => r.data),
-
-  register: (data: { email: string; password: string; name: string }) =>
-    apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.REGISTER, data).then((r) => r.data),
+    apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, data).then(r => r.data),
 
   logout: () => apiClient.post(API_ENDPOINTS.AUTH.LOGOUT),
 
@@ -16,29 +14,28 @@ export const authApi = {
       .post<{ accessToken: string; refreshToken: string }>(API_ENDPOINTS.AUTH.REFRESH, {
         refreshToken,
       })
-      .then((r) => r.data),
+      .then(r => r.data),
 
-  getMe: () => apiClient.get<User>(API_ENDPOINTS.AUTH.ME).then((r) => r.data),
+  register: (data: { email: string; password: string; name: string }) =>
+    apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.REGISTER, data).then(r => r.data),
 };
 
 export const usersApi = {
-  getProfile: () => apiClient.get<User>(API_ENDPOINTS.USERS.PROFILE).then((r) => r.data),
+  getProfile: () => apiClient.get<User>(API_ENDPOINTS.USERS.PROFILE).then(r => r.data),
 
   updateProfile: (data: Partial<User>) =>
-    apiClient.put<User>(API_ENDPOINTS.USERS.UPDATE, data).then((r) => r.data),
+    apiClient.put<User>(API_ENDPOINTS.USERS.UPDATE, data).then(r => r.data),
 };
 
 export const postsApi = {
+  create: (data: unknown) => apiClient.post(API_ENDPOINTS.POSTS.CREATE, data).then(r => r.data),
+
+  delete: (id: string) => apiClient.delete(API_ENDPOINTS.POSTS.DELETE(id)).then(r => r.data),
+
+  detail: (id: string) => apiClient.get(API_ENDPOINTS.POSTS.DETAIL(id)).then(r => r.data),
   list: (params?: Record<string, unknown>) =>
-    apiClient.get(API_ENDPOINTS.POSTS.LIST, { params }).then((r) => r.data),
-
-  detail: (id: string) => apiClient.get(API_ENDPOINTS.POSTS.DETAIL(id)).then((r) => r.data),
-
-  create: (data: unknown) =>
-    apiClient.post(API_ENDPOINTS.POSTS.CREATE, data).then((r) => r.data),
+    apiClient.get(API_ENDPOINTS.POSTS.LIST, { params }).then(r => r.data),
 
   update: (id: string, data: unknown) =>
-    apiClient.put(API_ENDPOINTS.POSTS.UPDATE(id), data).then((r) => r.data),
-
-  delete: (id: string) => apiClient.delete(API_ENDPOINTS.POSTS.DELETE(id)).then((r) => r.data),
+    apiClient.put(API_ENDPOINTS.POSTS.UPDATE(id), data).then(r => r.data),
 };

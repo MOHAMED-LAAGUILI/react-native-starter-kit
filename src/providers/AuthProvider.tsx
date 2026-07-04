@@ -1,8 +1,8 @@
-import { useAuthStore } from '@/store';
-import * as React from 'react';
+import * as React from "react";
+import { useAuthStore } from "@/store";
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const hydrate = useAuthStore((s) => s.hydrate);
+  const hydrate = useAuthStore(s => s.hydrate);
 
   React.useEffect(() => {
     hydrate();

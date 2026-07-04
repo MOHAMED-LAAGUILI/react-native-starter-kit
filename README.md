@@ -11,6 +11,13 @@ bun install
 bun dev
 ```
 
+## ENV
+create .env.staging env.development env.production
+API_URL=http://localhost:3000/api
+ENABLE_ANALYTICS=false
+ENABLE_CRASH_REPORTING=false
+
+
 Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](https://expo.dev/go).
 
 ## Commands
@@ -24,8 +31,7 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run clean` | Remove `.expo` and `node_modules` |
 | `bun run fix:deps` | Fix dependency versions via Expo |
 | `bun run doctor` | Run Expo doctor diagnostics |
-| `bun lint` | Lint with ESLint |
-| `bun run typecheck` | TypeScript type checking (`tsc --noEmit`) |
+
 
 ## Features
 
@@ -42,7 +48,6 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 - **Bottom Sheet** — Reusable bottom sheet component via `@rn-primitives/dialog`
 - **React Native Reusables** — Accessible, headless UI primitives (Dialog, Portal, Slot)
 - **lucide-react-native** — Icon library
-- **ErrorBoundary** — Structured error handling with logger
 - **Dark/Light/System theme** — CSS variables in oklch, persisted preference
 - **Cross-platform** — iOS, Android, Web
 
@@ -69,10 +74,8 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 │   │   ├── forms/          # FormField
 │   │   └── ui/             # Button, Text, BottomSheet
 │   ├── config/             # Constants
-│   ├── errors/             # ErrorBoundary, ApiError
 │   ├── hooks/              # Shared hooks
 │   ├── i18n/               # i18next + locales/{en,fr,ar}
-│   ├── logger/             # Structured logger
 │   ├── providers/          # QueryProvider, ThemeProvider
 │   ├── screens/            # Screen components
 │   ├── storage/            # MMKV wrapper (SSR-safe)

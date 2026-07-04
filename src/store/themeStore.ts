@@ -1,8 +1,8 @@
-import { StorageService } from '@/storage';
-import { STORAGE_KEYS } from '@/config/constants';
-import { create } from 'zustand';
+import { create } from "zustand";
+import { STORAGE_KEYS } from "@/config/constants";
+import { StorageService } from "@/storage";
 
-export type ThemeMode = 'light' | 'dark' | 'system';
+export type ThemeMode = "light" | "dark" | "system";
 
 interface ThemeState {
   mode: ThemeMode;
@@ -10,16 +10,16 @@ interface ThemeState {
   hydrate: () => void;
 }
 
-export const useThemeStore = create<ThemeState>((set) => ({
-  mode: 'system',
-  setMode: (mode: ThemeMode) => {
-    StorageService.setString(STORAGE_KEYS.THEME_MODE, mode);
-    set({ mode });
-  },
+export const useThemeStore = create<ThemeState>(set => ({
   hydrate: () => {
     try {
       const persisted = StorageService.getString(STORAGE_KEYS.THEME_MODE) as ThemeMode | undefined;
       if (persisted) set({ mode: persisted });
     } catch {}
+  },
+  mode: "system",
+  setMode: (mode: ThemeMode) => {
+    StorageService.setString(STORAGE_KEYS.THEME_MODE, mode);
+    set({ mode });
   },
 }));

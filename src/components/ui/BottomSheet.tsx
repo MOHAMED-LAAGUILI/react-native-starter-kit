@@ -1,9 +1,9 @@
-import BottomSheetLib, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
-import { cn } from '@/lib/utils';
-import * as React from 'react';
-import { Pressable, View } from 'react-native';
-import { Text } from './Text';
-import { X } from 'lucide-react-native';
+import BottomSheetLib, { BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
+import { X } from "lucide-react-native";
+import * as React from "react";
+import { Pressable, View } from "react-native";
+import { cn } from "@/lib/utils";
+import { Text } from "./Text";
 
 interface BottomSheetOption<T> {
   label: string;
@@ -40,13 +40,13 @@ function BottomSheetInner<T>({
   return (
     <BottomSheetLib
       ref={sheetRef}
-      snapPoints={['35%']}
+      snapPoints={["35%"]}
       index={-1}
       enablePanDownToClose
-      onChange={(index) => {
+      onChange={index => {
         if (index === -1) onOpenChange(false);
       }}
-      backdropComponent={(props) => (
+      backdropComponent={props => (
         <BottomSheetBackdrop
           {...props}
           appearsOnIndex={0}
@@ -62,9 +62,21 @@ function BottomSheetInner<T>({
     >
       <BottomSheetView className="flex-1 px-4">
         <View className="flex-row items-center justify-between mb-4">
-          <Text variant="h4" className="flex-1">{title}</Text>
-          <Pressable className="p-1 rounded-full active:bg-accent" onPress={() => onOpenChange(false)} hitSlop={10}>
-            <X size={20} className="text-muted-foreground" />
+          <Text
+            variant="h4"
+            className="flex-1"
+          >
+            {title}
+          </Text>
+          <Pressable
+            className="p-1 rounded-full active:bg-accent"
+            onPress={() => onOpenChange(false)}
+            hitSlop={10}
+          >
+            <X
+              size={20}
+              className="text-muted-foreground"
+            />
           </Pressable>
         </View>
         <View className="rounded-xl border border-border bg-card overflow-hidden">
@@ -72,9 +84,9 @@ function BottomSheetInner<T>({
             <Pressable
               key={String(option.value)}
               className={cn(
-                'flex-row items-center justify-between p-4',
-                index < options.length - 1 && 'border-b border-border',
-                selectedValue === option.value && 'bg-primary/20',
+                "flex-row items-center justify-between p-4",
+                index < options.length - 1 && "border-b border-border",
+                selectedValue === option.value && "bg-primary/20"
               )}
               onPress={() => {
                 onSelect(option.value);
@@ -82,9 +94,7 @@ function BottomSheetInner<T>({
               }}
             >
               <Text variant="body">{option.label}</Text>
-              {selectedValue === option.value && (
-                <View className="w-2 h-2 rounded-full bg-primary" />
-              )}
+              {selectedValue === option.value && <View className="w-2 h-2 rounded-full bg-primary" />}
             </Pressable>
           ))}
         </View>
@@ -95,5 +105,5 @@ function BottomSheetInner<T>({
 
 const BottomSheet = React.memo(BottomSheetInner) as typeof BottomSheetInner;
 
+export type { BottomSheetOption, BottomSheetProps };
 export { BottomSheet };
-export type { BottomSheetProps, BottomSheetOption };

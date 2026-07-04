@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { View, ScrollView } from 'react-native';
-import { Text } from '@/components/ui/Text';
-import { Input } from '@/components/ui/Input';
+import * as React from "react";
+import { ScrollView, View } from "react-native";
+import { Input } from "@/components/ui/Input";
+import { Text } from "@/components/ui/Text";
 
 function SearchScreen() {
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState("");
 
   return (
     <ScrollView className="flex-1 bg-background">
@@ -16,8 +16,11 @@ function SearchScreen() {
           onChangeText={setQuery}
           autoCapitalize="none"
         />
-        <Text variant="body" className="text-muted-foreground">
-          {query ? `Searching for "${query}"...` : 'Start typing to search'}
+        <Text
+          variant="body"
+          className="text-muted-foreground"
+        >
+          {query ? `Searching for "${query}"...` : "Start typing to search"}
         </Text>
       </View>
     </ScrollView>

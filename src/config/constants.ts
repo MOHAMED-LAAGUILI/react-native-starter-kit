@@ -1,33 +1,33 @@
 export const STORAGE_KEYS = {
-  AUTH_TOKEN: 'auth.token',
-  AUTH_REFRESH_TOKEN: 'auth.refresh_token',
-  THEME_MODE: 'theme.mode',
-  LANGUAGE: 'i18n.language',
+  AUTH_REFRESH_TOKEN: "auth.refresh_token",
+  AUTH_TOKEN: "auth.token",
+  LANGUAGE: "i18n.language",
+  THEME_MODE: "theme.mode",
 } as const;
 
 export const QUERY_KEYS = {
-  AUTH: ['auth'],
-  USER: ['user'],
-  POSTS: ['posts'],
+  AUTH: ["auth"],
+  POSTS: ["posts"],
+  USER: ["user"],
 } as const;
 
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
-    LOGOUT: '/auth/logout',
-    REFRESH: '/auth/refresh',
-    ME: '/auth/me',
-  },
-  USERS: {
-    PROFILE: '/users/profile',
-    UPDATE: '/users/update',
+    LOGIN: "/auth/login",
+    LOGOUT: "/auth/logout",
+    ME: "/auth/me",
+    REFRESH: "/auth/refresh",
+    REGISTER: "/auth/register",
   },
   POSTS: {
-    LIST: '/posts',
-    DETAIL: (id: string) => `/posts/${id}`,
-    CREATE: '/posts',
-    UPDATE: (id: string) => `/posts/${id}`,
+    CREATE: "/posts",
     DELETE: (id: string) => `/posts/${id}`,
+    DETAIL: (id: string) => `/posts/${id}`,
+    LIST: "/posts",
+    UPDATE: (id: string) => `/posts/${id}`,
+  },
+  USERS: {
+    PROFILE: "/users/profile",
+    UPDATE: "/users/update",
   },
 } as const;

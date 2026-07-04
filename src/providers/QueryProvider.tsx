@@ -1,7 +1,7 @@
-import { queryClient } from '@/api/queryClient';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import * as React from 'react';
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import * as React from "react";
+import { queryClient } from "@/api/queryClient";
 
 function QueryProvider({ children }: { children: React.ReactNode }) {
   return (

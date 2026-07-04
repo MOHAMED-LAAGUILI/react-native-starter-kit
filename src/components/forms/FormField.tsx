@@ -1,6 +1,6 @@
-import { Input, type InputProps } from '@/components/ui/Input';
-import { Text } from '@/components/ui/Text';
-import * as React from 'react';
+import * as React from "react";
+import { Input, type InputProps } from "@/components/ui/Input";
+import { Text } from "@/components/ui/Text";
 
 interface FormFieldProps extends InputProps {
   name: string;
@@ -21,11 +21,14 @@ function FormField({ error, touched, ...props }: FormFieldProps) {
 function FormError({ message }: { message?: string }) {
   if (!message) return null;
   return (
-    <Text variant="caption" className="text-destructive">
+    <Text
+      variant="caption"
+      className="text-destructive"
+    >
       {message}
     </Text>
   );
 }
 
-export { FormField, FormError };
 export type { FormFieldProps };
+export { FormError, FormField };

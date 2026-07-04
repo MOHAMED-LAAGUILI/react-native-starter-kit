@@ -1,8 +1,19 @@
-import { ENV } from '@/config/env';
-import { StorageService } from '@/storage';
-import { STORAGE_KEYS } from '@/config/constants';
-import { handleError, ApiError, NetworkError } from '@/errors';
-import axios, { AxiosError, type AxiosInstance, type InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, type AxiosInstance, type InternalAxiosRequestConfig } from "axios";
+import { STORAGE_KEYS } from "@/config/constants";
+import { ENV } from "@/config/env";
+import { StorageService } from "@/storage";
+
+class ApiError extends Error {
+  constructor(
+    message: string,
+    public status: number,
+    public code?: string,
+    public data?: unknown
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
 
 let isRefreshing = false;
 let failedQueue: Array<{
@@ -11,7 +22,7 @@ let failedQueue: Array<{
 }> = [];
 
 function processQueue(error: unknown, token: string | null): void {
-  failedQueue.forEach((promise) => {
+  failedQueue.forEach(promise => {
     if (error) {
       promise.reject(error);
     } else if (token) {
@@ -23,8 +34,8 @@ function processQueue(error: unknown, token: string | null): void {
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: ENV.API_URL,
+  headers: { "Content-Type": "application/json" },
   timeout: 30000,
-  headers: { 'Content-Type': 'application/json' },
 });
 
 apiClient.interceptors.request.use(
@@ -35,19 +46,19 @@ apiClient.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error),
+  error => Promise.reject(error)
 );
 
 apiClient.interceptors.response.use(
-  (response) => response,
+  response => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         return new Promise<string>((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        }).then((token) => {
+          failedQueue.push({ reject, resolve });
+        }).then(token => {
           if (originalRequest.headers) {
             originalRequest.headers.Authorization = `Bearer ${token}`;
           }
@@ -61,7 +72,7 @@ apiClient.interceptors.response.use(
       try {
         const refreshToken = StorageService.getString(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
         if (!refreshToken) {
-          throw new ApiError('No refresh token available', 401, 'NO_REFRESH_TOKEN');
+          throw new Error("No refresh token available");
         }
         const { data } = await axios.post(`${ENV.API_URL}/auth/refresh`, {
           refreshToken,
@@ -71,7 +82,7 @@ apiClient.interceptors.response.use(
         if (data.refreshToken ?? data.tokens?.refreshToken) {
           StorageService.setString(
             STORAGE_KEYS.AUTH_REFRESH_TOKEN,
-            data.refreshToken ?? data.tokens?.refreshToken,
+            data.refreshToken ?? data.tokens?.refreshToken
           );
         }
         processQueue(null, newToken);
@@ -83,26 +94,24 @@ apiClient.interceptors.response.use(
         processQueue(refreshError, null);
         StorageService.delete(STORAGE_KEYS.AUTH_TOKEN);
         StorageService.delete(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
-        return Promise.reject(new ApiError('Session expired', 401, 'SESSION_EXPIRED'));
+        return Promise.reject(new Error("Session expired"));
       } finally {
         isRefreshing = false;
       }
     }
 
     if (!error.response) {
-      handleError(new NetworkError());
-      return Promise.reject(new NetworkError());
+      return Promise.reject(new Error("Network error"));
     }
 
     const apiError = new ApiError(
-      (error.response.data as { message?: string })?.message ?? 'Request failed',
+      (error.response.data as { message?: string })?.message ?? "Request failed",
       error.response.status,
       (error.response.data as { code?: string })?.code,
-      error.response.data,
+      error.response.data
     );
-    handleError(apiError);
     return Promise.reject(apiError);
-  },
+  }
 );
 
 export { apiClient };

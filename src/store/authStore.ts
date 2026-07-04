@@ -1,7 +1,7 @@
-import { StorageService } from '@/storage';
-import { STORAGE_KEYS } from '@/config/constants';
-import type { User, AuthTokens } from '@/types/auth';
-import { create } from 'zustand';
+import { create } from "zustand";
+import { STORAGE_KEYS } from "@/config/constants";
+import { StorageService } from "@/storage";
+import type { AuthTokens, User } from "@/types/auth";
 
 interface AuthState {
   user: User | null;
@@ -17,14 +17,37 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
-  user: null,
-  tokens: null,
+  hydrate: () => {
+    const accessToken = StorageService.getString(STORAGE_KEYS.AUTH_TOKEN);
+    const refreshToken = StorageService.getString(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
+    if (accessToken && refreshToken) {
+      set({
+        isAuthenticated: true,
+        isLoading: false,
+        tokens: { accessToken, refreshToken },
+      });
+    } else {
+      set({ isLoading: false });
+    }
+  },
   isAuthenticated: false,
   isLoading: true,
 
-  setUser: (user) => set({ user }),
+  login: (user, tokens) => {
+    StorageService.setString(STORAGE_KEYS.AUTH_TOKEN, tokens.accessToken);
+    StorageService.setString(STORAGE_KEYS.AUTH_REFRESH_TOKEN, tokens.refreshToken);
+    set({ isAuthenticated: true, isLoading: false, tokens, user });
+  },
 
-  setTokens: (tokens) => {
+  logout: () => {
+    StorageService.delete(STORAGE_KEYS.AUTH_TOKEN);
+    StorageService.delete(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
+    set({ isAuthenticated: false, isLoading: false, tokens: null, user: null });
+  },
+
+  setLoading: isLoading => set({ isLoading }),
+
+  setTokens: tokens => {
     if (tokens) {
       StorageService.setString(STORAGE_KEYS.AUTH_TOKEN, tokens.accessToken);
       StorageService.setString(STORAGE_KEYS.AUTH_REFRESH_TOKEN, tokens.refreshToken);
@@ -32,34 +55,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       StorageService.delete(STORAGE_KEYS.AUTH_TOKEN);
       StorageService.delete(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
     }
-    set({ tokens, isAuthenticated: tokens !== null });
+    set({ isAuthenticated: tokens !== null, tokens });
   },
 
-  setLoading: (isLoading) => set({ isLoading }),
-
-  login: (user, tokens) => {
-    StorageService.setString(STORAGE_KEYS.AUTH_TOKEN, tokens.accessToken);
-    StorageService.setString(STORAGE_KEYS.AUTH_REFRESH_TOKEN, tokens.refreshToken);
-    set({ user, tokens, isAuthenticated: true, isLoading: false });
-  },
-
-  logout: () => {
-    StorageService.delete(STORAGE_KEYS.AUTH_TOKEN);
-    StorageService.delete(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
-    set({ user: null, tokens: null, isAuthenticated: false, isLoading: false });
-  },
-
-  hydrate: () => {
-    const accessToken = StorageService.getString(STORAGE_KEYS.AUTH_TOKEN);
-    const refreshToken = StorageService.getString(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
-    if (accessToken && refreshToken) {
-      set({
-        tokens: { accessToken, refreshToken },
-        isAuthenticated: true,
-        isLoading: false,
-      });
-    } else {
-      set({ isLoading: false });
-    }
-  },
+  setUser: user => set({ user }),
+  tokens: null,
+  user: null,
 }));

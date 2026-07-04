@@ -1,28 +1,29 @@
-import '../global.css';
+import "react-native-url-polyfill/auto";
+import "../global.css";
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { Stack } from 'expo-router';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
-import * as SystemUI from 'expo-system-ui';
-import { PortalHost } from '@rn-primitives/portal';
-import { QueryProvider } from '@/providers/QueryProvider';
-import { ThemeProvider } from '@/providers/ThemeProvider';
-import { useAuthStore, useThemeStore } from '@/store';
-import { setupI18n } from '@/i18n';
-import { ErrorBoundary } from '@/errors/ErrorBoundary';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { PortalHost } from "@rn-primitives/portal";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import * as SystemUI from "expo-system-ui";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { LoadingScreen } from "@/components/common/LoadingScreen";
+import { setupI18n } from "@/i18n";
+import { QueryProvider } from "@/providers/QueryProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { useAuthStore, useThemeStore } from "@/store";
 
-export { ErrorBoundary } from 'expo-router';
+export { ErrorBoundary } from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
 
 function RootLayoutInner({ onReady }: { onReady: () => void }) {
-  const isLoading = useAuthStore((s) => s.isLoading);
-  const hydrate = useAuthStore((s) => s.hydrate);
-  const themeHydrate = useThemeStore((s) => s.hydrate);
-  const themeMode = useThemeStore((s) => s.mode);
+  const isLoading = useAuthStore(s => s.isLoading);
+  const hydrate = useAuthStore(s => s.hydrate);
+  const themeHydrate = useThemeStore(s => s.hydrate);
+  const themeMode = useThemeStore(s => s.mode);
   const readyRef = useRef(false);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ function RootLayoutInner({ onReady }: { onReady: () => void }) {
   }, [isLoading, onReady]);
 
   useEffect(() => {
-    const bg = themeMode === 'dark' ? '#000000' : '#ffffff';
+    const bg = themeMode === "dark" ? "#000000" : "#ffffff";
     SystemUI.setBackgroundColorAsync(bg);
   }, [themeMode]);
 
@@ -73,19 +74,16 @@ export default function RootLayout() {
   }
 
   return (
-    <ErrorBoundary>
-      <GestureHandlerRootView style={styles.root}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
         <QueryProvider>
           <ThemeProvider>
+            <StatusBar style="auto" />
             <RootLayoutInner onReady={onReady} />
             <PortalHost />
           </ThemeProvider>
         </QueryProvider>
-      </GestureHandlerRootView>
-    </ErrorBoundary>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { flex: 1 },
-});

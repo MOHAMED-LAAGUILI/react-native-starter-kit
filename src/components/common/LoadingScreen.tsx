@@ -1,13 +1,19 @@
-import { cn } from '@/lib/utils';
-import * as React from 'react';
-import { ActivityIndicator, View } from 'react-native';
-import { Text } from '@/components/ui/Text';
+import * as React from "react";
+import { ActivityIndicator, View } from "react-native";
+import { cn } from "@/lib/utils";
+import { useThemeStore } from "@/store";
 
-function LoadingScreen({ message = 'Loading...' }: { message?: string }) {
+function LoadingScreen() {
+  const themeMode = useThemeStore(s => s.mode);
+
   return (
-    <View className="flex-1 items-center justify-center gap-4 bg-background">
-      <ActivityIndicator size="large" className="text-primary" />
-      <Text variant="body">{message}</Text>
+    <View
+      className={`flex-1 items-center justify-center gap-4 ${themeMode === "dark" ? "bg-black" : "bg-white"}`}
+    >
+      <ActivityIndicator
+        size="large"
+        className={`text-${themeMode === "dark" ? "white" : "black"}`}
+      />
     </View>
   );
 }

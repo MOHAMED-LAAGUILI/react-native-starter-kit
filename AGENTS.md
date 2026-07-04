@@ -13,9 +13,7 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `bun run clean` | `rm -rf .expo node_modules` |
 | `bun run fix:deps` | `npx expo install --fix` |
 | `bun run doctor` | `npx expo-doctor --verbose` |
-| `bun lint` | `eslint src/` |
-| `bun lint:fix` | `eslint src/ --fix` |
-| `bun typecheck` | `tsc --noEmit` |
+
 
 ## Conventions
 
@@ -62,7 +60,7 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | UI Primitives | @rn-primitives 1.5 (Portal, Dialog, Slot, etc.) |
 | Icons | lucide-react-native |
 | Animation | react-native-reanimated + gesture-handler |
-| Lint | ESLint 10 + Prettier |
+| Lint | Biome |
 | Git Hooks | Husky 9 + lint-staged |
 
 ## Routing Structure
@@ -95,10 +93,8 @@ src/
 │   ├── forms/        — FormField
 │   └── ui/           — Button, Text, BottomSheet
 ├── config/           — Constants, env helpers
-├── errors/           — ErrorBoundary, ApiError, NetworkError
 ├── hooks/            — Shared hooks
 ├── i18n/             — i18next setup + locales/{en,fr,ar}/
-├── logger/           — Structured logger
 ├── providers/        — QueryProvider, ThemeProvider
 ├── screens/          — LoginScreen, HomeScreen, SearchScreen, ProfileScreen, SettingsScreen
 ├── storage/          — MMKV wrapper (lazy, SSR-safe)

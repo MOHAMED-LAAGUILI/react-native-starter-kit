@@ -9,7 +9,13 @@
     "web": "expo start -c --web",
     "clean": "rm -rf .expo node_modules",
     "fix:deps": "npx expo install --fix",
-    "doctor": "npx expo-doctor --verbose"
+    "doctor": "npx expo-doctor --verbose",
+    "prebuild": "expo prebuild  --clean",
+    "build:ios": " eas build --profile preview --platform ios",
+    "build:android": " eas build --profile preview --platform android",
+    "format": "npx @biomejs/biome format --write",
+    "check": "npx @biomejs/biome check --write",
+    "biome": "bun run check && bun run format"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.2",
@@ -44,17 +50,10 @@
     "@tanstack/react-form": "^1",
     "@tanstack/react-query": "^5",
     "@tanstack/react-query-devtools": "^5",
-    "@typescript-eslint/eslint-plugin": "^8.62.1",
-    "@typescript-eslint/parser": "^8.62.1",
     "app-icon-badge": "^0.1.2",
     "axios": "^1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "eslint": "^10.6.0",
-    "eslint-config-expo": "^57.0.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.1",
     "expo": "^57.0.0",
     "expo-constants": "~57.0.3",
     "expo-haptics": "~57.0.0",
@@ -67,7 +66,6 @@
     "expo-system-ui": "^57.0.0",
     "expo-updates": "~57.0.6",
     "i18next": "^26.3.4",
-    "lint-staged": "^17.0.8",
     "lucide-react-native": "^1.21.0",
     "moti": "^0.30.0",
     "nativewind": "^4.2.6",
@@ -99,6 +97,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@biomejs/biome": "2.5.2",
     "@expo/config": "^57.0.2",
     "@react-native-community/cli": "^20.2.0",
     "@types/node": "^26.1.0",
@@ -123,7 +122,6 @@
     },
     "install": {
       "exclude": [
-        "eslint-config-expo",
         "react-native-worklets"
       ]
     }

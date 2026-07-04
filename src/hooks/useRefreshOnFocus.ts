@@ -1,5 +1,5 @@
-import { useFocusEffect } from 'expo-router/react-navigation';
-import { useCallback, useRef } from 'react';
+import { useFocusEffect } from "expo-router/react-navigation";
+import { useCallback, useRef } from "react";
 
 export function useRefreshOnFocus(refetch: () => void): void {
   const firstRef = useRef(true);
@@ -11,6 +11,6 @@ export function useRefreshOnFocus(refetch: () => void): void {
         return;
       }
       refetch();
-    }, [refetch]),
+    }, [refetch])
   );
 }

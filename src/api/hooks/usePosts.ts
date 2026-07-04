@@ -1,26 +1,24 @@
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEYS } from '@/config/constants';
-import { postsApi } from '@/api/endpoints';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { postsApi } from "@/api/endpoints";
+import { QUERY_KEYS } from "@/config/constants";
 
 export function usePosts() {
   return useInfiniteQuery({
-    queryKey: QUERY_KEYS.POSTS,
-    queryFn: ({ pageParam = 1 }) => postsApi.list({ page: pageParam, pageSize: 20 }),
     getNextPageParam: (lastPage: { meta?: { page: number; totalPages: number } }) => {
       if (!lastPage.meta) return undefined;
-      return lastPage.meta.page < lastPage.meta.totalPages
-        ? lastPage.meta.page + 1
-        : undefined;
+      return lastPage.meta.page < lastPage.meta.totalPages ? lastPage.meta.page + 1 : undefined;
     },
     initialPageParam: 1,
+    queryFn: ({ pageParam = 1 }) => postsApi.list({ page: pageParam, pageSize: 20 }),
+    queryKey: QUERY_KEYS.POSTS,
   });
 }
 
 export function usePost(id: string) {
   return useQuery({
-    queryKey: [...QUERY_KEYS.POSTS, id],
-    queryFn: () => postsApi.detail(id),
     enabled: !!id,
+    queryFn: () => postsApi.detail(id),
+    queryKey: [...QUERY_KEYS.POSTS, id],
   });
 }
 
