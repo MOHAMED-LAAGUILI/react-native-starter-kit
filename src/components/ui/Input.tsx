@@ -16,7 +16,14 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, .
 
   return (
     <View className={cn("gap-1", containerStyle)}>
-      {label ? <Text variant="label" className="text-muted-foreground mb-0.5">{label}</Text> : null}
+      {label ? (
+        <Text
+          variant="label"
+          className="text-muted-foreground mb-0.5"
+        >
+          {label}
+        </Text>
+      ) : null}
       <View
         className={cn(
           "flex-row items-center rounded-md border h-11",
@@ -25,11 +32,9 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, .
           error && "border-destructive"
         )}
       >
-           {leftIcon && (
-            <View className="h-9 w-8 items-center justify-center border-r border-border">
-              {leftIcon}
-            </View>
-          )}
+        {leftIcon && (
+          <View className="h-9 w-8 items-center justify-center border-r border-border">{leftIcon}</View>
+        )}
         <TextInput
           className={cn(
             "flex-1 text-base text-foreground px-3 h-full outline-0 ms-2",
@@ -50,7 +55,14 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, .
         />
         {rightIcon ? <View className="pr-3">{rightIcon}</View> : null}
       </View>
-      {error ? <Text variant="caption" className="text-destructive mt-0.5">{error}</Text> : null}
+      {error ? (
+        <Text
+          variant="caption"
+          className="text-destructive mt-0.5"
+        >
+          {error}
+        </Text>
+      ) : null}
     </View>
   );
 }

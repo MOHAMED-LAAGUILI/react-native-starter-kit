@@ -1,11 +1,11 @@
+import { Eye, EyeOff, Home, Lock, Mail, Phone, Search } from "lucide-react-native";
 import * as React from "react";
 import { Pressable, ScrollView, View } from "react-native";
-import { Button } from "@/components/ui/Button";
-import { Text } from "@/components/ui/Text";
-import { Input } from "@/components/ui/Input";
 import { FormField } from "@/components/forms/FormField";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Text } from "@/components/ui/Text";
 import { cn } from "@/lib/utils";
-import { Eye, EyeOff, Home, Lock, Mail, Phone, Search } from "lucide-react-native";
 
 function SectionTitle({ children }: { children: string }) {
   return (
@@ -24,9 +24,20 @@ function HomeScreen() {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <ScrollView className="flex-1 bg-background" contentContainerClassName="p-6 gap-2 pb-32">
-      <Text variant="h2" className="mb-2">Component Demo</Text>
-      <Text variant="body" className="text-muted-foreground mb-2">
+    <ScrollView
+      className="flex-1 bg-background"
+      contentContainerClassName="p-6 gap-2 pb-32"
+    >
+      <Text
+        variant="h2"
+        className="mb-2"
+      >
+        Component Demo
+      </Text>
+      <Text
+        variant="body"
+        className="text-muted-foreground mb-2"
+      >
         All UI, form, and typography components with available variants.
       </Text>
 
@@ -47,30 +58,94 @@ function HomeScreen() {
       {/* UI Components */}
       <SectionTitle>UI Components</SectionTitle>
 
-      <Text variant="label" className="text-muted-foreground mb-1">Button variants</Text>
+      <Text
+        variant="label"
+        className="text-muted-foreground mb-1"
+      >
+        Button variants
+      </Text>
       <View className="flex-row flex-wrap gap-2 mb-4">
-        <Button title="Primary" variant="primary" size="sm" />
-        <Button title="Secondary" variant="secondary" size="sm" />
-        <Button title="Outline" variant="outline" size="sm" />
-        <Button title="Ghost" variant="ghost" size="sm" />
-        <Button title="Destructive" variant="destructive" size="sm" />
+        <Button
+          title="Primary"
+          variant="primary"
+          size="sm"
+        />
+        <Button
+          title="Secondary"
+          variant="secondary"
+          size="sm"
+        />
+        <Button
+          title="Outline"
+          variant="outline"
+          size="sm"
+        />
+        <Button
+          title="Ghost"
+          variant="ghost"
+          size="sm"
+        />
+        <Button
+          title="Destructive"
+          variant="destructive"
+          size="sm"
+        />
       </View>
 
-      <Text variant="label" className="text-muted-foreground mb-1">Button sizes</Text>
+      <Text
+        variant="label"
+        className="text-muted-foreground mb-1"
+      >
+        Button sizes
+      </Text>
       <View className="flex-row items-center gap-2 mb-4">
-        <Button title="Small" size="sm" />
-        <Button title="Medium" size="md" />
-        <Button title="Large" size="lg" />
+        <Button
+          title="Small"
+          size="sm"
+        />
+        <Button
+          title="Medium"
+          size="md"
+        />
+        <Button
+          title="Large"
+          size="lg"
+        />
       </View>
 
-      <Text variant="label" className="text-muted-foreground mb-1">Button states</Text>
+      <Text
+        variant="label"
+        className="text-muted-foreground mb-1"
+      >
+        Button states
+      </Text>
       <View className="flex-row flex-wrap gap-2 mb-4">
-        <Button title="Loading" loading />
-        <Button title="Disabled" disabled />
-        <Button title="With Icon" variant="outline" leftIcon={<Home size={16} className="text-foreground" />} />
+        <Button
+          title="Loading"
+          loading
+        />
+        <Button
+          title="Disabled"
+          disabled
+        />
+        <Button
+          title="With Icon"
+          variant="outline"
+          leftIcon={
+            <Home
+              size={16}
+              className="text-foreground"
+            />
+          }
+        />
       </View>
 
-      <Text variant="label" className="text-muted-foreground mb-1">Input variants</Text>
+      <Text
+        variant="label"
+        className="text-muted-foreground mb-1"
+      >
+        Input variants
+      </Text>
       <View className="gap-3 mb-4">
         <Input
           label="Default"
@@ -81,26 +156,50 @@ function HomeScreen() {
         <Input
           label="Search"
           placeholder="Search..."
-          leftIcon={<Search size={16} className="text-muted-foreground" />}
+          leftIcon={
+            <Search
+              size={16}
+              className="text-muted-foreground"
+            />
+          }
         />
         <Input
           label="Email"
           placeholder="you@example.com"
-          leftIcon={<Mail size={16} className="text-muted-foreground" />}
+          leftIcon={
+            <Mail
+              size={16}
+              className="text-muted-foreground"
+            />
+          }
           keyboardType="email-address"
           autoCapitalize="none"
         />
         <Input
           label="Password"
           placeholder="Enter password"
-          leftIcon={<Lock size={16} className="text-muted-foreground" />}
+          leftIcon={
+            <Lock
+              size={16}
+              className="text-muted-foreground"
+            />
+          }
           secureTextEntry={!showPassword}
           rightIcon={
-            <Pressable onPress={() => setShowPassword(p => !p)} hitSlop={8}>
+            <Pressable
+              onPress={() => setShowPassword(p => !p)}
+              hitSlop={8}
+            >
               {showPassword ? (
-                <EyeOff size={16} className="text-muted-foreground" />
+                <EyeOff
+                  size={16}
+                  className="text-muted-foreground"
+                />
               ) : (
-                <Eye size={16} className="text-muted-foreground" />
+                <Eye
+                  size={16}
+                  className="text-muted-foreground"
+                />
               )}
             </Pressable>
           }
@@ -108,14 +207,22 @@ function HomeScreen() {
         <Input
           label="Phone"
           placeholder="+1 (555) 000-0000"
-          leftIcon={<Phone size={16} className="text-muted-foreground" />}
+          leftIcon={
+            <Phone
+              size={16}
+              className="text-muted-foreground"
+            />
+          }
           keyboardType="phone-pad"
         />
         <Input
           label="With error"
           placeholder="Email"
           value={email}
-          onChangeText={(t) => { setEmail(t); setEmailError(""); }}
+          onChangeText={t => {
+            setEmail(t);
+            setEmailError("");
+          }}
           error={emailError}
           keyboardType="email-address"
         />

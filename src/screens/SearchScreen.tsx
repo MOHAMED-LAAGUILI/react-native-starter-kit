@@ -1,10 +1,10 @@
+import { router } from "expo-router";
+import { Search as SearchIcon } from "lucide-react-native";
 import * as React from "react";
 import { ActivityIndicator, FlatList, Image, Pressable, View } from "react-native";
-import { router } from "expo-router";
+import { usePublicPosts } from "@/api/hooks/usePublicPosts";
 import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Text";
-import { usePublicPosts } from "@/api/hooks/usePublicPosts";
-import { Search as SearchIcon } from "lucide-react-native";
 
 function SearchScreen() {
   const [query, setQuery] = React.useState("");
@@ -13,16 +13,29 @@ function SearchScreen() {
   return (
     <View className="flex-1 bg-background">
       <View className="p-6 pb-0">
-        <Text variant="h2" className="mb-4">Search</Text>
+        <Text
+          variant="h2"
+          className="mb-4"
+        >
+          Search
+        </Text>
         <Input
           placeholder="Search posts..."
           value={query}
           onChangeText={setQuery}
           autoCapitalize="none"
           autoCorrect={false}
-          leftIcon={<SearchIcon size={16} className="text-muted-foreground" />}
+          leftIcon={
+            <SearchIcon
+              size={16}
+              className="text-muted-foreground"
+            />
+          }
         />
-        <Text variant="caption" className="text-muted-foreground mt-2 mb-1">
+        <Text
+          variant="caption"
+          className="text-muted-foreground mt-2 mb-1"
+        >
           {isLoading ? "Loading..." : `${posts?.length ?? 0} posts from jsonplaceholder.typicode.com`}
         </Text>
       </View>
@@ -33,7 +46,10 @@ function SearchScreen() {
         </View>
       ) : error ? (
         <View className="flex-1 items-center justify-center px-6">
-          <Text variant="body" className="text-destructive text-center">
+          <Text
+            variant="body"
+            className="text-destructive text-center"
+          >
             Failed to load posts. Make sure you are connected to the internet.
           </Text>
         </View>
@@ -45,7 +61,7 @@ function SearchScreen() {
           renderItem={({ item }) => (
             <Pressable
               className="bg-card rounded-xl border border-border active:opacity-80 overflow-hidden"
-              onPress={() => router.push({ pathname: "/(app)/post/[id]", params: { id: String(item.id) } })}
+              onPress={() => router.push({ params: { id: String(item.id) }, pathname: "/(app)/post/[id]" })}
             >
               <Image
                 source={{ uri: item.imageUrl }}
@@ -53,13 +69,23 @@ function SearchScreen() {
                 resizeMode="cover"
               />
               <View className="p-4">
-                <Text variant="label" className="text-muted-foreground mb-1">
+                <Text
+                  variant="label"
+                  className="text-muted-foreground mb-1"
+                >
                   Post #{item.id}
                 </Text>
-                <Text variant="body" className="font-semibold mb-1">
+                <Text
+                  variant="body"
+                  className="font-semibold mb-1"
+                >
                   {item.title}
                 </Text>
-                <Text variant="bodySmall" className="text-muted-foreground" numberOfLines={2}>
+                <Text
+                  variant="bodySmall"
+                  className="text-muted-foreground"
+                  numberOfLines={2}
+                >
                   {item.body}
                 </Text>
               </View>
@@ -67,7 +93,10 @@ function SearchScreen() {
           )}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center pt-12">
-              <Text variant="body" className="text-muted-foreground">
+              <Text
+                variant="body"
+                className="text-muted-foreground"
+              >
                 {query ? "No posts match your search" : "Start typing to search posts"}
               </Text>
             </View>

@@ -1,6 +1,5 @@
 import "react-native-url-polyfill/auto";
 import "../global.css";
-import "react-native-reanimated";
 import "react-native-gesture-handler";
 
 import { PortalHost } from "@rn-primitives/portal";
@@ -10,6 +9,7 @@ import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { configureReanimatedLogger, ReanimatedLogLevel } from "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { HeaderButtonsProvider } from "react-navigation-header-buttons/HeaderButtonsProvider";
 import { LoadingScreen } from "@/components/common/LoadingScreen";
@@ -18,6 +18,11 @@ import { QueryProvider } from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { useAuthStore, useThemeStore } from "@/store";
 import { isWeb } from "@/utils/platform";
+
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: true, // Reanimated runs in strict mode by default
+});
 
 export { ErrorBoundary } from "expo-router";
 
@@ -48,13 +53,13 @@ function RootLayoutInner({ onReady }: { onReady: () => void }) {
   }, [themeMode]);
 
   if (isLoading) {
-    return(
-    <ThemeProvider>
-              <StatusBar style="auto" />
+    return (
+      <ThemeProvider>
+        <StatusBar style="auto" />
 
-      <LoadingScreen />
-    </ThemeProvider>
-    )
+        <LoadingScreen />
+      </ThemeProvider>
+    );
   }
 
   return <Stack screenOptions={{ headerShown: false }} />;
@@ -80,13 +85,13 @@ export default function RootLayout() {
   }, [i18nReady, appReady]);
 
   if (!i18nReady) {
-    return(
-    <ThemeProvider>
-              <StatusBar style="auto" />
+    return (
+      <ThemeProvider>
+        <StatusBar style="auto" />
 
-      <LoadingScreen />
-    </ThemeProvider>
-    )
+        <LoadingScreen />
+      </ThemeProvider>
+    );
   }
 
   return (

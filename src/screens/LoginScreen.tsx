@@ -1,4 +1,5 @@
 import { useForm } from "@tanstack/react-form";
+import { Lock, Mail, User } from "lucide-react-native";
 import * as React from "react";
 import { KeyboardAvoidingView, Pressable, ScrollView, View } from "react-native";
 import { useLogin, useRegister } from "@/api/hooks/useAuth";
@@ -6,9 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Text";
 import { useAuthStore } from "@/store";
-import { loginSchema, registerSchema } from "@/validation";
 import type { RegisterFormData } from "@/validation";
-import { Lock, Mail, User } from "lucide-react-native";
+import { loginSchema, registerSchema } from "@/validation";
 
 type Mode = "login" | "signup";
 
@@ -16,7 +16,8 @@ function getFieldError(errors: unknown): string | undefined {
   const err = Array.isArray(errors) ? errors[0] : undefined;
   if (!err) return undefined;
   if (typeof err === "string") return err;
-  if (typeof err === "object" && err !== null && "message" in err) return String((err as { message: string }).message);
+  if (typeof err === "object" && err !== null && "message" in err)
+    return String((err as { message: string }).message);
   return String(err);
 }
 
@@ -32,7 +33,11 @@ function LoginScreen() {
       if (isLogin) {
         await loginMutation.mutateAsync({ email: value.email, password: value.password });
       } else {
-        await registerMutation.mutateAsync({ email: value.email, name: value.name, password: value.password });
+        await registerMutation.mutateAsync({
+          email: value.email,
+          name: value.name,
+          password: value.password,
+        });
       }
     },
     validators: { onSubmit: isLogin ? (loginSchema as never) : (registerSchema as never) },
@@ -68,7 +73,10 @@ function LoginScreen() {
       >
         <View className="items-center mb-8 gap-2">
           <Text variant="h1">{isLogin ? "Welcome" : "Create Account"}</Text>
-          <Text variant="body" className="text-muted-foreground">
+          <Text
+            variant="body"
+            className="text-muted-foreground"
+          >
             {isLogin ? "Sign in to your account" : "Sign up for a new account"}
           </Text>
         </View>
@@ -81,7 +89,12 @@ function LoginScreen() {
                   label="Name"
                   placeholder="Enter your name"
                   autoCapitalize="words"
-                  leftIcon={<User size={iconSize} className="text-muted-foreground" />}
+                  leftIcon={
+                    <User
+                      size={iconSize}
+                      className="text-muted-foreground"
+                    />
+                  }
                   value={field.state.value}
                   onChangeText={v => field.handleChange(v)}
                   onBlur={() => field.handleBlur()}
@@ -98,7 +111,12 @@ function LoginScreen() {
                 placeholder="Enter your email"
                 keyboardType="email-address"
                 autoCapitalize="none"
-                leftIcon={<Mail size={iconSize} className="text-muted-foreground" />}
+                leftIcon={
+                  <Mail
+                    size={iconSize}
+                    className="text-muted-foreground"
+                  />
+                }
                 value={field.state.value}
                 onChangeText={v => field.handleChange(v)}
                 onBlur={() => field.handleBlur()}
@@ -113,7 +131,12 @@ function LoginScreen() {
                 label="Password"
                 placeholder="Enter your password"
                 secureTextEntry
-                leftIcon={<Lock size={iconSize} className="text-muted-foreground" />}
+                leftIcon={
+                  <Lock
+                    size={iconSize}
+                    className="text-muted-foreground"
+                  />
+                }
                 value={field.state.value}
                 onChangeText={v => field.handleChange(v)}
                 onBlur={() => field.handleBlur()}
@@ -129,7 +152,12 @@ function LoginScreen() {
                   label="Confirm Password"
                   placeholder="Confirm your password"
                   secureTextEntry
-                  leftIcon={<Lock size={iconSize} className="text-muted-foreground" />}
+                  leftIcon={
+                    <Lock
+                      size={iconSize}
+                      className="text-muted-foreground"
+                    />
+                  }
                   value={field.state.value}
                   onChangeText={v => field.handleChange(v)}
                   onBlur={() => field.handleBlur()}
@@ -140,7 +168,10 @@ function LoginScreen() {
           )}
 
           {formError && (
-            <Text variant="caption" className="text-destructive">
+            <Text
+              variant="caption"
+              className="text-destructive"
+            >
               {formError}
             </Text>
           )}
@@ -158,10 +189,19 @@ function LoginScreen() {
           </form.Subscribe>
         </View>
 
-        <Pressable onPress={toggleMode} className="items-center">
-          <Text variant="body" className="text-muted-foreground">
+        <Pressable
+          onPress={toggleMode}
+          className="items-center"
+        >
+          <Text
+            variant="body"
+            className="text-muted-foreground"
+          >
             {isLogin ? "Don't have an account? " : "Already have an account? "}
-            <Text variant="body" className="text-primary font-semibold">
+            <Text
+              variant="body"
+              className="text-primary font-semibold"
+            >
               {isLogin ? "Sign Up" : "Sign In"}
             </Text>
           </Text>

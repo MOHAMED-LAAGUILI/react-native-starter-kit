@@ -9,8 +9,14 @@ function LoadingScreen() {
   const textColor = isDark ? "#ffffff" : "#000000";
 
   return (
-    <View className="flex-1 items-center justify-center gap-4" style={{ backgroundColor: background }}>
-      <ActivityIndicator size="large" color={textColor} />
+    <View
+      className="flex-1 items-center justify-center gap-4"
+      style={{ backgroundColor: background }}
+    >
+      <ActivityIndicator
+        size="large"
+        color={textColor}
+      />
     </View>
   );
 }

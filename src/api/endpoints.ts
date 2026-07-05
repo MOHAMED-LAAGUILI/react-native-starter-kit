@@ -1,6 +1,6 @@
+import type { PublicPost } from "@/api/types";
 import { API_ENDPOINTS, PUBLIC_API_BASE } from "@/config/constants";
 import type { LoginRequest, LoginResponse, User } from "@/types/auth";
-import type { PublicPost } from "@/api/types";
 import { apiClient } from "./client";
 
 export const authApi = {
@@ -46,6 +46,10 @@ function withImageUrl(post: Omit<PublicPost, "imageUrl">): PublicPost {
 }
 
 export const publicApi = {
+  post: (id: number) =>
+    apiClient
+      .get<Omit<PublicPost, "imageUrl">>(`${PUBLIC_API_BASE}/posts/${id}`)
+      .then(r => withImageUrl(r.data)),
   posts: (search?: string) => {
     const url = `${PUBLIC_API_BASE}/posts`;
     return apiClient.get<Omit<PublicPost, "imageUrl">[]>(url).then(r => {
@@ -55,7 +59,4 @@ export const publicApi = {
       return posts.filter(p => p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q));
     });
   },
-  post: (id: number) =>
-    apiClient.get<Omit<PublicPost, "imageUrl">>(`${PUBLIC_API_BASE}/posts/${id}`)
-      .then(r => withImageUrl(r.data)),
 };

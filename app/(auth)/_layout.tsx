@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Stack, useRouter } from "expo-router";
+import * as React from "react";
 import { useEffect } from "react";
 import { STORAGE_KEYS } from "@/config/constants";
 import { StorageService } from "@/storage";

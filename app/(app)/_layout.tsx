@@ -73,7 +73,10 @@ function DrawerHeaderLeft() {
           onPress={() => router.back()}
           hitSlop={12}
         >
-          <ArrowLeft size={24} color={icon} />
+          <ArrowLeft
+            size={24}
+            color={icon}
+          />
         </Pressable>
       </View>
     );
@@ -106,7 +109,10 @@ function HeaderTitle() {
   const title = useMemo(() => getCurrentTitle(pathname), [pathname]);
 
   return (
-    <Text className="text-xl font-bold" style={{ color: text }}>
+    <Text
+      className="text-xl font-bold"
+      style={{ color: text }}
+    >
       {title}
     </Text>
   );
@@ -128,7 +134,12 @@ function AppDrawerContent(props: AppDrawerContentProps) {
             focused={isActive}
             activeBackgroundColor={isActive ? "#2563eb" : background + "00"}
             activeTintColor={isActive ? "#ffffff" : text}
-            icon={({ color, size }) => <Icon color={isActive ? "#ffffff" : color} size={size} />}
+            icon={({ color, size }) => (
+              <Icon
+                color={isActive ? "#ffffff" : color}
+                size={size}
+              />
+            )}
             onPress={() => router.push(href)}
           />
         );
