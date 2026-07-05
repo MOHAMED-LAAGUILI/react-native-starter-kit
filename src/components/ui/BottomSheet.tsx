@@ -40,7 +40,7 @@ function BottomSheetInner<T>({
   return (
     <BottomSheetLib
       ref={sheetRef}
-      snapPoints={["90%"]}
+      snapPoints={["80%"]}
       index={-1}
       enablePanDownToClose
       enableContentPanningGesture={false}

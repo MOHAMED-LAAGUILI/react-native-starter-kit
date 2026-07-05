@@ -41,16 +41,21 @@ export const postsApi = {
     apiClient.put(API_ENDPOINTS.POSTS.UPDATE(id), data).then(r => r.data),
 };
 
+function withImageUrl(post: Omit<PublicPost, "imageUrl">): PublicPost {
+  return { ...post, imageUrl: `https://picsum.photos/seed/${post.id}/800/400` };
+}
+
 export const publicApi = {
   posts: (search?: string) => {
     const url = `${PUBLIC_API_BASE}/posts`;
-    return apiClient.get<PublicPost[]>(url).then(r => {
-      const posts = r.data;
+    return apiClient.get<Omit<PublicPost, "imageUrl">[]>(url).then(r => {
+      let posts = r.data.map(withImageUrl);
       if (!search) return posts;
       const q = search.toLowerCase();
       return posts.filter(p => p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q));
     });
   },
   post: (id: number) =>
-    apiClient.get<PublicPost>(`${PUBLIC_API_BASE}/posts/${id}`).then(r => r.data),
+    apiClient.get<Omit<PublicPost, "imageUrl">>(`${PUBLIC_API_BASE}/posts/${id}`)
+      .then(r => withImageUrl(r.data)),
 };

@@ -1,12 +1,11 @@
 import { type Href, router, usePathname, useRouter } from "expo-router";
 import { Drawer, DrawerContentScrollView, DrawerItem, DrawerToggleButton } from "expo-router/drawer";
-import { Home, type LucideIcon, Search, Settings, User, UserCircle2 } from "lucide-react-native";
+import { ArrowLeft, Home, type LucideIcon, Search, Settings, User, UserCircle2 } from "lucide-react-native";
 import { type ComponentProps, useEffect, useMemo } from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { useAuthStore } from "@/store";
-import { useUniwind } from "uniwind";
 import { useThemeColors } from "@/hooks/useThemeColor";
+import { useAuthStore } from "@/store";
 
 type AppDrawerContentProps = Parameters<NonNullable<ComponentProps<typeof Drawer>["drawerContent"]>>[0];
 
@@ -43,6 +42,7 @@ const ROUTES = [
 }>;
 
 function getCurrentTitle(pathname: string) {
+  if (pathname.includes("/post/")) return "Post";
   const normalizedPathname = pathname.replace(/\/+$/, "");
   const segments = normalizedPathname.split("/").filter(Boolean);
   const currentSegment = segments.at(-1);
@@ -63,14 +63,25 @@ function getCurrentTitle(pathname: string) {
 }
 
 function DrawerHeaderLeft() {
-const colors = useThemeColors();
-  
+  const pathname = usePathname();
+  const { icon } = useThemeColors();
+
+  if (pathname.includes("/post/")) {
+    return (
+      <View className="ml-3">
+        <Pressable
+          onPress={() => router.back()}
+          hitSlop={12}
+        >
+          <ArrowLeft size={24} color={icon} />
+        </Pressable>
+      </View>
+    );
+  }
+
   return (
     <View className="ml-3">
-      <DrawerToggleButton 
-      tintColor={colors.icon}
-    
-      />
+      <DrawerToggleButton tintColor={icon} />
     </View>
   );
 }
@@ -78,9 +89,8 @@ const colors = useThemeColors();
 function DrawerHeaderRight() {
   return (
     <HeaderButtons>
-      
-      <Item 
-      IconComponent={UserCircle2}
+      <Item
+        IconComponent={UserCircle2}
         title="Profile"
         iconName="person"
         onPress={() => router.push("/(app)/(tabs)/profile")}
@@ -91,31 +101,41 @@ function DrawerHeaderRight() {
 
 function HeaderTitle() {
   const pathname = usePathname();
+  const { text } = useThemeColors();
 
   const title = useMemo(() => getCurrentTitle(pathname), [pathname]);
 
-  return <Text>{title}</Text>;
+  return (
+    <Text className="text-xl font-bold" style={{ color: text }}>
+      {title}
+    </Text>
+  );
 }
 
 function AppDrawerContent(props: AppDrawerContentProps) {
   const pathname = usePathname();
+  const { primary, background } = useThemeColors();
 
   return (
     <DrawerContentScrollView {...props}>
-      {ROUTES.map(({ label, href, icon: Icon, match }) => (
-        <DrawerItem
-          key={label}
-          label={label}
-          focused={match.includes(pathname)}
-          icon={({ color, size }) => (
-            <Icon
-              color={color}
-              size={size}
-            />
-          )}
-          onPress={() => router.push(href)}
-        />
-      ))}
+      {ROUTES.map(({ label, href, icon: Icon, match }) => {
+        const isFocused = match.includes(pathname);
+        return (
+          <DrawerItem
+            key={label}
+            label={label}
+            focused={isFocused}
+            icon={({ color, size }) => (
+              <Icon
+                color={color}
+                size={size}
+              />
+            )}
+            onPress={() => router.push(href)}
+            style={isFocused ? { backgroundColor: primary + "33", borderRadius: 8 } : undefined}
+          />
+        );
+      })}
     </DrawerContentScrollView>
   );
 }
@@ -145,6 +165,13 @@ export default function AppLayout() {
     >
       <Drawer.Screen
         name="(tabs)"
+        options={{
+          drawerItemStyle: { display: "none" },
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen
+        name="post/[id]"
         options={{
           drawerItemStyle: { display: "none" },
           headerShown: true,

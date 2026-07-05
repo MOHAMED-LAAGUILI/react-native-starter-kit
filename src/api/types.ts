@@ -3,6 +3,7 @@ export interface PublicPost {
   id: number;
   title: string;
   body: string;
+  imageUrl: string;
 }
 
 export interface PaginatedResponse<T> {

@@ -1,11 +1,11 @@
 import * as React from "react";
-import { ScrollView, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import { Button } from "@/components/ui/Button";
 import { Text } from "@/components/ui/Text";
 import { Input } from "@/components/ui/Input";
 import { FormField } from "@/components/forms/FormField";
 import { cn } from "@/lib/utils";
-import { HomeIcon } from "lucide-react-native";
+import { Eye, EyeOff, Home, Lock, Mail, Phone, Search } from "lucide-react-native";
 
 function SectionTitle({ children }: { children: string }) {
   return (
@@ -21,6 +21,7 @@ function HomeScreen() {
   const [emailError, setEmailError] = React.useState("");
   const [inputValue, setInputValue] = React.useState("");
   const [formValue, setFormValue] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
 
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="p-6 gap-2 pb-32">
@@ -66,7 +67,7 @@ function HomeScreen() {
       <View className="flex-row flex-wrap gap-2 mb-4">
         <Button title="Loading" loading />
         <Button title="Disabled" disabled />
-        <Button title="With Icon" variant="outline" leftIcon={<Text className="text-base"><HomeIcon size={15} /></Text>} />
+        <Button title="With Icon" variant="outline" leftIcon={<Home size={16} className="text-foreground" />} />
       </View>
 
       <Text variant="label" className="text-muted-foreground mb-1">Input variants</Text>
@@ -80,25 +81,34 @@ function HomeScreen() {
         <Input
           label="Search"
           placeholder="Search..."
-          leftIcon={<Text className="text-muted-foreground"><HomeIcon size={15} /></Text>}
+          leftIcon={<Search size={16} className="text-muted-foreground" />}
         />
         <Input
           label="Email"
           placeholder="you@example.com"
-          leftIcon={<Text className="text-muted-foreground"><HomeIcon size={15} /></Text>}
+          leftIcon={<Mail size={16} className="text-muted-foreground" />}
           keyboardType="email-address"
           autoCapitalize="none"
         />
         <Input
           label="Password"
           placeholder="Enter password"
-          leftIcon={<Text className="text-muted-foreground"><HomeIcon size={15} /></Text>}
-          secureTextEntry
+          leftIcon={<Lock size={16} className="text-muted-foreground" />}
+          secureTextEntry={!showPassword}
+          rightIcon={
+            <Pressable onPress={() => setShowPassword(p => !p)} hitSlop={8}>
+              {showPassword ? (
+                <EyeOff size={16} className="text-muted-foreground" />
+              ) : (
+                <Eye size={16} className="text-muted-foreground" />
+              )}
+            </Pressable>
+          }
         />
         <Input
           label="Phone"
           placeholder="+1 (555) 000-0000"
-          leftIcon={<Text className="text-muted-foreground"><HomeIcon size={15} /></Text>}
+          leftIcon={<Phone size={16} className="text-muted-foreground" />}
           keyboardType="phone-pad"
         />
         <Input

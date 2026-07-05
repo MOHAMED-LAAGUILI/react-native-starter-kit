@@ -1,8 +1,10 @@
 import * as React from "react";
-import { ActivityIndicator, FlatList, Pressable, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Pressable, View } from "react-native";
+import { router } from "expo-router";
 import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Text";
 import { usePublicPosts } from "@/api/hooks/usePublicPosts";
+import { Search as SearchIcon } from "lucide-react-native";
 
 function SearchScreen() {
   const [query, setQuery] = React.useState("");
@@ -18,7 +20,7 @@ function SearchScreen() {
           onChangeText={setQuery}
           autoCapitalize="none"
           autoCorrect={false}
-          leftIcon={<Text className="text-muted-foreground">{'>'}</Text>}
+          leftIcon={<SearchIcon size={16} className="text-muted-foreground" />}
         />
         <Text variant="caption" className="text-muted-foreground mt-2 mb-1">
           {isLoading ? "Loading..." : `${posts?.length ?? 0} posts from jsonplaceholder.typicode.com`}
@@ -41,16 +43,26 @@ function SearchScreen() {
           keyExtractor={item => String(item.id)}
           contentContainerClassName="px-6 pb-6 gap-2"
           renderItem={({ item }) => (
-            <Pressable className="bg-card p-4 rounded-xl border border-border active:opacity-80">
-              <Text variant="label" className="text-muted-foreground mb-1">
-                Post #{item.id}
-              </Text>
-              <Text variant="body" className="font-semibold mb-1">
-                {item.title}
-              </Text>
-              <Text variant="bodySmall" className="text-muted-foreground" numberOfLines={2}>
-                {item.body}
-              </Text>
+            <Pressable
+              className="bg-card rounded-xl border border-border active:opacity-80 overflow-hidden"
+              onPress={() => router.push({ pathname: "/(app)/post/[id]", params: { id: String(item.id) } })}
+            >
+              <Image
+                source={{ uri: item.imageUrl }}
+                className="w-full h-40"
+                resizeMode="cover"
+              />
+              <View className="p-4">
+                <Text variant="label" className="text-muted-foreground mb-1">
+                  Post #{item.id}
+                </Text>
+                <Text variant="body" className="font-semibold mb-1">
+                  {item.title}
+                </Text>
+                <Text variant="bodySmall" className="text-muted-foreground" numberOfLines={2}>
+                  {item.body}
+                </Text>
+              </View>
             </Pressable>
           )}
           ListEmptyComponent={
