@@ -3,6 +3,7 @@ export const STORAGE_KEYS = {
   AUTH_TOKEN: "auth.token",
   LANGUAGE: "i18n.language",
   ONBOARDING_COMPLETE: "onboarding.complete",
+  PRIMARY_COLOR: "theme.primary_color",
   THEME_MODE: "theme.mode",
 } as const;
 

@@ -1,8 +1,9 @@
 import { router } from "expo-router";
 import { Search as SearchIcon } from "lucide-react-native";
 import * as React from "react";
-import { ActivityIndicator, FlatList, Image, Pressable, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { usePublicPosts } from "@/api/hooks/usePublicPosts";
+import { PostCard } from "@/components/common/PostCard";
 import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Text";
 
@@ -59,37 +60,13 @@ function SearchScreen() {
           keyExtractor={item => String(item.id)}
           contentContainerClassName="px-6 pb-6 gap-2"
           renderItem={({ item }) => (
-            <Pressable
-              className="bg-card rounded-xl border border-border active:opacity-80 overflow-hidden"
+            <PostCard
+              id={item.id}
+              title={item.title}
+              body={item.body}
+              imageUrl={item.imageUrl}
               onPress={() => router.push({ params: { id: String(item.id) }, pathname: "/(app)/post/[id]" })}
-            >
-              <Image
-                source={{ uri: item.imageUrl }}
-                className="w-full h-40"
-                resizeMode="cover"
-              />
-              <View className="p-4">
-                <Text
-                  variant="label"
-                  className="text-muted-foreground mb-1"
-                >
-                  Post #{item.id}
-                </Text>
-                <Text
-                  variant="body"
-                  className="font-semibold mb-1"
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  variant="bodySmall"
-                  className="text-muted-foreground"
-                  numberOfLines={2}
-                >
-                  {item.body}
-                </Text>
-              </View>
-            </Pressable>
+            />
           )}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center pt-12">

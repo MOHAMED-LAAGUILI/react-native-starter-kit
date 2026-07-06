@@ -6,20 +6,12 @@ import { useLogin, useRegister } from "@/api/hooks/useAuth";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Text";
+import { getFieldError } from "@/lib/form-helpers";
 import { useAuthStore } from "@/store";
 import type { RegisterFormData } from "@/validation";
 import { loginSchema, registerSchema } from "@/validation";
 
 type Mode = "login" | "signup";
-
-function getFieldError(errors: unknown): string | undefined {
-  const err = Array.isArray(errors) ? errors[0] : undefined;
-  if (!err) return undefined;
-  if (typeof err === "string") return err;
-  if (typeof err === "object" && err !== null && "message" in err)
-    return String((err as { message: string }).message);
-  return String(err);
-}
 
 function LoginScreen() {
   const [mode, setMode] = React.useState<Mode>("login");
@@ -190,8 +182,8 @@ function LoginScreen() {
         </View>
 
         <Pressable
+          className="items-center py-2"
           onPress={toggleMode}
-          className="items-center"
         >
           <Text
             variant="body"

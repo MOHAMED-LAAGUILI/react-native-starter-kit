@@ -34,6 +34,10 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 - **Stores**: named export (`export { useAuthStore }`)
 - **Types**: `export type { ... }`
 
+### UI Components
+- Use custom components from `@/components/ui/` (`Text`, `Button`, `Input`, `BottomSheet`) instead of `Text` and `Pressable` from `react-native`
+- Custom components support `variant`, `className`, and proper theme tokens — never use raw `react-native` components for UI
+
 ### Imports
 - `@/` path alias maps to `./src/` (tsconfig paths)
 - Absolute imports: `import { cn } from '@/lib/utils'`
@@ -54,6 +58,7 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | Language | TypeScript 6 (strict) |
 | Routing | Expo Router (Stack/Drawer/Tabs) |
 | Styling | Tailwind v4 + Uniwind + `cn()` (clsx + tailwind-merge) |
+| Theme | CSS variables in oklch (light/dark + 7 accent color palettes) |
 | Client State | Zustand 5 (MMKV persistence, lazy hydration) |
 | Server State | TanStack Query 5 + Devtools |
 | Networking | Axios (auth interceptor, refresh queue) |
@@ -92,10 +97,11 @@ app/
 src/
 ├── api/              — Axios client, typed hooks (useLogin, usePosts, etc.)
 ├── components/
-│   ├── common/       — LoadingScreen, ErrorFallback
+│   ├── common/       — LoadingScreen, ErrorFallback, SettingRow, InfoRow, PostCard
+│   ├── drawer/       — DrawerHeaderLeft, DrawerHeaderRight, DrawerProfileHeader, HeaderTitle, AppDrawerContent
 │   ├── forms/        — FormField
 │   └── ui/           — Button, Text, Input, BottomSheet (gorhom)
-├── config/           — Constants, env helpers (ENV from process.env/expo-constants)
+├── config/           — Constants, env helpers, color-palettes.ts (7 palettes)
 ├── hooks/            — Shared hooks
 ├── i18n/             — i18next setup + locales/{en,fr,ar}/, RNRestart restart
 ├── providers/        — QueryProvider, ThemeProvider (Uniwind.setTheme + nav theme)
@@ -103,9 +109,9 @@ src/
 ├── storage/          — MMKV wrapper (lazy, SSR-safe, try/catch fallback)
 ├── store/            — Zustand stores (authStore, themeStore) with MMKV persist
 ├── types/            — Global type declarations (uniwind.d.ts)
-├── utils/            — cn() utility
+├── lib/              — cn() utility, form-helpers (getFieldError)
+├── utils/            — format utilities, platform helpers
 ├── validation/       — Zod schemas (login, register, forgotPassword)
-└── lib/              — cn() utility, theme tokens
 global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @variant)
 ```
 
@@ -118,6 +124,9 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - CSS variables in `global.css` (oklch colors, `@variant light` / `@variant dark`)
 - `ThemeProvider` syncs Zustand `themeStore.mode` → `Uniwind.setTheme()` + React Navigation theme
 - Modes: `light`, `dark`, `system` (follows `Appearance`)
+- **Accent Colors**: 7 palettes (blue, purple, green, orange, red, teal, pink) defined in `src/config/color-palettes.ts`; `themeStore.primaryColor` persisted in MMKV
+- `ThemeProvider` calls `Uniwind.updateCSSVariables(theme, vars)` on boot + palette change to inject palette-specific CSS vars
+- All screens use CSS variables (`bg-primary`, `text-primary`, `bg-primary/10`, etc.) instead of hardcoded colors — changing accent color propagates instantly
 - Persisted in MMKV via Zustand middleware
 - `expo-system-ui` background color synced on theme change
 

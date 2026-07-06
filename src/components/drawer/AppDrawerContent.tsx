@@ -1,0 +1,57 @@
+import { router, usePathname } from "expo-router";
+import Drawer, { DrawerContentScrollView } from "expo-router/drawer";
+import type { ComponentProps } from "react";
+import { View } from "react-native";
+import { Button } from "@/components/ui/Button";
+import { NAV_ITEMS } from "@/config/navigation";
+import { useThemeColors } from "@/hooks/useThemeColor";
+import { cn } from "@/lib/utils";
+import { DrawerProfileHeader } from "./DrawerProfileHeader";
+
+type AppDrawerContentProps = Parameters<NonNullable<ComponentProps<typeof Drawer>["drawerContent"]>>[0];
+
+function normalizePath(path: string | { pathname: string; params?: unknown }) {
+  return typeof path === "string" ? path : path.pathname;
+}
+
+export function AppDrawerContent(props: AppDrawerContentProps) {
+  const pathname = usePathname();
+  const { background } = useThemeColors();
+
+  return (
+    <DrawerContentScrollView
+      {...props}
+      contentContainerStyle={{
+        backgroundColor: background,
+        paddingHorizontal: 0,
+        paddingTop: 0,
+      }}
+    >
+      <DrawerProfileHeader />
+
+      <View className="mt-4 px-4">
+        {NAV_ITEMS.map(({ label, href, icon: Icon, match }) => {
+          const currentPath = normalizePath(pathname);
+          const isActive = match.some(p => currentPath.includes(p));
+
+          return (
+            <Button
+              key={label}
+              variant={isActive ? "primary" : "ghost"}
+              title={label}
+              size="sm"
+              leftIcon={
+                <Icon
+                  size={22}
+                  className={isActive ? "text-primary-foreground" : "text-muted-foreground"}
+                />
+              }
+              className={cn("mb-1 justify-start", !isActive && "bg-transparent")}
+              onPress={() => router.push(href)}
+            />
+          );
+        })}
+      </View>
+    </DrawerContentScrollView>
+  );
+}

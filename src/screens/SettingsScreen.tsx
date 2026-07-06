@@ -1,10 +1,13 @@
-import { ChevronRight, Globe, Info, Palette } from "lucide-react-native";
+import { Brush, Globe, Info, Palette } from "lucide-react-native";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import { SettingRow } from "@/components/common/SettingRow";
 import { BottomSheet, type BottomSheetOption } from "@/components/ui/BottomSheet";
 import { Text } from "@/components/ui/Text";
+import { COLOR_PALETTES, type ColorPaletteKey } from "@/config/color-palettes";
 import { changeLanguage } from "@/i18n";
+import { cn } from "@/lib/utils";
 import { type ThemeMode, useThemeStore } from "@/store";
 
 const THEME_OPTIONS: BottomSheetOption<ThemeMode>[] = [
@@ -20,13 +23,34 @@ const LANGUAGE_OPTIONS: BottomSheetOption<string>[] = [
 ];
 
 function SettingsScreen() {
-  const { mode, setMode } = useThemeStore();
+  const { mode, setMode, primaryColor, setPrimaryColor } = useThemeStore();
   const { t, i18n } = useTranslation();
   const [themeSheetOpen, setThemeSheetOpen] = React.useState(false);
   const [langSheetOpen, setLangSheetOpen] = React.useState(false);
+  const [colorSheetOpen, setColorSheetOpen] = React.useState(false);
 
   const currentThemeLabel = THEME_OPTIONS.find(o => o.value === mode)?.label ?? "System";
   const currentLangLabel = LANGUAGE_OPTIONS.find(o => o.value === i18n.language)?.label ?? "English";
+  const currentPalette = COLOR_PALETTES.find(p => p.key === primaryColor);
+  const currentColorLabel = currentPalette?.label ?? "Blue";
+
+  const colorOptions = React.useMemo<BottomSheetOption<ColorPaletteKey>[]>(
+    () =>
+      COLOR_PALETTES.map(p => ({
+        label: p.label,
+        leftElement: (
+          <View
+            className={cn(
+              "w-6 h-6 rounded-full mr-3",
+              primaryColor === p.key && "ring-2 ring-offset-2 ring-primary"
+            )}
+            style={{ backgroundColor: p.color }}
+          />
+        ),
+        value: p.key,
+      })),
+    [primaryColor]
+  );
 
   return (
     <>
@@ -40,51 +64,32 @@ function SettingsScreen() {
               {t("settings.appearance")}
             </Text>
             <View className="rounded-xl border border-border bg-card overflow-hidden">
-              <Pressable
-                className="flex-row items-center p-4 active:bg-accent"
-                onPress={() => setThemeSheetOpen(true)}
-              >
-                <Palette
-                  size={22}
-                  className="text-foreground mr-3"
-                />
-                <View className="flex-1">
-                  <Text variant="body">{t("theme.title")}</Text>
-                  <Text
-                    variant="caption"
-                    className="text-muted-foreground mt-0.5"
-                  >
-                    {currentThemeLabel}
-                  </Text>
-                </View>
-                <ChevronRight
-                  size={18}
-                  className="text-muted-foreground"
-                />
-              </Pressable>
+              <SettingRow
+                icon={Brush}
+                label="Accent Color"
+                subtitle={currentColorLabel}
+                rightElement={
+                  <View
+                    className="w-5 h-5 rounded-full mr-2"
+                    style={{ backgroundColor: currentPalette?.color }}
+                  />
+                }
+                onPress={() => setColorSheetOpen(true)}
+              />
               <View className="h-px bg-border mx-4" />
-              <Pressable
-                className="flex-row items-center p-4 active:bg-accent"
+              <SettingRow
+                icon={Palette}
+                label={t("theme.title")}
+                subtitle={currentThemeLabel}
+                onPress={() => setThemeSheetOpen(true)}
+              />
+              <View className="h-px bg-border mx-4" />
+              <SettingRow
+                icon={Globe}
+                label={t("language.title")}
+                subtitle={currentLangLabel}
                 onPress={() => setLangSheetOpen(true)}
-              >
-                <Globe
-                  size={22}
-                  className="text-foreground mr-3"
-                />
-                <View className="flex-1">
-                  <Text variant="body">{t("language.title")}</Text>
-                  <Text
-                    variant="caption"
-                    className="text-muted-foreground mt-0.5"
-                  >
-                    {currentLangLabel}
-                  </Text>
-                </View>
-                <ChevronRight
-                  size={18}
-                  className="text-muted-foreground"
-                />
-              </Pressable>
+              />
             </View>
           </View>
 
@@ -113,7 +118,7 @@ function SettingsScreen() {
               </View>
               <View className="h-px bg-border mx-4" />
               <View className="flex-row items-center p-4">
-                <View className="w-[22px] mr-3" />
+                <View className="w-5.5 mr-3" />
                 <View className="flex-1">
                   <Text
                     variant="caption"
@@ -127,6 +132,15 @@ function SettingsScreen() {
           </View>
         </View>
       </ScrollView>
+
+      <BottomSheet
+        open={colorSheetOpen}
+        onOpenChange={setColorSheetOpen}
+        title="Accent Color"
+        options={colorOptions}
+        selectedValue={primaryColor}
+        onSelect={value => setPrimaryColor(value)}
+      />
 
       <BottomSheet
         open={themeSheetOpen}

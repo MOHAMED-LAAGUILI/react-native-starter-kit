@@ -42,6 +42,7 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 - **Drawer + Tabs** — Left drawer with hamburger menu header button, bottom tab bar (Home, Search, Profile, Settings)
 - **Bottom Sheet** — Reusable bottom sheet component via `@gorhom/bottom-sheet` with snap points, backdrop, pan-to-close
 - **Dark/Light/System theme** — CSS variables in oklch, persisted preference, follows system
+- **Accent Color System** — 7 color palettes (blue, purple, green, orange, red, teal, pink) switchable at runtime; all screens (drawer, tabs, profile) react instantly via `Uniwind.updateCSSVariables()`
 - **Splash Screen** — Custom splash with auto-hide after i18n + auth hydration ready
 - **System UI** — Background color synced with theme mode
 - **Cross-platform** — iOS, Android, Web
@@ -71,7 +72,7 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 │   │   ├── common/             # LoadingScreen, ErrorFallback
 │   │   ├── forms/              # FormField
 │   │   └── ui/                 # Button, Text, Input, BottomSheet
-│   ├── config/                 # Constants, env helpers
+│   ├── config/                 # Constants, env helpers, color-palettes.ts
 │   ├── hooks/                  # Shared hooks
 │   ├── i18n/                   # i18next + locales/{en,fr,ar}
 │   ├── providers/              # QueryProvider, ThemeProvider
@@ -101,6 +102,7 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | Language | TypeScript 6 (strict) |
 | Routing | Expo Router (Stack/Drawer/Tabs) |
 | Styling | Tailwind CSS v4 + Uniwind + cn() |
+| Theme | oklch CSS variables (light/dark + 7 accent color palettes) |
 | Client State | Zustand 5 (MMKV persistence) |
 | Server State | TanStack Query 5 + Devtools |
 | Forms | TanStack Form 1 + Zod 3 |

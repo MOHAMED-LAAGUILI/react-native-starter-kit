@@ -5,7 +5,6 @@ import { FormField } from "@/components/forms/FormField";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Text } from "@/components/ui/Text";
-import { cn } from "@/lib/utils";
 
 function SectionTitle({ children }: { children: string }) {
   return (
@@ -41,7 +40,6 @@ function HomeScreen() {
         All UI, form, and typography components with available variants.
       </Text>
 
-      {/* Typography */}
       <SectionTitle>Typography</SectionTitle>
       <View className="gap-1 bg-card p-4 rounded-xl border border-border">
         <Text variant="h1">Heading h1</Text>
@@ -55,7 +53,6 @@ function HomeScreen() {
         <Text variant="label">Label text</Text>
       </View>
 
-      {/* UI Components */}
       <SectionTitle>UI Components</SectionTitle>
 
       <Text
@@ -236,7 +233,6 @@ function HomeScreen() {
         )}
       </View>
 
-      {/* Form Components */}
       <SectionTitle>Form Components</SectionTitle>
       <View className="gap-3 bg-card p-4 rounded-xl border border-border">
         <FormField
