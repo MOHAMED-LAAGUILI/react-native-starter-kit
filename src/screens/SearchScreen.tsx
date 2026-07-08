@@ -20,12 +20,7 @@ function SearchScreen() {
           onChangeText={setQuery}
           autoCapitalize="none"
           autoCorrect={false}
-          leftIcon={
-            <SearchIcon
-              size={16}
-              className="text-muted-foreground"
-            />
-          }
+          type="search"
         />
         <Text
           variant="caption"

@@ -56,6 +56,12 @@ export default function AppLayout() {
           headerShown: true,
         }}
       />
+      <Drawer.Screen
+        name="preferences"
+        options={{
+          headerShown: true,
+        }}
+      />
     </Drawer>
   );
 }

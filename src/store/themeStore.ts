@@ -12,23 +12,41 @@ interface ThemeState {
   hydrate: () => void;
 }
 
+function loadMode(): ThemeMode {
+  try {
+    const v = StorageService.getItem<string>(STORAGE_KEYS.THEME_MODE);
+    if (v && ["light", "dark", "system"].includes(v)) return v as ThemeMode;
+  } catch {}
+  return "system";
+}
+
+function loadPrimaryColor(): string {
+  try {
+    const v = StorageService.getItem<string>(STORAGE_KEYS.PRIMARY_COLOR);
+    if (v) return v;
+  } catch {}
+  return "blue";
+}
+
 export const useThemeStore = create<ThemeState>(set => ({
   hydrate: () => {
     try {
-      const persisted = StorageService.getString(STORAGE_KEYS.THEME_MODE) as ThemeMode | undefined;
-      if (persisted) set({ mode: persisted });
-      const persistedColor = StorageService.getString(STORAGE_KEYS.PRIMARY_COLOR);
-      if (persistedColor) set({ primaryColor: persistedColor });
+      const mode = loadMode();
+      set({ mode });
+      const color = loadPrimaryColor();
+      set({ primaryColor: color });
     } catch {}
   },
-  mode: "system",
-  primaryColor: "blue",
+  mode: loadMode(),
+  primaryColor: loadPrimaryColor(),
+
   setMode: (mode: ThemeMode) => {
-    StorageService.setString(STORAGE_KEYS.THEME_MODE, mode);
+    StorageService.setItem(STORAGE_KEYS.THEME_MODE, mode);
     set({ mode });
   },
+
   setPrimaryColor: (color: string) => {
-    StorageService.setString(STORAGE_KEYS.PRIMARY_COLOR, color);
+    StorageService.setItem(STORAGE_KEYS.PRIMARY_COLOR, color);
     set({ primaryColor: color });
   },
 }));

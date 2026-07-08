@@ -17,6 +17,8 @@ export function HeaderTitle() {
         return "Features";
       case "blank":
         return "Blank";
+      case "preferences":
+        return "Preferences";
       case "search":
         return "Search";
       case "profile":

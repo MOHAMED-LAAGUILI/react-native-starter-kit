@@ -76,7 +76,7 @@
         "react-native-nitro-modules": "^0.36.1",
         "react-native-reanimated": "4.5.0",
         "react-native-reanimated-carousel": "^4.0.3",
-        "react-native-restart": "^0.0.28",
+        "react-native-restart-newarch": "^1.0.87",
         "react-native-safe-area-context": "~5.7.0",
         "react-native-screens": "^4.25.2",
         "react-native-svg": "15.15.4",
@@ -1689,7 +1689,7 @@
 
     "react-native-reanimated-carousel": ["react-native-reanimated-carousel@4.0.3", "", { "peerDependencies": { "react": ">=18.0.0", "react-native": ">=0.70.3", "react-native-gesture-handler": ">=2.9.0", "react-native-reanimated": ">=3.0.0" } }, "sha512-YZXlvZNghR5shFcI9hTA7h7bEhh97pfUSLZvLBAshpbkuYwJDKmQXejO/199T6hqGq0wCRwR0CWf2P4Vs6A4Fw=="],
 
-    "react-native-restart": ["react-native-restart@0.0.28", "", { "peerDependencies": { "react": "*", "react-native": "*" } }, "sha512-FUGr24ZDCC2AwuhDcK8SRoDxqCyFMSlhJaR4u5nSEAcAkn4S26VxrZSpiBdI1CxC6rnbaV+vh9kdxv8YIS+pdw=="],
+    "react-native-restart-newarch": ["react-native-restart-newarch@1.0.87", "", { "peerDependencies": { "react-native": ">=0.60.0" } }, "sha512-JiYYjS1nXZjp11N/ljMnTpV/5xazV+JSSEIMrok7ce8jw0iU9DVKrqSRg5weUc9fva2yg+vkTHZXkwEQ7myh+g=="],
 
     "react-native-safe-area-context": ["react-native-safe-area-context@5.7.0", "", { "peerDependencies": { "react": "*", "react-native": "*" } }, "sha512-/9/MtQz8ODphjsLdZ+GZAIcC/RtoqW9EeShf7Uvnfgm/pzYrJ75y3PV/J1wuAV1T5Dye5ygq4EAW20RoBq0ABQ=="],
 

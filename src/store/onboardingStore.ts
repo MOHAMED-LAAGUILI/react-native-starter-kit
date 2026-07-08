@@ -8,14 +8,22 @@ interface OnboardingState {
   hydrate: () => void;
 }
 
+function loadOnboarding(): boolean {
+  try {
+    return StorageService.getItem<boolean>(STORAGE_KEYS.ONBOARDING_COMPLETE) ?? false;
+  } catch {
+    return false;
+  }
+}
+
 export const useOnboardingStore = create<OnboardingState>(set => ({
   complete: () => {
-    StorageService.setBoolean(STORAGE_KEYS.ONBOARDING_COMPLETE, true);
+    StorageService.setItem(STORAGE_KEYS.ONBOARDING_COMPLETE, true);
     set({ isComplete: true });
   },
   hydrate: () => {
-    const done = StorageService.getBoolean(STORAGE_KEYS.ONBOARDING_COMPLETE) ?? false;
+    const done = loadOnboarding();
     set({ isComplete: done });
   },
-  isComplete: false,
+  isComplete: loadOnboarding(),
 }));

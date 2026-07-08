@@ -1,109 +1,71 @@
-import { Platform } from "react-native";
 import { isWeb } from "@/utils/platform";
 
-let storageInstance: ReturnType<typeof createMMKV> | null = null;
+let mmkv: ReturnType<typeof createMMKV> | null = null;
 
 function createMMKV() {
   try {
-    const mmkv = require("react-native-mmkv");
-    return mmkv.createMMKV({
-      id: "app-storage",
-      //path: `${USER_DIRECTORY}/storage`,
-      //encryptionKey: 'hunter2',
-      //encryptionType: 'AES-256',
-      //mode: 'multi-process',
-      //readOnly: false,
-      //compareBeforeSet: false,
-    });
-  } catch (e) {
-    return e;
+    const { createMMKV: create } = require("react-native-mmkv");
+    return create({ id: "app-storage" });
+  } catch {
+    return null;
   }
 }
 
 function getStorage() {
-  if (!storageInstance) {
-    storageInstance = createMMKV();
-  }
-  if (!storageInstance) {
-    if (isWeb) {
-      try {
-        return {
-          clearAll: () => localStorage.clear(),
-          contains: (key: string) => localStorage.getItem(key) !== null,
-          getAllKeys: () => Object.keys(localStorage),
-          getBoolean: (key: string) => {
-            const v = localStorage.getItem(key);
-            return v ? v === "true" : undefined;
-          },
-          getNumber: (key: string) => {
-            const v = localStorage.getItem(key);
-            return v ? Number(v) : undefined;
-          },
-          getString: (key: string) => localStorage.getItem(key) ?? undefined,
-          remove: (key: string) => {
-            localStorage.removeItem(key);
-            return true;
-          },
-          set: (key: string, value: string | boolean | number) => localStorage.setItem(key, String(value)),
-        };
-      } catch {
-        return null;
-      }
-    }
-    return null;
-  }
-  return storageInstance;
+  if (!mmkv) mmkv = createMMKV();
+  return mmkv;
 }
 
-const StorageService = {
+function getWebStorage() {
+  if (!isWeb) return null;
+  try {
+    return {
+      clearAll: () => localStorage.clear(),
+      contains: (key: string) => localStorage.getItem(key) !== null,
+      getAllKeys: () => Object.keys(localStorage),
+      getString: (key: string) => localStorage.getItem(key),
+      remove: (key: string) => localStorage.removeItem(key),
+      set: (key: string, value: string) => localStorage.setItem(key, value),
+    };
+  } catch {
+    return null;
+  }
+}
+
+export const StorageService = {
   clearAll(): void {
     getStorage()?.clearAll();
+    getWebStorage()?.clearAll();
   },
 
   contains(key: string): boolean {
-    return getStorage()?.contains(key) ?? false;
+    return getStorage()?.contains(key) ?? getWebStorage()?.contains(key) ?? false;
   },
 
-  delete(key: string): void {
-    getStorage()?.remove(key);
+  getAllKeys(): string[] {
+    const nativeKeys = getStorage()?.getAllKeys() ?? [];
+    const webKeys = getWebStorage()?.getAllKeys() ?? [];
+    const combined = new Set([...nativeKeys, ...webKeys]);
+    return [...combined];
   },
-
-  getBoolean(key: string): boolean | undefined {
-    return getStorage()?.getBoolean(key);
-  },
-
-  getNumber(key: string): number | undefined {
-    return getStorage()?.getNumber(key);
-  },
-
-  getObject<T>(key: string): T | undefined {
-    const json = getStorage()?.getString(key);
-    if (!json) return undefined;
+  getItem<T>(key: string): T | null {
+    const raw = getStorage()?.getString(key) ?? getWebStorage()?.getString(key) ?? null;
+    if (raw == null) return null;
     try {
-      return JSON.parse(json) as T;
+      return JSON.parse(raw) as T;
     } catch {
-      return undefined;
+      return raw as unknown as T;
     }
   },
-  getString(key: string): string | undefined {
-    return getStorage()?.getString(key);
+
+  removeItem(key: string): void {
+    getStorage()?.remove(key);
+    getWebStorage()?.remove(key);
   },
 
-  setBoolean(key: string, value: boolean): void {
-    getStorage()?.set(key, value);
-  },
-
-  setNumber(key: string, value: number): void {
-    getStorage()?.set(key, value);
-  },
-
-  setObject<T>(key: string, value: T): void {
-    getStorage()?.set(key, JSON.stringify(value));
-  },
-
-  setString(key: string, value: string): void {
-    getStorage()?.set(key, value);
+  setItem<T>(key: string, value: T): void {
+    const json = JSON.stringify(value);
+    getStorage()?.set(key, json);
+    getWebStorage()?.set(key, json);
   },
 };
-
-export { StorageService };

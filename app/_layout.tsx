@@ -12,12 +12,11 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { configureReanimatedLogger, ReanimatedLogLevel } from "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { HeaderButtonsProvider } from "react-navigation-header-buttons/HeaderButtonsProvider";
-import { LoadingScreen } from "@/components/common/LoadingScreen";
 import { ToastConfig } from "@/components/ui/Toast";
 import { setupI18n } from "@/i18n";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { useAuthStore, useOnboardingStore, useThemeStore } from "@/store";
+import { useThemeStore } from "@/store";
 import { isWeb } from "@/utils/platform";
 
 configureReanimatedLogger({
@@ -29,40 +28,20 @@ export { ErrorBoundary } from "expo-router";
 SplashScreen.preventAutoHideAsync();
 
 function RootLayoutInner({ onReady }: { onReady: () => void }) {
-  const isLoading = useAuthStore(s => s.isLoading);
-  const hydrate = useAuthStore(s => s.hydrate);
-  const themeHydrate = useThemeStore(s => s.hydrate);
-  const onboardingHydrate = useOnboardingStore(s => s.hydrate);
   const themeMode = useThemeStore(s => s.mode);
   const readyRef = useRef(false);
 
   useEffect(() => {
-    hydrate();
-    themeHydrate();
-    onboardingHydrate();
-  }, [hydrate, themeHydrate, onboardingHydrate]);
-
-  useEffect(() => {
-    if (!isLoading && !readyRef.current) {
+    if (!readyRef.current) {
       readyRef.current = true;
       onReady();
     }
-  }, [isLoading, onReady]);
+  }, [onReady]);
 
   useEffect(() => {
     const bg = themeMode === "dark" ? "#000000" : "#ffffff";
     SystemUI.setBackgroundColorAsync(bg);
   }, [themeMode]);
-
-  if (isLoading) {
-    return (
-      <ThemeProvider>
-        <StatusBar style="auto" />
-
-        <LoadingScreen />
-      </ThemeProvider>
-    );
-  }
 
   return <Stack screenOptions={{ headerShown: false }} />;
 }
@@ -90,8 +69,6 @@ export default function RootLayout() {
     return (
       <ThemeProvider>
         <StatusBar style="auto" />
-
-        <LoadingScreen />
       </ThemeProvider>
     );
   }
