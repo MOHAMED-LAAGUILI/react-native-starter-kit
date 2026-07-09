@@ -82,7 +82,10 @@ export default function RootLayout() {
   if (!i18nReady) {
     return (
       <ThemeProvider>
-        <StatusBar style="auto" animated />
+        <StatusBar
+          style="auto"
+          animated
+        />
         <LottieView
           source={require("@assets/lottie/Loading animation blue.json")}
           autoPlay
@@ -100,7 +103,10 @@ export default function RootLayout() {
           <QueryProvider>
             <ThemeProvider>
               <BottomSheetModalProvider>
-                <StatusBar style="auto" animated/>
+                <StatusBar
+                  style="auto"
+                  animated
+                />
                 <RootLayoutInner onReady={onReady} />
                 <Toasts
                   overrideDarkMode={isDark}

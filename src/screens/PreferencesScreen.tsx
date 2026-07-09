@@ -87,7 +87,7 @@ export function PreferencesScreen() {
               <View
                 key={store.id}
                 className="p-3 rounded-xl border border-border bg-card gap-5 flex-wrap"
-             >
+              >
                 <View className="flex-row items-center gap-2 mb-1">
                   <Database
                     size={14}
