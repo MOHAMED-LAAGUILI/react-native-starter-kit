@@ -1,38 +1,39 @@
-import type { ConfigContext, ExpoConfig } from "@expo/config";
-import type { AppIconBadgeConfig } from "app-icon-badge/types";
-import ExpoEnv from "./src/config/env.js";
-import "dotenv/config";
+import type { ConfigContext, ExpoConfig } from '@expo/config';
+import type { AppIconBadgeConfig } from 'app-icon-badge/types';
+import ExpoEnv from './src/config/env.js';
+import 'dotenv/config';
 
-import "tsx/cjs";
+import 'tsx/cjs';
 
 const appIconBadgeConfig: AppIconBadgeConfig = {
   badges: [
     {
-      color: "white",
+      color: 'white',
       text: process.env.NODE_ENV,
-      type: "banner",
+      type: 'banner',
     },
     {
-      color: "white",
+      color: 'white',
       text: ExpoEnv.EXPO_PUBLIC_VERSION,
-      type: "ribbon",
+      type: 'ribbon',
     },
   ],
-  enabled: process.env.NODE_ENV !== "production",
+  enabled: process.env.NODE_ENV !== 'production',
 };
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   android: {
     adaptiveIcon: {
-      backgroundColor: "#2E3C4B",
-      foregroundImage: "./assets/images/adaptive-icon.png",
+      backgroundColor: '#2E3C4B',
+      foregroundImage: './assets/images/adaptive-icon.png',
     },
     package: ExpoEnv.EXPO_PUBLIC_PACKAGE,
-    userInterfaceStyle: "light",
+    permissions: ['android.permission.READ_EXTERNAL_STORAGE', 'android.permission.WRITE_EXTERNAL_STORAGE'],
+    userInterfaceStyle: 'light',
   },
-  assetBundlePatterns: ["**/*"],
-  backgroundColor: "#ffffff",
+  assetBundlePatterns: ['**/*'],
+  backgroundColor: '#ffffff',
   description: `${ExpoEnv.EXPO_PUBLIC_NAME} Mobile App`,
   experiments: {
     typedRoutes: true,
@@ -43,9 +44,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: ExpoEnv.EAS_PROJECT_ID,
     },
   },
-  icon: "./assets/images/icon.png",
+  icon: './assets/images/icon.png',
   ios: {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     bundleIdentifier: ExpoEnv.EXPO_PUBLIC_BUNDLE_ID,
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
@@ -56,83 +57,96 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   name: ExpoEnv.EXPO_PUBLIC_NAME,
   // @ts-expect-error - newArchEnabled is valid in Expo SDK 57
   newArchEnabled: true,
-  orientation: "portrait",
+  orientation: 'portrait',
   owner: ExpoEnv.EXPO_ACCOUNT_OWNER,
   plugins: [
-    "expo-system-ui",
+    'expo-system-ui',
     [
-      "expo-splash-screen",
+      'expo-splash-screen',
       {
-        backgroundColor: "#2E3C4B",
-        image: "./assets/images/splash.png",
+        backgroundColor: '#2E3C4B',
+        image: './assets/images/splash.png',
         imageWidth: 150,
-        resizeMode: "contain",
+        resizeMode: 'contain',
       },
     ],
     [
-      "expo-dev-client",
+      'expo-dev-client',
       {
         android: {
-          defaultLaunchURL: "http://10.0.0.2:8081",
+          defaultLaunchURL: 'http://10.0.0.2:8081',
         },
-        defaultLaunchURL: "http://localhost:8081",
-        launchMode: "most-recent",
+        defaultLaunchURL: 'http://localhost:8081',
+        launchMode: 'most-recent',
       },
     ],
     [
-      "expo-font",
+      'expo-font',
       {
         android: {
           fonts: [
             {
               fontDefinitions: [
                 {
-                  path: "node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf",
+                  path: 'node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf',
                   weight: 400,
                 },
                 {
-                  path: "node_modules/@expo-google-fonts/inter/500Medium/Inter_500Medium.ttf",
+                  path: 'node_modules/@expo-google-fonts/inter/500Medium/Inter_500Medium.ttf',
                   weight: 500,
                 },
                 {
-                  path: "node_modules/@expo-google-fonts/inter/600SemiBold/Inter_600SemiBold.ttf",
+                  path: 'node_modules/@expo-google-fonts/inter/600SemiBold/Inter_600SemiBold.ttf',
                   weight: 600,
                 },
                 {
-                  path: "node_modules/@expo-google-fonts/inter/700Bold/Inter_700Bold.ttf",
+                  path: 'node_modules/@expo-google-fonts/inter/700Bold/Inter_700Bold.ttf',
                   weight: 700,
                 },
               ],
-              fontFamily: "Inter",
+              fontFamily: 'Inter',
             },
           ],
         },
         ios: {
           fonts: [
-            "node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf",
-            "node_modules/@expo-google-fonts/inter/500Medium/Inter_500Medium.ttf",
-            "node_modules/@expo-google-fonts/inter/600SemiBold/Inter_600SemiBold.ttf",
-            "node_modules/@expo-google-fonts/inter/700Bold/Inter_700Bold.ttf",
+            'node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf',
+            'node_modules/@expo-google-fonts/inter/500Medium/Inter_500Medium.ttf',
+            'node_modules/@expo-google-fonts/inter/600SemiBold/Inter_600SemiBold.ttf',
+            'node_modules/@expo-google-fonts/inter/700Bold/Inter_700Bold.ttf',
           ],
         },
       },
     ],
-    "expo-localization",
-    "expo-router",
-    ["app-icon-badge", appIconBadgeConfig],
-    "expo-status-bar",
-    ["react-native-edge-to-edge"],
+    'expo-localization',
+    'expo-router',
+    ['app-icon-badge', appIconBadgeConfig],
+    'expo-status-bar',
+    ['react-native-edge-to-edge'],
+    [
+      'expo-dynamic-icons',
+      {
+        icons: {
+          expoDark: {
+            image: './assets/images/expo-icon-dark.png',
+          },
+          originalDark: {
+            image: './assets/images/react-native-reusables-dark.png',
+          },
+        },
+      },
+    ],
   ],
   scheme: ExpoEnv.EXPO_PUBLIC_SCHEME,
   slug: ExpoEnv.EXPO_PUBLIC_SLUG,
   updates: {
     fallbackToCacheTimeout: 0,
   },
-  userInterfaceStyle: "automatic",
+  userInterfaceStyle: 'automatic',
   version: ExpoEnv.EXPO_PUBLIC_VERSION,
   web: {
-    bundler: "metro",
-    favicon: "./assets/images/favicon.png",
-    output: "static",
+    bundler: 'metro',
+    favicon: './assets/images/favicon.png',
+    output: 'static',
   },
 });

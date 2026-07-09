@@ -1,6 +1,5 @@
-import { type Href } from "expo-router";
-import { Database, FileQuestion, Home, Search, Settings, Sparkles, User } from "lucide-react-native";
-import type { ComponentProps } from "react";
+import type { Href } from 'expo-router';
+import { Database, FileQuestion, Home, Search, Settings, Sparkles, User } from 'lucide-react-native';
 
 export type NavItem = {
   href: Href;
@@ -11,45 +10,45 @@ export type NavItem = {
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    href: "/(app)/(tabs)" as Href,
+    href: '/(app)/(tabs)' as Href,
     icon: Home,
-    label: "Home",
-    match: ["/", "/index"],
+    label: 'Home',
+    match: ['/', '/index'],
   },
   {
-    href: "/(app)/(tabs)/search" as Href,
+    href: '/(app)/(tabs)/search' as Href,
     icon: Search,
-    label: "Search",
-    match: ["/search"],
+    label: 'Search',
+    match: ['/search'],
   },
   {
-    href: "/(app)/(tabs)/profile" as Href,
+    href: '/(app)/(tabs)/profile' as Href,
     icon: User,
-    label: "Profile",
-    match: ["/profile"],
+    label: 'Profile',
+    match: ['/profile'],
   },
   {
-    href: "/(app)/(tabs)/settings" as Href,
+    href: '/(app)/(tabs)/settings' as Href,
     icon: Settings,
-    label: "Settings",
-    match: ["/settings"],
+    label: 'Settings',
+    match: ['/settings'],
   },
   {
-    href: "/(app)/features" as Href,
+    href: '/(app)/features' as Href,
     icon: Sparkles,
-    label: "Features",
-    match: ["/features"],
+    label: 'Features',
+    match: ['/features'],
   },
   {
-    href: "/(app)/blank" as Href,
+    href: '/(app)/blank' as Href,
     icon: FileQuestion,
-    label: "Blank",
-    match: ["/blank"],
+    label: 'Blank',
+    match: ['/blank'],
   },
   {
-    href: "/(app)/preferences" as Href,
+    href: '/(app)/preferences' as Href,
     icon: Database,
-    label: "Preferences",
-    match: ["/preferences"],
+    label: 'Preferences',
+    match: ['/preferences'],
   },
 ];

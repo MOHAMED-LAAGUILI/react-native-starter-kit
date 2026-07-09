@@ -1,17 +1,24 @@
-import axios, { AxiosError, type AxiosInstance, type InternalAxiosRequestConfig } from "axios";
-import { STORAGE_KEYS } from "@/config/constants";
-import { ENV } from "@/config/env";
-import { StorageService } from "@/storage";
+import type { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
+import { STORAGE_KEYS } from '@/config/constants';
+import { ENV } from '@/config/env';
+import { StorageService } from '@/storage';
 
 class ApiError extends Error {
+  status: number;
+  code?: string;
+  data?: unknown;
+
   constructor(
     message: string,
-    public status: number,
-    public code?: string,
-    public data?: unknown
+    status: number,
+    options?: { code?: string; data?: unknown },
   ) {
     super(message);
-    this.name = "ApiError";
+    this.name = 'ApiError';
+    this.status = status;
+    this.code = options?.code;
+    this.data = options?.data;
   }
 }
 
@@ -22,10 +29,11 @@ let failedQueue: Array<{
 }> = [];
 
 function processQueue(error: unknown, token: string | null): void {
-  failedQueue.forEach(promise => {
+  failedQueue.forEach((promise) => {
     if (error) {
       promise.reject(error);
-    } else if (token) {
+    }
+    else if (token) {
       promise.resolve(token);
     }
   });
@@ -34,7 +42,7 @@ function processQueue(error: unknown, token: string | null): void {
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: ENV.API_URL,
-  headers: { "Content-Type": "application/json" },
+  headers: { 'Content-Type': 'application/json' },
   timeout: 30000,
 });
 
@@ -46,7 +54,7 @@ apiClient.interceptors.request.use(
     }
     return config;
   },
-  error => Promise.reject(error)
+  error => Promise.reject(error),
 );
 
 apiClient.interceptors.response.use(
@@ -58,7 +66,7 @@ apiClient.interceptors.response.use(
       if (isRefreshing) {
         return new Promise<string>((resolve, reject) => {
           failedQueue.push({ reject, resolve });
-        }).then(token => {
+        }).then((token) => {
           if (originalRequest.headers) {
             originalRequest.headers.Authorization = `Bearer ${token}`;
           }
@@ -72,7 +80,7 @@ apiClient.interceptors.response.use(
       try {
         const refreshToken = StorageService.auth.getItem<string>(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
         if (!refreshToken) {
-          throw new Error("No refresh token available");
+          throw new Error('No refresh token available');
         }
         const { data } = await axios.post(`${ENV.API_URL}/auth/refresh`, {
           refreshToken,
@@ -87,28 +95,29 @@ apiClient.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
         }
         return apiClient(originalRequest);
-      } catch (refreshError) {
+      }
+      catch (refreshError) {
         processQueue(refreshError, null);
         StorageService.auth.removeItem(STORAGE_KEYS.AUTH_TOKEN);
         StorageService.auth.removeItem(STORAGE_KEYS.AUTH_REFRESH_TOKEN);
-        return Promise.reject(new Error("Session expired"));
-      } finally {
+        return Promise.reject(new Error('Session expired'));
+      }
+      finally {
         isRefreshing = false;
       }
     }
 
     if (!error.response) {
-      return Promise.reject(new Error("Network error"));
+      return Promise.reject(new Error('Network error'));
     }
 
     const apiError = new ApiError(
-      (error.response.data as { message?: string })?.message ?? "Request failed",
+      (error.response.data as { message?: string })?.message ?? 'Request failed',
       error.response.status,
-      (error.response.data as { code?: string })?.code,
-      error.response.data
+      { code: (error.response.data as { code?: string })?.code, data: error.response.data },
     );
     return Promise.reject(apiError);
-  }
+  },
 );
 
 export { apiClient };

@@ -1,2 +1,2 @@
-import { PostDetailScreen } from "@/screens/PostDetailScreen";
+import { PostDetailScreen } from '@/screens/post-detail-screen';
 export default PostDetailScreen;

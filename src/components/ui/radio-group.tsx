@@ -1,0 +1,50 @@
+import type * as React from 'react';
+import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
+import { View } from 'react-native';
+import { cn } from '@/lib/utils';
+import { Text } from './text';
+
+type RadioGroupProps = {
+  value: string;
+  onValueChange: (value: string) => void;
+  disabled?: boolean;
+  className?: string;
+  children: React.ReactNode;
+};
+
+function RadioGroup({ value, onValueChange, disabled, className, children }: RadioGroupProps) {
+  return (
+    <RadioGroupPrimitive.Root
+      value={value}
+      onValueChange={onValueChange}
+      disabled={disabled}
+      className={cn('gap-3', className)}
+    >
+      {children}
+    </RadioGroupPrimitive.Root>
+  );
+}
+
+type RadioGroupItemProps = {
+  value: string;
+  label: string;
+  disabled?: boolean;
+};
+
+function RadioGroupItem({ value, label, disabled }: RadioGroupItemProps) {
+  return (
+    <RadioGroupPrimitive.Item
+      value={value}
+      disabled={disabled}
+      className="flex-row items-center gap-3"
+    >
+      <View className={cn('size-5 items-center justify-center rounded-full border', 'border-border')}>
+        <RadioGroupPrimitive.Indicator className="size-3 rounded-full bg-primary" />
+      </View>
+      <Text className="text-base text-foreground">{label}</Text>
+    </RadioGroupPrimitive.Item>
+  );
+}
+
+export type { RadioGroupItemProps, RadioGroupProps };
+export { RadioGroup, RadioGroupItem };

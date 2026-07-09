@@ -1,59 +1,51 @@
-import { toast } from "@backpackapp-io/react-native-toast";
-import * as React from "react";
-import { useThemeStore } from "@/store";
+import { toast } from '@backpackapp-io/react-native-toast';
 
-export type ToastVariant = "success" | "error" | "info";
-const themeMode = useThemeStore(s => s.mode);
+export type ToastVariant = 'success' | 'error' | 'info';
 
-export interface ToastProps {
+export type ToastProps = {
   variant?: ToastVariant;
   title: string;
   message?: string;
-}
+};
 
-const isDark = themeMode === "dark";
+export const toastDefaultStyle = {
+  indicator: {
+    alignSelf: 'stretch' as const,
+    borderRadius: 2,
+    marginRight: 12,
+    width: 4,
+  },
+  pressable: {
+    backgroundColor: '#ffffff',
+    borderColor: '#e5e5ea',
+    borderRadius: 10,
+    borderWidth: 0.5,
+  },
+  text: {
+    color: '#1c1c1e',
+    fontWeight: '600' as const,
+  },
+  view: {
+    overflow: 'hidden' as const,
+    paddingLeft: 0,
+  },
+};
 
-export const toastDefaultStyle = React.useMemo(
-  () => ({
-    indicator: {
-      alignSelf: "stretch" as const,
-      borderRadius: 2,
-      marginRight: 12,
-      width: 4,
-    },
-    pressable: {
-      backgroundColor: isDark ? "#1c1c1e" : "#ffffff",
-      borderColor: isDark ? "#333333" : "#e5e5ea",
-      borderRadius: 10,
-      borderWidth: 0.5,
-    },
-    text: {
-      color: isDark ? "#f2f2f2" : "#1c1c1e",
-      fontWeight: "600" as const,
-    },
-    view: {
-      overflow: "hidden" as const,
-      paddingLeft: 0,
-    },
-  }),
-  [isDark]
-);
-
-export function showToast({ variant = "info", title, message }: ToastProps) {
+export function showToast({ variant = 'info', title, message }: ToastProps) {
   const text = message ? `${title}\n${message}` : title;
 
   switch (variant) {
-    case "success":
+    case 'success':
       toast.success(text);
       break;
 
-    case "error":
+    case 'error':
       toast.error(text);
       break;
-
-    case "info":
     default:
-      toast(text);
+      toast.loading(text, {
+        duration: 2000,
+      });
       break;
   }
 }

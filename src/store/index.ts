@@ -1,4 +1,4 @@
-export { useAuthStore } from "./authStore";
-export { useOnboardingStore } from "./onboardingStore";
-export type { ThemeMode } from "./themeStore";
-export { useThemeStore } from "./themeStore";
+export { useAuthStore } from './auth-store';
+export { useOnboardingStore } from './onboarding-store';
+export type { ThemeMode } from './theme-store';
+export { useThemeStore } from './theme-store';

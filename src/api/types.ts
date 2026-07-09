@@ -1,12 +1,12 @@
-export interface PublicPost {
+export type PublicPost = {
   userId: number;
   id: number;
   title: string;
   body: string;
   imageUrl: string;
-}
+};
 
-export interface PaginatedResponse<T> {
+export type PaginatedResponse<T> = {
   data: T[];
   meta: {
     total: number;
@@ -14,16 +14,16 @@ export interface PaginatedResponse<T> {
     pageSize: number;
     totalPages: number;
   };
-}
+};
 
-export interface ApiResponse<T> {
+export type ApiResponse<T> = {
   data: T;
   message?: string;
-}
+};
 
-export interface ApiErrorResponse {
+export type ApiErrorResponse = {
   message: string;
   code?: string;
   statusCode: number;
   errors?: Record<string, string[]>;
-}
+};

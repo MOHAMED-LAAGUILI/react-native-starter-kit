@@ -1,2 +1,2 @@
-import { FeaturesScreen } from "@/screens/FeaturesScreen";
+import { FeaturesScreen } from '@/screens/features-screen';
 export default FeaturesScreen;

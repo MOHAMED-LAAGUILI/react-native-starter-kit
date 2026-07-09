@@ -1,12 +1,12 @@
-import { View } from "react-native";
-import { Text } from "@/components/ui/Text";
+import { View } from 'react-native';
+import { Text } from '@/components/ui';
 
 function Screen() {
   return (
-    <View className="flex-1 items-center justify-center bg-background">
+    <View className='flex-1 items-center justify-center bg-background'>
       <Text
-        variant="h4"
-        className="text-muted-foreground"
+        variant='h4'
+        className='text-muted-foreground'
       >
         Page Title
       </Text>

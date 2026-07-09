@@ -1,12 +1,13 @@
-import { isWeb } from "@/utils/platform";
+import { isWeb } from '@/utils/platform';
 
 type StorageBackend = ReturnType<typeof createMMKVBackend> | ReturnType<typeof createWebBackend> | null;
 
 function createMMKVBackend(id: string) {
   try {
-    const { createMMKV, existsMMKV } = require("react-native-mmkv");
+    const { createMMKV, existsMMKV } = require('react-native-mmkv');
 
-    if (!existsMMKV?.(id)) createMMKV({ id });
+    if (!existsMMKV?.(id))
+      createMMKV({ id });
 
     const instance = createMMKV({ id });
 
@@ -18,13 +19,15 @@ function createMMKVBackend(id: string) {
       remove: (key: string) => instance.remove(key),
       set: (key: string, value: string) => instance.set(key, value),
     };
-  } catch {
+  }
+  catch {
     return null;
   }
 }
 
 function createWebBackend(id: string) {
-  if (!isWeb) return null;
+  if (!isWeb)
+    return null;
   try {
     const prefix = `${id}.`;
     return {
@@ -41,13 +44,15 @@ function createWebBackend(id: string) {
       remove: (key: string) => localStorage.removeItem(prefix + key),
       set: (key: string, value: string) => localStorage.setItem(prefix + key, value),
     };
-  } catch {
+  }
+  catch {
     return null;
   }
 }
 
 function createStorageBackend(id: string): StorageBackend {
-  if (isWeb) return createWebBackend(id);
+  if (isWeb)
+    return createWebBackend(id);
   return createMMKVBackend(id);
 }
 
@@ -64,12 +69,15 @@ function createStore(id: string) {
     },
 
     getItem<T>(key: string): T | null {
-      if (!backend) return null;
+      if (!backend)
+        return null;
       const raw = backend.getString(key);
-      if (raw == null) return null;
+      if (raw == null)
+        return null;
       try {
         return JSON.parse(raw) as T;
-      } catch {
+      }
+      catch {
         return raw as unknown as T;
       }
     },
@@ -79,7 +87,8 @@ function createStore(id: string) {
     },
 
     setItem<T>(key: string, value: T): void {
-      if (!backend) return;
+      if (!backend)
+        return;
       const json = JSON.stringify(value);
       if (!backend.contains(key) || backend.getString(key) !== json) {
         backend.set(key, json);
@@ -89,7 +98,7 @@ function createStore(id: string) {
       const alive = backend !== null;
       return {
         alive,
-        driver: isWeb ? "web" : alive ? "mmkv" : "none",
+        driver: isWeb ? 'web' : alive ? 'mmkv' : 'none',
         id,
         keyCount: backend?.getAllKeys().length ?? 0,
       };
@@ -98,35 +107,35 @@ function createStore(id: string) {
 }
 
 export const StorageService = {
-  auth: createStore("app-auth"),
+  auth: createStore('app-auth'),
 
   contains(key: string): boolean {
     return (
-      this.auth.getItem(key) !== null ||
-      this.theme.getItem(key) !== null ||
-      this.i18n.getItem(key) !== null ||
-      this.onboarding.getItem(key) !== null
+      this.auth.getItem(key) !== null
+      || this.theme.getItem(key) !== null
+      || this.i18n.getItem(key) !== null
+      || this.onboarding.getItem(key) !== null
     );
   },
 
-  getAllStores(): Array<{ id: string; status: ReturnType<typeof createStore>["status"] }> {
+  getAllStores(): Array<{ id: string; status: ReturnType<typeof createStore>['status'] }> {
     return [
-      { id: "app-auth", status: this.auth.status },
-      { id: "app-theme", status: this.theme.status },
-      { id: "app-i18n", status: this.i18n.status },
-      { id: "app-onboarding", status: this.onboarding.status },
+      { id: 'app-auth', status: this.auth.status },
+      { id: 'app-theme', status: this.theme.status },
+      { id: 'app-i18n', status: this.i18n.status },
+      { id: 'app-onboarding', status: this.onboarding.status },
     ];
   },
 
   getItem<T>(key: string): T | null {
     return (
-      this.auth.getItem<T>(key) ??
-      this.theme.getItem<T>(key) ??
-      this.i18n.getItem<T>(key) ??
-      this.onboarding.getItem<T>(key)
+      this.auth.getItem<T>(key)
+      ?? this.theme.getItem<T>(key)
+      ?? this.i18n.getItem<T>(key)
+      ?? this.onboarding.getItem<T>(key)
     );
   },
-  i18n: createStore("app-i18n"),
-  onboarding: createStore("app-onboarding"),
-  theme: createStore("app-theme"),
+  i18n: createStore('app-i18n'),
+  onboarding: createStore('app-onboarding'),
+  theme: createStore('app-theme'),
 };

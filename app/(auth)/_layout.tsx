@@ -1,28 +1,27 @@
-import { Stack, useRouter } from "expo-router";
-import * as React from "react";
-import { useEffect } from "react";
-import { useAuthStore, useOnboardingStore } from "@/store";
+import { Stack, useRouter } from 'expo-router';
+import { useEffect } from 'react';
+import { useAuthStore, useOnboardingStore } from '@/store';
 
 export default function AuthLayout() {
-  const isAuthenticated = useAuthStore(s => s.isAuthenticated);
-  const isOnboarded = useOnboardingStore(s => s.isComplete);
+  const isAuthenticated = useAuthStore((s: { isAuthenticated: any; }) => s.isAuthenticated);
+  const isOnboarded = useOnboardingStore((s: { isComplete: any; }) => s.isComplete);
   const router = useRouter();
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace("/(app)/(tabs)");
+      router.replace('/(app)/(tabs)');
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, router]);
 
   useEffect(() => {
-    if (!isAuthenticated && !isOnboarded) {
-      router.replace("/onboarding");
+    if (!(isAuthenticated || isOnboarded)) {
+      router.replace('/onboarding');
     }
-  }, [isAuthenticated, isOnboarded]);
+  }, [isAuthenticated, isOnboarded, router]);
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="login" />
+      <Stack.Screen name='login' />
     </Stack>
   );
 }

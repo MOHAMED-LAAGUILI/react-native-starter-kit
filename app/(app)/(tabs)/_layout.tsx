@@ -1,5 +1,5 @@
-import { Tabs } from "expo-router";
-import { Home, Search, Settings, User } from "lucide-react-native";
+import { Tabs } from 'expo-router';
+import { Home, Search, Settings, User } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -9,55 +9,55 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
-          headerTitle: "Home",
+          headerTitle: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Home
               color={color}
               size={size}
             />
           ),
-          title: "Home",
+          title: 'Home',
         }}
       />
       <Tabs.Screen
-        name="search"
+        name='search'
         options={{
-          headerTitle: "Search",
+          headerTitle: 'Search',
           tabBarIcon: ({ color, size }) => (
             <Search
               color={color}
               size={size}
             />
           ),
-          title: "Search",
+          title: 'Search',
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name='profile'
         options={{
-          headerTitle: "Profile",
+          headerTitle: 'Profile',
           tabBarIcon: ({ color, size }) => (
             <User
               color={color}
               size={size}
             />
           ),
-          title: "Profile",
+          title: 'Profile',
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name='settings'
         options={{
-          headerTitle: "Settings",
+          headerTitle: 'Settings',
           tabBarIcon: ({ color, size }) => (
             <Settings
               color={color}
               size={size}
             />
           ),
-          title: "Settings",
+          title: 'Settings',
         }}
       />
     </Tabs>

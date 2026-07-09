@@ -1,42 +1,43 @@
-import { Eye, EyeOff, KeyRound, Mail, Phone, Search, User } from "lucide-react-native";
-import * as React from "react";
-import { Pressable, TextInput, type TextInputProps, View, type ViewStyle } from "react-native";
-import { useThemeColors } from "@/hooks/useThemeColor";
-import { cn } from "@/lib/utils";
-import { Text } from "./Text";
+import type { TextInputProps, ViewStyle } from 'react-native';
+import { Eye, EyeOff, KeyRound, Mail, Phone, Search, User } from 'lucide-react-native';
+import * as React from 'react';
+import { Pressable, TextInput, View } from 'react-native';
+import { useThemeColors } from '@/hooks/use-theme-color';
+import { cn } from '@/lib/utils';
+import { Text } from './text';
 
-type InputType = "email" | "password" | "phone" | "search" | "text" | "username";
+type InputType = 'email' | 'password' | 'phone' | 'search' | 'text' | 'username';
 
-interface InputProps extends TextInputProps {
+type InputProps = {
   label?: string;
   error?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   containerStyle?: ViewStyle;
   type?: InputType;
-}
+} & TextInputProps;
 
-function Input({ label, error, leftIcon, rightIcon, containerStyle, className, type = "text", ...props }: InputProps) {
+function Input({ label, error, leftIcon, rightIcon, containerStyle, className, type = 'text', ...props }: InputProps) {
   const [focused, setFocused] = React.useState(false);
   const [secureVisible, setSecureVisible] = React.useState(false);
   const { text, muted } = useThemeColors();
   const iconColor = muted || text;
 
-  const isSecure = type === "password";
+  const isSecure = type === 'password';
   const resolvedSecureTextEntry = isSecure ? !secureVisible : props.secureTextEntry;
 
   const builtinLeftIcon = React.useMemo(() => {
     const iconProps = { color: iconColor, size: 18 };
     switch (type) {
-      case "search":
+      case 'search':
         return <Search {...iconProps} />;
-      case "phone":
+      case 'phone':
         return <Phone {...iconProps} />;
-      case "username":
+      case 'username':
         return <User {...iconProps} />;
-      case "password":
+      case 'password':
         return <KeyRound {...iconProps} />;
-      case "email":
+      case 'email':
         return <Mail {...iconProps} />;
       default:
         return null;
@@ -44,24 +45,27 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
   }, [type, iconColor]);
 
   const builtinRightIcon = React.useMemo(() => {
-    if (!isSecure) return null;
+    if (!isSecure)
+      return null;
     return (
       <Pressable
         onPress={() => setSecureVisible(v => !v)}
         hitSlop={8}
         className="items-center justify-center"
       >
-        {secureVisible ? (
-          <EyeOff
-            size={18}
-            color={iconColor}
-          />
-        ) : (
-          <Eye
-            size={18}
-            color={iconColor}
-          />
-        )}
+        {secureVisible
+          ? (
+              <EyeOff
+                size={18}
+                color={iconColor}
+              />
+            )
+          : (
+              <Eye
+                size={18}
+                color={iconColor}
+              />
+            )}
       </Pressable>
     );
   }, [isSecure, secureVisible, iconColor]);
@@ -70,33 +74,35 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
   const showRightIcon = isSecure ? builtinRightIcon : rightIcon;
 
   return (
-    <View className={cn("gap-1", containerStyle)}>
-      {label ? (
-        <Text
-          variant="label"
-          className="text-muted-foreground mb-0.5"
-        >
-          {label}
-        </Text>
-      ) : null}
+    <View className={cn('gap-1', containerStyle)}>
+      {label
+        ? (
+            <Text
+              variant="label"
+              className="mb-0.5 text-muted-foreground"
+            >
+              {label}
+            </Text>
+          )
+        : null}
       <View
         className={cn(
-          "flex-row items-center rounded-md border h-11 gap-2 px-3",
-          "bg-secondary",
-          focused ? "border-ring" : "border-border",
-          error && "border-destructive"
+          'h-11 flex-row items-center gap-2 rounded-md border px-3',
+          'bg-secondary',
+          focused ? 'border-ring' : 'border-border',
+          error && 'border-destructive',
         )}
       >
         {showLeftIcon && <View className="items-center justify-center">{showLeftIcon}</View>}
         <TextInput
-          className={cn("flex-1 text-base text-foreground h-full outline-0", className)}
+          className={cn('h-full flex-1 text-base text-foreground outline-0', className)}
           placeholderTextColor="#9CA3AF"
           secureTextEntry={resolvedSecureTextEntry}
-          onFocus={e => {
+          onFocus={(e) => {
             setFocused(true);
             props.onFocus?.(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             setFocused(false);
             props.onBlur?.(e);
           }}
@@ -104,14 +110,16 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
         />
         {showRightIcon && <View className="items-center justify-center">{showRightIcon}</View>}
       </View>
-      {error ? (
-        <Text
-          variant="caption"
-          className="text-destructive mt-0.5"
-        >
-          {error}
-        </Text>
-      ) : null}
+      {error
+        ? (
+            <Text
+              variant="caption"
+              className="mt-0.5 text-destructive"
+            >
+              {error}
+            </Text>
+          )
+        : null}
     </View>
   );
 }

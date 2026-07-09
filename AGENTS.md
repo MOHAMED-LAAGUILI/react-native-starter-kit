@@ -14,9 +14,8 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `bun run fix:deps` | `npx expo install --fix` |
 | `bun run doctor` | `npx expo-doctor --verbose` |
 | `bun run prebuild` | `expo prebuild -c` |
-| `bun run biome` | `bun run check && bun run format` |
-| `bun run check` | `npx @biomejs/biome check --write` |
-| `bun run format` | `npx @biomejs/biome format --write` |
+| `bun run lint` | `npx eslint src/ && npx eslint app/` |
+| `bun run lint:fix` | `npx eslint src/ --fix && npx eslint app/ --fix` |
 | `bun run export` | `npx expo export --platform web` |
 | `bun run login` | `eas login` |
 | `bun run logout` | `eas logout` |
@@ -55,10 +54,19 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 - **Utilities**: named export (`export function cn`)
 - **Stores**: named export (`export { useAuthStore }`)
 - **Types**: `export type { ... }`
+- **Demo/section sub-components**: named export for reusable pieces; internal sub-components stay co-located (same file) for screens that would exceed the 110-line function limit
+
+### Function Size & Refactoring
+- ESLint enforces `max-lines-per-function: 110` — extract demo sections, form fields, and card lists into separate components when a screen exceeds this limit
+- Each extracted component owns its own state; screens become thin orchestrators that only render sub-components
+- **Constructor params**: capped at 3 (`max-params` rule). Use an options object (`{ status, code?, data? }`) for constructors needing more than 3 args
+- **No setState in effects**: initialize state with lazy initializer (`useState(() => readAllKeys())`) instead of calling `setState` synchronously in `useFocusEffect` / `useEffect`
+- **No unused vars**: remove destructured values that aren't used; the rule requires unused vars to match `/^_/u`
 
 ### UI Components
 - Use custom components from `@/components/ui/` (`Text`, `Button`, `Input`, `BottomSheet`) instead of `Text` and `Pressable` from `react-native`
 - Custom components support `variant`, `className`, and proper theme tokens — never use raw `react-native` components for UI
+- Import from barrel (`@/components/ui`) where available, not individual paths — ESLint enforces `perfectionist/sort-imports` and `import/no-duplicates`
 
 ### Cross-Platform (Web + iOS + Android)
 - **Icons** (lucide-react-native): always use `color` prop, never `className` — `className` colors don't work on native. Use `useThemeColors()` to get hex values: `color={text}`, `color={muted}`
@@ -104,7 +112,7 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | Icons | lucide-react-native |
 | Animation | react-native-reanimated + gesture-handler |
 | Font | @expo-google-fonts/inter (4 weights via expo-font plugin) |
-| Lint | Biome 2 |
+| Lint | ESLint 10 + Prettier 3 |
 | Assets Alias | `@assets/*` → `./assets/*` (tsconfig + Metro) |
 
 ## Routing Structure
@@ -223,7 +231,7 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - `expo-status-bar` — status bar component
 - `react-native-safe-area-context` — SafeAreaProvider + useSafeAreaInsets
 - `react-native-url-polyfill` — URL polyfill for fetch
-- `react-native-restart` — app restart on RTL language change
+- `react-native-restart-newarch` — app restart on RTL language change
 - `react-native-edge-to-edge` — edge-to-edge display
 - `react-native-reanimated` + `react-native-gesture-handler` — animations + gestures
 
