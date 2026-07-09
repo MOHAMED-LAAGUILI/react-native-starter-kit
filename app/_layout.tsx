@@ -44,7 +44,7 @@ function RootLayoutInner({ hidden }: { hidden: boolean }) {
 
 function SplashLoading() {
   return (
-    <View className='flex-1 items-center justify-center bg-background'>
+    <View className="flex-1 items-center justify-center bg-background">
       <LottieView
         source={require('@assets/lottie/Loading animation blue.json')}
         autoPlay
@@ -88,7 +88,7 @@ export default function RootLayout() {
             <BottomSheetModalProvider>
               <ThemeProvider>
                 <StatusBar
-                  style='auto'
+                  style="auto"
                   animated
                 />
                 {!i18nReady && <SplashLoading />}
@@ -96,7 +96,7 @@ export default function RootLayout() {
                 <Toasts
                   overrideDarkMode={isDark}
                   defaultStyle={toastDefaultStyle}
-                  globalAnimationType='spring'
+                  globalAnimationType="spring"
                   globalAnimationConfig={{
                     dampingRatio: 0.7,
                     duration: 200,

@@ -8,7 +8,7 @@ import { HeaderTitle } from '@/components/drawer/header-title';
 import { useAuthStore } from '@/store';
 
 export default function AppLayout() {
-  const isAuthenticated = useAuthStore((state: { isAuthenticated: any; }) => state.isAuthenticated);
+  const isAuthenticated = useAuthStore((state: { isAuthenticated: any }) => state.isAuthenticated);
   const navigation = useRouter();
 
   useEffect(() => {
@@ -31,33 +31,33 @@ export default function AppLayout() {
       }}
     >
       <Drawer.Screen
-        name='(tabs)'
+        name="(tabs)"
         options={{
           drawerItemStyle: { display: 'none' },
           headerShown: true,
         }}
       />
       <Drawer.Screen
-        name='post/[id]'
+        name="post/[id]"
         options={{
           drawerItemStyle: { display: 'none' },
           headerShown: true,
         }}
       />
       <Drawer.Screen
-        name='features'
+        name="features"
         options={{
           headerShown: true,
         }}
       />
       <Drawer.Screen
-        name='blank'
+        name="blank"
         options={{
           headerShown: true,
         }}
       />
       <Drawer.Screen
-        name='preferences'
+        name="preferences"
         options={{
           headerShown: true,
         }}

@@ -9,7 +9,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name='index'
+        name="index"
         options={{
           headerTitle: 'Home',
           tabBarIcon: ({ color, size }) => (
@@ -22,7 +22,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='search'
+        name="search"
         options={{
           headerTitle: 'Search',
           tabBarIcon: ({ color, size }) => (
@@ -35,7 +35,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='profile'
+        name="profile"
         options={{
           headerTitle: 'Profile',
           tabBarIcon: ({ color, size }) => (
@@ -48,7 +48,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='settings'
+        name="settings"
         options={{
           headerTitle: 'Settings',
           tabBarIcon: ({ color, size }) => (
