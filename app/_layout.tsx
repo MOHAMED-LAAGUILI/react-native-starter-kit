@@ -26,8 +26,6 @@ import {
   useThemeStore,
 } from '@/store';
 import { isWeb } from '@/utils/platform';
-
-import 'react-native-url-polyfill/auto';
 import '../global.css';
 
 export { ErrorBoundary } from 'expo-router';
