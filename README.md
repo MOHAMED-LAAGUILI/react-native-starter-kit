@@ -3,7 +3,10 @@
 A production-ready [React Native](https://reactnative.dev/) starter built with [Expo SDK 57](https://expo.dev/), [Expo Router](https://expo.dev/router), [Tailwind CSS v4](https://tailwindcss.com/) via [Uniwind](https://uniwind.dev/), [Zustand](https://github.com/pmndrs/zustand), [TanStack Query](https://tanstack.com/query), and [@gorhom/bottom-sheet](https://github.com/gorhom/bottom-sheet).
 
 ## Demo Android
-<video controls src="Demo-Android.mp4" title="Title"></video>
+video controls width="700">
+  <source src="Demo-Android.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Quick Start
 
