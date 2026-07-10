@@ -31,6 +31,53 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `production` | Store (AAB) | production | App Store / Play Store release |
 | `simulator` | — | — | iOS simulator / Android emulator builds |
 
+## Essentials
+
+How: Essential Rules
+
+### Imports & Modules
+- ✅ DO use absolute imports: `@/components/ui/button`, `@assets/images/icon.png`
+- ✅ DO use `color` prop on lucide icons, never `className` (`color={text}`, `color={muted}`)
+- ✅ DO use `cn()` for className merging (`cn('flex-1', focused && 'bg-primary/10')`)
+- ✅ DO use dynamic `import()` for native modules that may be absent on web (`import('expo-dynamic-app-icon')`)
+- ✅ DO use `Linking.openURL` with plain string URLs for deep links
+- ✅ DO use inline type imports — `import { type Foo }` not `import { Foo }` (`ts/consistent-type-imports`)
+- ✅ DO use `type` over `interface` for type definitions (`ts/consistent-type-definitions`)
+- ❌ DO NOT nest component definitions inside other components (`react/no-nested-component-definitions`)
+- ❌ DO NOT use `cloneElement` — use render prop pattern instead (`react/no-clone-element`)
+
+### State & Data
+- ✅ DO use Zustand for client state with MMKV persistence
+- ✅ DO use TanStack Query for server state with staleTime 5min
+- ✅ DO use arrow selectors for perf: `useAuthStore((s) => s.isAuthenticated)`
+- ✅ DO use TanStack Form + Zod for form validation (not react-hook-form)
+- ✅ DO use MMKV storage for sensitive/persisted data (not AsyncStorage)
+- ❌ DO NOT set state synchronously in `useEffect` — use lazy initializer: `useState(() => readAllKeys())`
+
+### UI & Styling
+- ✅ DO use custom components from `@/components/ui/` (`Text`, `Button`, `Input`, `BottomSheet`)
+- ✅ DO use `useThemeColors()` for dynamic colors in icons and SVG
+- ✅ DO use `t()` from `useTranslation()` for all user-facing strings (never hardcode)
+- ✅ DO use kebab-case for filenames (`unicorn/filename-case`)
+- ✅ DO extract components when a function exceeds 110 lines (`max-lines-per-function`)
+- ✅ DO cap function params at 3; use options object beyond that (`max-params`)
+- ✅ DO write React Compiler–compatible code (`react-compiler/react-compiler`)
+- ❌ DO NOT use raw `Text`/`Pressable` from `react-native` — use wrapped versions
+- ❌ DO NOT modify `android/` or `ios/` directly — use Expo config plugins
+
+### Build & Config
+- ✅ DO set `process.env.EXPO_ROUTER_APP_ROOT = './app'` and `EXPO_ROUTER_IMPORT_MODE = 'sync'` at the top of `metro.config.js`
+- ✅ DO use `bun` for package management (no `package-lock.json` or `yarn.lock`)
+- ❌ DO NOT edit `expo-env.d.ts` or `.expo/types/` — they are auto-generated
+
+### Relaxed Rules (allowed by config)
+- `console.log` / `console.warn` — allowed for debugging (`no-console: off`)
+- `require()` — allowed in metro configs and mocks (`ts/no-require-imports: off`)
+- Inline styles — allowed (`react/no-inline-styles: off`)
+- Forward references — allowed (`ts/no-use-before-define: off`)
+- `useRef` without exhaustive deps — allowed (`react-hooks/refs: off`)
+- Conditional assignments — allowed (`no-cond-assign: off`)
+
 ## Conventions
 
 ### Naming
