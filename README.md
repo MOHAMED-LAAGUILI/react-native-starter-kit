@@ -26,17 +26,10 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run doctor` | Run Expo doctor diagnostics |
 | `bun run prebuild` | Prebuild native project |
 | `bun run check` | Lint + auto-fix via Biome |
-| `bun run lint` | Lint |
 | `bun run lint:fix` | Lint + format (both) |
 | `bun run export` | Export web build |
 | `bun run login` | EAS login |
 | `bun run logout` | EAS logout |
-| `bun run build:development:ios` | EAS dev client build for iOS |
-| `bun run build:development:android` | EAS dev client build for Android |
-| `bun run build:preview:ios` | EAS preview build for iOS |
-| `bun run build:preview:android` | EAS preview build for Android |
-| `bun run build:production:ios` | EAS production build for iOS |
-| `bun run build:production:android` | EAS production build for Android |
 | `bun run start:preview` | Dev server with preview env |
 | `bun run start:production` | Dev server with production env |
 | `bun run prebuild:preview` | Prebuild with preview env |
@@ -114,26 +107,26 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 
 ## Tech Stack
 
-| Category | Library |
-|----------|---------|
-| Framework | React 19 + React Native 0.86 |
-| Platform | Expo SDK 57 |
-| Language | TypeScript 6 (strict) |
-| Routing | Expo Router (Stack/Drawer/Tabs) |
-| Styling | Tailwind CSS v4 + Uniwind + cn() |
-| Theme | oklch CSS variables (light/dark + 7 accent color palettes) |
-| Client State | Zustand 5 (MMKV persistence) |
-| Server State | TanStack Query 5 + Devtools |
-| Forms | TanStack Form 1 + Zod 3 |
-| Storage | react-native-mmkv 4 (lazy, SSR-safe) |
-| i18n | i18next 26 + react-i18next (EN/FR/AR, RTL) |
-| UI Primitives | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) |
-| Bottom Sheet | @gorhom/bottom-sheet 5 |
-| Icons | lucide-react-native |
-| HTTP | Axios (auth interceptor, refresh queue) |
-| Animation | react-native-reanimated + gesture-handler |
-| Font | @expo-google-fonts/inter (4 weights, via expo-font plugin) |
-| Linting | Biome 2 |
+| Category      | Library 
+|---------------|-------------------------------
+| Framework     | React 19 + React Native 0.86 
+| Platform      | Expo SDK 57 
+| Language      | TypeScript 6 (strict) 
+| Routing       | Expo Router (Stack/Drawer/Tabs) 
+| Styling       | Tailwind CSS v4 + Uniwind + cn() 
+| Theme         | oklch CSS variables (light/dark + 7 accent color palettes) 
+| Client State  | Zustand 5 (MMKV persistence) 
+| Server State  | TanStack Query 5 + Devtools 
+| Forms         | TanStack Form 1 + Zod 3 
+| Storage       | react-native-mmkv 4 (lazy, SSR-safe) 
+| i18n          | i18next 26 + react-i18next (EN/FR/AR, RTL) 
+| UI Primitives | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) 
+| Bottom Sheet  | @gorhom/bottom-sheet 5 
+| Icons         | lucide-react-native 
+| HTTP          | Axios (auth interceptor, refresh queue) 
+| Animation     | react-native-reanimated + gesture-handler 
+| Font          | @expo-google-fonts/inter (4 weights, via expo-font plugin) 
+| Linting       | Eslint                                                     
 
 ## Learn More
 

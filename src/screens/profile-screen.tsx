@@ -2,7 +2,6 @@ import { Globe, Mail, Phone, X } from 'lucide-react-native';
 import * as React from 'react';
 import { Dimensions, Linking, ScrollView, View } from 'react-native';
 import Svg, { Defs, LinearGradient, Path, Rect, Stop } from 'react-native-svg';
-import { URL } from 'react-native-url-polyfill';
 import { InfoRow } from '@/components/common/info-row';
 import { Text } from '@/components/ui';
 import { Button } from '@/components/ui/button';
@@ -25,8 +24,8 @@ const INFO_ITEMS: InfoItem[] = [
   { icon: Mail, label: 'Email', value: 'james011@gmail.com' },
   { icon: Phone, label: 'Mobile', value: '1234567891' },
   { icon: X, label: 'Twitter', value: '@james012' },
-  { icon: Globe, label: 'LinkedIn', value: 'www.linkedin.com/in/james012', href: new URL('/in/james012', 'https://linkedin.com').href },
-  { icon: Globe, label: 'Facebook', value: 'www.facebook.com/james012', href: new URL('/james012', 'https://www.facebook.com').href },
+  { icon: Globe, label: 'LinkedIn', value: 'www.linkedin.com/in/james012', href: 'https://linkedin.com/in/james012' },
+  { icon: Globe, label: 'Facebook', value: 'www.facebook.com/james012', href: 'https://www.facebook.com/james012' },
 ];
 
 function ProfileHeader({ gradientColor, name, initial }: { gradientColor: string; name: string; initial: string }) {
@@ -65,9 +64,16 @@ function ProfileHeader({ gradientColor, name, initial }: { gradientColor: string
 }
 
 function InfoCards({ items }: { items: InfoItem[] }) {
+  const itemsWithHref = React.useMemo(() => items.map((item) => {
+    if (!item.href)
+      return item;
+    const url = new URL(item.href);
+    return { ...item, href: url.href };
+  }), [items]);
+
   return (
     <View className="overflow-hidden rounded-2xl border border-border bg-card">
-      {items.map((item, index) => (
+      {itemsWithHref.map((item, index) => (
         <React.Fragment key={item.label}>
           {index > 0 && <View className="mx-4 h-px bg-border" />}
           <InfoRow

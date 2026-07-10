@@ -1,5 +1,39 @@
 import { Tabs } from 'expo-router';
 import { Home, Search, Settings, User } from 'lucide-react-native';
+import { View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+import { cn } from '@/lib/utils';
+
+function AnimatedTabIcon({ children, focused }: { children: React.ReactNode; focused: boolean }) {
+  const scale = useSharedValue(1);
+
+  scale.value = withSpring(focused ? 1.2 : 1, {
+    mass: 0.5,
+    damping: 10,
+    stiffness: 100,
+  });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  return (
+    <View
+      className={cn(
+        'rounded-full p-2',
+        focused && 'bg-primary/10',
+      )}
+    >
+      <Animated.View style={animatedStyle}>
+        {children}
+      </Animated.View>
+    </View>
+  );
+}
 
 export default function TabLayout() {
   return (
@@ -12,11 +46,10 @@ export default function TabLayout() {
         name="index"
         options={{
           headerTitle: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Home
-              color={color}
-              size={size}
-            />
+          tabBarIcon: ({ color, size, focused }) => (
+            <AnimatedTabIcon focused={focused}>
+              <Home color={color} size={size} />
+            </AnimatedTabIcon>
           ),
           title: 'Home',
         }}
@@ -25,11 +58,10 @@ export default function TabLayout() {
         name="search"
         options={{
           headerTitle: 'Search',
-          tabBarIcon: ({ color, size }) => (
-            <Search
-              color={color}
-              size={size}
-            />
+          tabBarIcon: ({ color, size, focused }) => (
+            <AnimatedTabIcon focused={focused}>
+              <Search color={color} size={size} />
+            </AnimatedTabIcon>
           ),
           title: 'Search',
         }}
@@ -38,11 +70,10 @@ export default function TabLayout() {
         name="profile"
         options={{
           headerTitle: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <User
-              color={color}
-              size={size}
-            />
+          tabBarIcon: ({ color, size, focused }) => (
+            <AnimatedTabIcon focused={focused}>
+              <User color={color} size={size} />
+            </AnimatedTabIcon>
           ),
           title: 'Profile',
         }}
@@ -51,11 +82,10 @@ export default function TabLayout() {
         name="settings"
         options={{
           headerTitle: 'Settings',
-          tabBarIcon: ({ color, size }) => (
-            <Settings
-              color={color}
-              size={size}
-            />
+          tabBarIcon: ({ color, size, focused }) => (
+            <AnimatedTabIcon focused={focused}>
+              <Settings color={color} size={size} />
+            </AnimatedTabIcon>
           ),
           title: 'Settings',
         }}

@@ -124,16 +124,21 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     'expo-status-bar',
     ['react-native-edge-to-edge'],
     [
-      'expo-dynamic-icons',
+      'expo-dynamic-app-icon',
       {
-        icons: {
           expo_dark: {
-            image: './assets/images/expo_icon_dark.png',
+            android: './assets/images/expo_icon_dark.png',
+                        ios: './assets/images/expo_icon_dark.png',
+
           },
           original_dark: {
-            image: './assets/images/react_native_reusables_dark.png',
+            android: './assets/images/react_native_reusables_dark.png',
+                                    ios: './assets/images/expo_icon_dark.png',
+
+            prerendered: true
+
           },
-        },
+      
       },
     ],
   ],

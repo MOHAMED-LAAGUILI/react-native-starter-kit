@@ -2,6 +2,7 @@ import BottomSheetLib, { BottomSheetBackdrop, BottomSheetScrollView } from '@gor
 import { X } from 'lucide-react-native';
 import * as React from 'react';
 import { Pressable, useWindowDimensions, View } from 'react-native';
+import { useThemeColors } from '@/hooks/use-theme-color';
 import { cn } from '@/lib/utils';
 import { Text } from './text';
 
@@ -38,6 +39,7 @@ function BottomSheetInner<T>({
   const sheetRef = React.useRef<React.ElementRef<typeof BottomSheetLib>>(null);
   const mountedRef = React.useRef(false);
   const { height: screenHeight } = useWindowDimensions();
+  const { muted } = useThemeColors();
 
   React.useEffect(() => {
     mountedRef.current = true;
@@ -94,7 +96,7 @@ function BottomSheetInner<T>({
           >
             <X
               size={20}
-              className="text-muted-foreground"
+              color={muted}
             />
           </Pressable>
         </View>

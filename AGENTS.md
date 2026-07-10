@@ -14,17 +14,10 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `bun run fix:deps` | `npx expo install --fix` |
 | `bun run doctor` | `npx expo-doctor --verbose` |
 | `bun run prebuild` | `expo prebuild -c` |
-| `bun run lint` | `npx eslint src/ && npx eslint app/` |
 | `bun run lint:fix` | `npx eslint src/ --fix && npx eslint app/ --fix` |
 | `bun run export` | `npx expo export --platform web` |
 | `bun run login` | `eas login` |
 | `bun run logout` | `eas logout` |
-| `bun run build:development:ios` | `eas build --profile development --platform ios` |
-| `bun run build:development:android` | `eas build --profile development --platform android` |
-| `bun run build:preview:ios` | `eas build --profile preview --platform ios` |
-| `bun run build:preview:android` | `eas build --profile preview --platform android` |
-| `bun run build:production:ios` | `eas build --profile production --platform ios` |
-| `bun run build:production:android` | `eas build --profile production --platform android` |
 | `bun run start:preview` | `cross-env EXPO_PUBLIC_APP_ENV=preview expo start -c` |
 | `bun run start:production` | `cross-env EXPO_PUBLIC_APP_ENV=production expo start -c` |
 | `bun run prebuild:preview` | `cross-env EXPO_PUBLIC_APP_ENV=preview expo prebuild -c` |

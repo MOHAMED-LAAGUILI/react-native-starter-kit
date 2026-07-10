@@ -2,14 +2,12 @@ import type { BottomSheetOption } from '@/components/ui/bottom-sheet';
 import type { ColorPaletteKey } from '@/config/color-palettes';
 import type { ThemeMode } from '@/store';
 import { useNetInfo } from '@react-native-community/netinfo';
-import { setAppIcon } from 'expo-dynamic-icons';
-import { Brush, ExternalLink, Globe, Heart, Info, Monitor, Moon, Share2, Sun, Wifi } from 'lucide-react-native';
+import { Brush, Check, ExternalLink, Globe, Heart, Info, Monitor, Moon, Share2, Sun, Wifi } from 'lucide-react-native';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, ScrollView, Share, TouchableOpacity, View } from 'react-native';
-import { URL } from 'react-native-url-polyfill';
 import { SettingRow } from '@/components/common/setting-row';
-import { Button, Text } from '@/components/ui';
+import { Text } from '@/components/ui';
 import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Image } from '@/components/ui/image';
 import { showToast } from '@/components/ui/toast';
@@ -74,16 +72,28 @@ function AppearanceSection({
   );
 }
 
+function IconRow({ iconName, label, source, currentIcon, iconColor, onPress }: { iconName: string; label: string; source?: number; currentIcon: string; iconColor: string; onPress: (name: string) => void }) {
+  const isSelected = currentIcon === iconName;
+  return (
+    <TouchableOpacity onPress={() => onPress(iconName)} className="flex-row items-center p-4">
+      {source && <Image source={source} className="mr-3 size-6 rounded-sm" />}
+      <Text variant="body" className="flex-1">{label}</Text>
+      {isSelected && <Check size={18} color={iconColor} />}
+    </TouchableOpacity>
+  );
+}
+
 function AppInfoSection() {
   const { t } = useTranslation();
   const { type, isConnected } = useNetInfo();
+  const { icon } = useThemeColors();
 
   return (
     <View>
       <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.info')}</Text>
       <View className="overflow-hidden rounded-xl border border-border bg-card">
         <View className="flex-row items-center p-4">
-          <Info size={22} style={{ marginRight: 12 }} />
+          <Info size={22} color={icon} style={{ marginRight: 12 }} />
           <View className="flex-1">
             <Text variant="body">{t('app.name')}</Text>
             <Text variant="caption" className="mt-0.5 text-muted-foreground">{t('app.version', { version: '1.0.0' })}</Text>
@@ -119,9 +129,6 @@ function AppInfoSection() {
 
 function SupportSection() {
   const { t } = useTranslation();
-  const repoUrl = React.useMemo(() => new URL('/MOHAMED-LAAGUILI/react-native-starter-kit', 'https://github.com'), []);
-  const developerUrl = React.useMemo(() => new URL('/MOHAMED-LAAGUILI', 'https://github.com'), []);
-  const issuesUrl = React.useMemo(() => new URL('/MOHAMED-LAAGUILI/react-native-starter-kit/issues', 'https://github.com'), []);
 
   return (
     <View>
@@ -131,21 +138,21 @@ function SupportSection() {
           icon={Share2}
           label={t('settings.shareApp')}
           subtitle={t('settings.shareAppDescription')}
-          onPress={() => Share.share({ message: t('settings.shareMessage'), url: repoUrl.href })}
+          onPress={() => Share.share({ message: t('settings.shareMessage'), url: 'https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit' })}
         />
         <View className="mx-4 h-px bg-border" />
         <SettingRow
           icon={Heart}
           label={t('settings.supportFeedback')}
           subtitle={t('settings.supportFeedbackDescription')}
-          onPress={() => Linking.openURL(issuesUrl.href)}
+          onPress={() => Linking.openURL('https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit/issues')}
         />
         <View className="mx-4 h-px bg-border" />
         <SettingRow
           icon={ExternalLink}
           label={t('settings.developer')}
           subtitle={t('settings.developerDescription')}
-          onPress={() => Linking.openURL(developerUrl.href)}
+          onPress={() => Linking.openURL('https://github.com/MOHAMED-LAAGUILI')}
         />
       </View>
     </View>
@@ -154,30 +161,38 @@ function SupportSection() {
 
 function AppIconSection() {
   const { t } = useTranslation();
+  const { icon: iconColor } = useThemeColors();
+  const [currentIcon, setCurrentIcon] = React.useState<string>('default');
+
+  React.useEffect(() => {
+    let mounted = true;
+    import('expo-dynamic-app-icon').then((mod) => {
+      if (mounted)
+        setCurrentIcon(mod.getAppIcon());
+    }).catch(() => {});
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   const handleAppIcon = React.useCallback((iconName: string) => {
-    try {
-      setAppIcon(iconName);
-    }
-    catch {
+    import('expo-dynamic-app-icon').then((mod) => {
+      mod.setAppIcon(iconName);
+      setCurrentIcon(iconName);
+    }).catch(() => {
       showToast({ message: t('settings.toastAppIconUnavailable'), title: t('settings.toastAppIconUnavailableTitle'), variant: 'error' });
-    }
+    });
   }, [t]);
 
   return (
     <View>
       <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.appIcon')}</Text>
       <View className="overflow-hidden rounded-xl border border-border bg-card">
-        <TouchableOpacity onPress={() => handleAppIcon('expo_dark')} className="flex-row items-center p-4">
-          <Image source={require('@assets/images/expo_icon_dark.png')} className="mr-3 size-6 rounded-sm" />
-          <Text variant="body">{t('settings.appIconExpo')}</Text>
-        </TouchableOpacity>
+        <IconRow iconName="expo_dark" label={t('settings.appIconExpo')} source={require('@assets/images/expo_icon_dark.png')} currentIcon={currentIcon} iconColor={iconColor} onPress={handleAppIcon} />
         <View className="mx-4 h-px bg-border" />
-        <TouchableOpacity onPress={() => handleAppIcon('original_dark')} className="flex-row items-center p-4">
-          <Image source={require('@assets/images/react_native_reusables_dark.png')} className="mr-3 size-6 rounded-sm" />
-          <Text variant="body">{t('settings.appIconDark')}</Text>
-        </TouchableOpacity>
+        <IconRow iconName="original_dark" label={t('settings.appIconDark')} source={require('@assets/images/react_native_reusables_dark.png')} currentIcon={currentIcon} iconColor={iconColor} onPress={handleAppIcon} />
         <View className="mx-4 h-px bg-border" />
-        <Button title={t('settings.appIconReset')} variant="outline" onPress={() => handleAppIcon('default')} className="flex-row items-center p-4" />
+        <IconRow iconName="default" label={t('settings.appIconReset')} currentIcon={currentIcon} iconColor={iconColor} onPress={handleAppIcon} />
       </View>
     </View>
   );
