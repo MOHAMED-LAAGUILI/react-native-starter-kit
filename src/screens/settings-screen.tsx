@@ -7,6 +7,7 @@ import { Brush, ExternalLink, Globe, Heart, Info, Monitor, Moon, Share2, Sun, Wi
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, ScrollView, Share, TouchableOpacity, View } from 'react-native';
+import { URL } from 'react-native-url-polyfill';
 import { SettingRow } from '@/components/common/setting-row';
 import { Button, Text } from '@/components/ui';
 import { BottomSheet } from '@/components/ui/bottom-sheet';
@@ -118,6 +119,10 @@ function AppInfoSection() {
 
 function SupportSection() {
   const { t } = useTranslation();
+  const repoUrl = React.useMemo(() => new URL('/MOHAMED-LAAGUILI/react-native-starter-kit', 'https://github.com'), []);
+  const developerUrl = React.useMemo(() => new URL('/MOHAMED-LAAGUILI', 'https://github.com'), []);
+  const issuesUrl = React.useMemo(() => new URL('/MOHAMED-LAAGUILI/react-native-starter-kit/issues', 'https://github.com'), []);
+
   return (
     <View>
       <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.support')}</Text>
@@ -126,21 +131,21 @@ function SupportSection() {
           icon={Share2}
           label={t('settings.shareApp')}
           subtitle={t('settings.shareAppDescription')}
-          onPress={() => Share.share({ message: t('settings.shareMessage'), url: 'https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit' })}
+          onPress={() => Share.share({ message: t('settings.shareMessage'), url: repoUrl.href })}
         />
         <View className="mx-4 h-px bg-border" />
         <SettingRow
           icon={Heart}
           label={t('settings.supportFeedback')}
           subtitle={t('settings.supportFeedbackDescription')}
-          onPress={() => Linking.openURL('https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit/issues')}
+          onPress={() => Linking.openURL(issuesUrl.href)}
         />
         <View className="mx-4 h-px bg-border" />
         <SettingRow
           icon={ExternalLink}
           label={t('settings.developer')}
           subtitle={t('settings.developerDescription')}
-          onPress={() => Linking.openURL('https://github.com/MOHAMED-LAAGUILI')}
+          onPress={() => Linking.openURL(developerUrl.href)}
         />
       </View>
     </View>

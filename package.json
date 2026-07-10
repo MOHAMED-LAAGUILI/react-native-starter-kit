@@ -19,7 +19,7 @@
     "logout": "eas logout",
     "fix:deps": "npx expo install --fix",
     "doctor": "npx expo-doctor --verbose",
-    "expo:config": "npx expo config",
+    "expo:config": "npx expo config --type public",
     "export": "npx expo export --platform web",
     "prebuild:preview": "cross-env EXPO_PUBLIC_APP_ENV=preview STRICT_ENV_VALIDATION=1 expo prebuild",
     "prebuild:development": "cross-env EXPO_PUBLIC_APP_ENV=development STRICT_ENV_VALIDATION=1 expo prebuild",
