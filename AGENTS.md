@@ -273,7 +273,7 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - Android package: `com.rn_template.app` (underscores, not hyphens — Android requirement)
 
 ## Planned Features
-- **Sentry** — error tracking and performance monitoring via `@sentry/react-native`
+- **Expo Observe** — error tracking and performance monitoring via `expo-observe`
 - **Expo Notifications** — push notifications via `expo-notifications` with local + remote notification support
 - **Husky** — git hooks for pre-commit linting and formatting
 - **Maestro** — E2E testing framework for mobile

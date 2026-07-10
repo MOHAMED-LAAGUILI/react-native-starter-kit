@@ -26,8 +26,8 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run doctor` | Run Expo doctor diagnostics |
 | `bun run prebuild` | Prebuild native project |
 | `bun run check` | Lint + auto-fix via Biome |
-| `bun run format` | Format code via Biome |
-| `bun run biome` | Lint + format (both) |
+| `bun run lint` | Lint |
+| `bun run lint:fix` | Lint + format (both) |
 | `bun run export` | Export web build |
 | `bun run login` | EAS login |
 | `bun run logout` | EAS logout |
@@ -101,9 +101,12 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 ├── metro.config.js             # Expo + Uniwind Metro plugin
 ├── babel.config.js             # module-resolver, reanimated, dotenv
 ├── eas.json                    # EAS Build profiles
-├── biome.json                  # Biome config
+├── eslint.config.mjs           # eslint config
 ├── tsconfig.json
 ├── package.json
+└── .eas/
+    └── workflows/
+        └── create-build-all.yml         # Eas Actions: auto-build apk
 └── .github/
     └── workflows/
         └── release.yml         # GitHub Actions: auto-release on push to main
@@ -207,7 +210,7 @@ To release, just bump the version in `package.json` and push to `main`.
 - EAS profiles inject `EXPO_PUBLIC_APP_ENV` via `eas.json` `env` block
 
 ## Roadmap
-- **Sentry** — Error tracking and performance monitoring
+- **Expo Observe** — error tracking and performance monitoring via `expo-observe`
 - **Expo Notifications** — Push notifications with local and remote support
 - **Husky** — Git hooks for pre-commit linting and formatting
 - **Maestro** — E2E testing framework for mobile
