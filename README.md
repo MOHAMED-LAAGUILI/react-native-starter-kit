@@ -1,7 +1,7 @@
 <h1 align="center">
   React Native Template
 </h1><p align="center">
-<img alt="React Native Template Obytes" src="/assets/image.png" width="400" />
+<img width="1280" height="680" alt="image" src="https://github.com/user-attachments/assets/2e80075b-9131-4e2b-8dcf-42faf9bda0d1" />
 </p>
 
 
