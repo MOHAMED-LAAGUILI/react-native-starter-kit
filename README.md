@@ -40,25 +40,25 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run expo:config`                    | Print public Expo config
 | `bun run generate:apk`                   | Build Android APK and install via ADB
 | `bun run prebuild`                       | Prebuild native project (all platforms)
-| `bun run prebuild:development`           | Prebuild native project (development env)
-| `bun run prebuild:preview`               | Prebuild native project (preview env)
-| `bun run prebuild:production`            | Prebuild native project (production env)
+| `bun run prebuild:dev`                   | Prebuild native project (development env)
+| `bun run prebuild:prev`                  | Prebuild native project (preview env)
+| `bun run prebuild:prod`                  | Prebuild native project (production env)
 | `bun run prebuild:generate`              | Prebuild native project & generate APK
-| `bun run android:development`            | Android dev server (development env)
-| `bun run ios:development`                | iOS dev server (development env)
-| `bun run android:preview`                | Android dev server (preview env)
-| `bun run ios:preview`                    | iOS dev server (preview env)
-| `bun run android:production`             | Android dev server (production env)
-| `bun run ios:production`                 | iOS dev server (production env)
-| `bun run workflow:build-ios:preview`     | Trigger EAS workflow to build iOS from github branch named preview
-| `bun run workflow:build-android:preview` | Trigger EAS workflow to build Android from github branch named preview
-| `bun run workflow:build-ios:main`        | Trigger EAS workflow to build iOS from github branch named main
-| `bun run workflow:build-android:main`    | Trigger EAS workflow to build Android from github branch named main
+| `bun run android:dev`                    | Android dev server (development env)
+| `bun run ios:dev`                        | iOS dev server (development env)
+| `bun run android:prev`                   | Android dev server (preview env)
+| `bun run ios:prev`                       | iOS dev server (preview env)
+| `bun run android:prod`                   | Android dev server (production env)
+| `bun run ios:prod`                       | iOS dev server (production env)
+| `bun run flow:build-ios:prev`            | Trigger EAS workflow to build iOS from github branch named preview
+| `bun run flow:build-android:prev`        | Trigger EAS workflow to build Android from github branch named preview
+| `bun run flow:build-ios:main`            | Trigger EAS workflow to build iOS from github branch named main
+| `bun run flow:build-android:main`        | Trigger EAS workflow to build Android from github branch named main
 | `bun run submit:android`                 | Submit Android build to Play Store
 | `bun run submit:ios`                     | Submit iOS build to App Store
-| `bun run eas:update:configure`           | Configure EAS Update for the project
-| `bun run eas:update:preview`             | Push OTA update to preview channel
-| `bun run eas:update:production`          | Push OTA update to production channel
+| `bun run eas:update:config`              | Configure EAS Update for the project
+| `bun run eas:update:prev`                | Push OTA update to preview channel
+| `bun run eas:update:prod`                | Push OTA update to production channel
 | `bun run export:web`                     | Export web build locally static files
 | `bun run deploy:web`                     | Deploy web build to production
 
@@ -225,8 +225,8 @@ bun run checks
 git push
 
 # 4. Trigger EAS workflow build
-bun run workflow:build-ios:main
-bun run workflow:build-android:main
+bun run flow:build-ios:main
+bun run flow:build-android:main
 
 # 5. Submit to stores
 bun run submit:ios
@@ -241,22 +241,22 @@ bun run checks
 git push
 
 # 2. Trigger EAS workflow build
-bun run workflow:build-ios:main
-bun run workflow:build-android:main
+bun run flow:build-ios:main
+bun run flow:build-android:main
 
 # 3. Push OTA update (no resubmission needed)
-bun run eas:update:production
+bun run eas:update:prod
 ```
 
 ### Preview / Testing
 
 ```bash
 # 1. Build for preview
-bun run workflow:build-ios:preview
-bun run workflow:build-android:preview
+bun run flow:build-ios:prev
+bun run flow:build-android:prev
 
 # 2. Push OTA update to preview channel
-bun run eas:update:preview
+bun run eas:update:prev
 ```
 
 ## Deploy
