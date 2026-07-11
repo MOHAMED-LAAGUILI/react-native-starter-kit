@@ -208,7 +208,7 @@ Use [Expo Application Services (EAS)](https://expo.dev/eas) for builds, updates,
 
 ### EAS Build Profiles
 
-| Profile       | Distribution | Channel     | Use Case |
+| Profile       | Distribution | Channel     | Use Case
 |---------------|--------------|-------------|---------------------------
 | `development` | Internal     | development | Dev client builds for local testing 
 | `preview`     | Store (APK)  | preview     | Internal QA builds 

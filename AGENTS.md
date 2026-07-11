@@ -326,11 +326,13 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 ## CI/CD
 
 ### EAS Build (`eas.json`)
-| Profile | Channel | Distribution | Use Case |
-|---------|---------|-------------|----------|
-| `development` | — | Internal | Dev client builds for local testing |
-| `preview` | preview | Store (APK) | Internal QA builds |
-| `production` | production | Store (AAB) | App Store / Play Store release |
+| Profile       | Distribution | Channel     | Use Case
+|---------------|--------------|-------------|---------------------------
+| `development` | Internal     | development | Dev client builds for local testing 
+| `preview`     | Store (APK)  | preview     | Internal QA builds 
+| `production`  | Store (AAB)  | production  | App Store / Play Store release 
+| `simulator`   | —            | —           | iOS simulator / Android emulator builds 
+ 
 
 - `autoIncrement: true` on `preview` and `production` — EAS auto-bumps build numbers
 - `appVersionSource: "remote"` — version numbers managed by EAS
