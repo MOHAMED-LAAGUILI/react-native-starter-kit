@@ -1,16 +1,23 @@
 # React Native Starter Kit
+<p align="center">
+   ![alt text](/assets/image.png)
+</p>
 
-A production-ready [React Native](https://reactnative.dev/) starter built with [Expo SDK 57](https://expo.dev/), [Expo Router](https://expo.dev/router), [Tailwind CSS v4](https://tailwindcss.com/) via [Uniwind](https://uniwind.dev/), [Zustand](https://github.com/pmndrs/zustand), [TanStack Query](https://tanstack.com/query), and [@gorhom/bottom-sheet](https://github.com/gorhom/bottom-sheet).
+<h1 align="center">
+  React Native Template
+</h1>
+
+
 
 ## Demo Android
 
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7481391447850717184?compact=1" height="399" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7481391447850717184?compact=1 
 
 ## Quick Start
 
 ```bash
-git clone <repo> my-app
-cd my-app
+git clone https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit.git my-react-native-app
+cd my-react-native-app
 bun install
 bun dev
 ```
@@ -209,4 +216,3 @@ To release, just bump the version in `package.json` and push to `main`.
 - **Expo Notifications** — push notifications via `expo-notifications` with local + remote notification support
 - **Husky** — git hooks for pre-commit linting and formatting
 - **Maestro** — E2E testing framework for mobile
-
