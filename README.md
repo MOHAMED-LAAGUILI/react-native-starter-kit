@@ -1,7 +1,7 @@
 <h1 align="center">
   React Native Template
 </h1><p align="center">
-<img alt="React Native Template Obytes" src="/assets/image.png" width="200" />
+<img alt="React Native Template Obytes" src="/assets/image.png" width="400" />
 </p>
 
 
