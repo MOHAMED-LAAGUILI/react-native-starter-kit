@@ -47,7 +47,6 @@ const fontPlugin: ['expo-font', { android: { fonts: Array<{ fontFamily: string; 
     },
   },
 ];
-
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   android: {
@@ -58,6 +57,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     package: ENV.EXPO_PUBLIC_PACKAGE,
     userInterfaceStyle: 'light',
   },
+  userInterfaceStyle: 'automatic',
+  updates: {
+    url: `https://u.expo.dev/${ENV.EAS_PROJECT_ID}`,
+    fallbackToCacheTimeout: 0,
+  },
+  runtimeVersion: {
+    policy: 'appVersion',
+  },
+
   assetBundlePatterns: ['**/*'],
   backgroundColor: '#ffffff',
   description: `${ENV.EXPO_PUBLIC_NAME} Mobile App`,
@@ -72,6 +80,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   icon: './assets/images/icon.png',
   ios: {
+    // @ts-expect-error - newArchEnabled && jsEngine is valid in Expo SDK 57
+    jsEngine: 'jsc',
     backgroundColor: '#ffffff',
     bundleIdentifier: ENV.EXPO_PUBLIC_BUNDLE_ID,
     infoPlist: {
@@ -81,7 +91,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
 
   name: ENV.EXPO_PUBLIC_NAME,
-  // @ts-expect-error - newArchEnabled is valid in Expo SDK 57
+
+  jsEngine: 'hermes',
   newArchEnabled: true,
   orientation: 'portrait',
   owner: ENV.EXPO_ACCOUNT_OWNER,
@@ -115,10 +126,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ],
   scheme: ENV.EXPO_PUBLIC_SCHEME,
   slug: ENV.EXPO_PUBLIC_SLUG,
-  updates: {
-    fallbackToCacheTimeout: 0,
-  },
-  userInterfaceStyle: 'automatic',
+
   version: ENV.EXPO_PUBLIC_VERSION,
   web: {
     bundler: 'metro',

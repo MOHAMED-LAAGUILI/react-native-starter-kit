@@ -21,8 +21,8 @@
     },
     "preview": {
       "channel": "preview",
+      "distribution": "internal",
       "autoIncrement": true,
-      "distribution": "store",
       "ios": {
         "image": "latest"
       },
