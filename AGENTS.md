@@ -5,39 +5,42 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 
 ## Commands
 
-| Script                           | Purpose 
-|----------------------------------|--------------------------------------------
-| `bun dev`                        | Start Expo dev server (fresh cache)
-| `bun run ios`                    | Dev server targeting iOS
-| `bun run android`                | Dev server targeting Android
-| `bun run web`                    | Dev server targeting Web
-| `bun run clean`                  | Clean cache, node_modules, native builds, and lockfile
-| `bun run login`                  | EAS login
-| `bun run logout`                 | EAS logout
-| `bun run deps:fix`               | Fix dependency versions via Expo
-| `bun run lint:fix`               | Run ESLint with auto-fix on all source files
-| `bun run type:check`             | Run TypeScript type checking (no emit)
-| `bun run doctor`                 | Run Expo doctor diagnostics
-| `bun run expo:config`            | Print public Expo config
-| `bun run export:web`             | Export web build
-| `bun run prebuild`               | Prebuild native project 
-| `bun run generate-apk`           | Build Android APK and install via ADB
-| `bun run prebuild:development`   | Prebuild native project (development env)
-| `bun run prebuild:preview`       | Prebuild native project (preview env)
-| `bun run prebuild:production`    | Prebuild native project (production env)
-| `bun run prebuild:generate`      | Prebuild native project & generate apk
-| `bun run android:development`    | Android dev server (development env)
-| `bun run ios:development`        | iOS dev server (development env)
-| `bun run android:preview`        | Android dev server (preview env)
-| `bun run ios:preview`            | iOS dev server (preview env)
-| `bun run android:production`     | Android dev server (production env)
-| `bun run ios:production`         | iOS dev server (production env)
-| `bun run workflow:build-ios`     | Trigger EAS workflow to build iOS
-| `bun run workflow:build-android` | Trigger EAS workflow to build Android
-| `bun run workflow:build-all`     | Trigger EAS workflow to build both platforms
-| `bun run submit:android`         | Submit Android build to Play Store
-| `bun run submit:ios`             | Submit iOS build to App Store
-| `bun run deploy`                 | Deploy to EAS Hosting
+| Script                                   | Purpose 
+|------------------------------------------|--------------------------------------------
+| `bun dev`                                | Start Expo dev server (fresh cache)
+| `bun run ios`                            | Dev server targeting iOS
+| `bun run android`                        | Dev server targeting Android
+| `bun run web`                            | Dev server targeting Web
+| `bun run clean`                          | Clean cache, node_modules, native builds, and lockfile
+| `bun run eas:login`                      | EAS login
+| `bun run eas:logout`                     | EAS logout
+| `bun run eas:whoami`                     | EAS reveal connected account
+| `bun run deps:fix`                       | Fix dependency versions via Expo
+| `bun run lint:fix`                       | Run ESLint with auto-fix on all source files
+| `bun run type:check`                     | Run TypeScript type checking (no emit)
+| `bun run doctor`                         | Run Expo doctor diagnostics
+| `bun run expo:config`                    | Print public Expo config
+| `bun run export:web`                     | Export web build
+| `bun run prebuild`                       | Prebuild native project 
+| `bun run generate-apk`                   | Build Android APK and install via ADB
+| `bun run prebuild:development`           | Prebuild native project (development env)
+| `bun run prebuild:preview`               | Prebuild native project (preview env)
+| `bun run prebuild:production`            | Prebuild native project (production env)
+| `bun run prebuild:generate`              | Prebuild native project & generate apk
+| `bun run android:development`            | Android dev server (development env)
+| `bun run ios:development`                | iOS dev server (development env)
+| `bun run android:preview`                | Android dev server (preview env)
+| `bun run ios:preview`                    | iOS dev server (preview env)
+| `bun run android:production`             | Android dev server (production env)
+| `bun run ios:production`                 | iOS dev server (production env)
+| `bun run workflow:build-ios:preview`     | Trigger EAS workflow to build iOS from github branch named preview
+| `bun run workflow:build-android:preview` | Trigger EAS workflow to build Android from github branch named preview
+| `bun run workflow:build-ios:main`        | Trigger EAS workflow to build iOS from github branch named main
+| `bun run workflow:build-android:main`    | Trigger EAS workflow to build Android from github branch named main
+| `bun run workflow:build-all`             | Trigger EAS workflow to build both platforms
+| `bun run submit:android`                 | Submit Android build to Play Store
+| `bun run submit:ios`                     | Submit iOS build to App Store
+| `bun run deploy`                         | Deploy to EAS Hosting
 
 ### EAS Build Profiles
 | Profile       | Distribution | Channel     | Use Case |
@@ -52,7 +55,7 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 How: Essential Rules
 
 ### Imports & Modules
-- ✅ DO use absolute imports: `@/components/ui/button`, `@assets/images/icon.png`
+- ✅ DO use absolute imports: `@/components/ui/button`, `@assets/images/expo_icon_dark.svg`
 - ✅ DO use `color` prop on lucide icons, never `className` (`color={text}`, `color={muted}`)
 - ✅ DO use `cn()` for className merging (`cn('flex-1', focused && 'bg-primary/10')`)
 - ✅ DO use dynamic `import()` for native modules that may be absent on web (`import('expo-dynamic-app-icon')`)
@@ -103,7 +106,7 @@ How: Essential Rules
 - **Functions/vars**: camelCase (`setMode`, `changeLanguage`, `hydrate`)
 - **Constants**: UPPER_SNAKE_CASE (`STORAGE_KEYS`, `THEME_OPTIONS`)
 - **Store slices**: camelCase with `Store` suffix (`useAuthStore`, `useThemeStore`)
-- **Assets**: lowercase a-z, numbers 0-9, underscores only (`loading_animation_blue.json`, `expo_icon_dark.png`)
+- **Assets**: lowercase a-z, numbers 0-9, underscores only (`loading_animation_blue.json`, `expo_icon_dark.svg`)
 
 ### Exports
 - **Page components**: default export (`export default function Screen`)

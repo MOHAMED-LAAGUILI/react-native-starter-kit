@@ -53,10 +53,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     adaptiveIcon: {
       backgroundColor: '#2E3C4B',
-      foregroundImage: './assets/images/adaptive_icon.png',
+      foregroundImage: './assets/images/expo_icon_dark.svg',
     },
     package: ENV.EXPO_PUBLIC_PACKAGE,
-    permissions: ['android.permission.READ_EXTERNAL_STORAGE', 'android.permission.WRITE_EXTERNAL_STORAGE'],
     userInterfaceStyle: 'light',
   },
   assetBundlePatterns: ['**/*'],
@@ -71,7 +70,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: ENV.EAS_PROJECT_ID,
     },
   },
-  icon: './assets/images/icon.png',
+  icon: './assets/images/expo_icon_dark.svg',
   ios: {
     backgroundColor: '#ffffff',
     bundleIdentifier: ENV.EXPO_PUBLIC_BUNDLE_ID,
@@ -91,8 +90,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
-        backgroundColor: '#2E3C4B',
-        image: './assets/images/splash.png',
+        backgroundColor: '#FFFFFF',
+        image: './assets/images/expo_icon_dark.svg',
         imageWidth: 150,
         resizeMode: 'contain',
       },
@@ -123,7 +122,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: ENV.EXPO_PUBLIC_VERSION,
   web: {
     bundler: 'metro',
-    favicon: './assets/images/favicon.png',
+    favicon: './assets/images/expo_icon_dark.svg',
     output: 'static',
   },
 });

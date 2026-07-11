@@ -3,10 +3,8 @@
 A production-ready [React Native](https://reactnative.dev/) starter built with [Expo SDK 57](https://expo.dev/), [Expo Router](https://expo.dev/router), [Tailwind CSS v4](https://tailwindcss.com/) via [Uniwind](https://uniwind.dev/), [Zustand](https://github.com/pmndrs/zustand), [TanStack Query](https://tanstack.com/query), and [@gorhom/bottom-sheet](https://github.com/gorhom/bottom-sheet).
 
 ## Demo Android
-<video controls width="700">
-  <source src="./Demo-Android.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7481391447850717184?compact=1" height="399" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
 
 ## Quick Start
 
@@ -21,40 +19,42 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 
 ## Commands
 
-
-| Script                           | Purpose 
-|----------------------------------|--------------------------------------------
-| `bun dev`                        | Start Expo dev server (fresh cache)
-| `bun run ios`                    | Dev server targeting iOS
-| `bun run android`                | Dev server targeting Android
-| `bun run web`                    | Dev server targeting Web
-| `bun run clean`                  | Clean cache, node_modules, native builds, and lockfile
-| `bun run login`                  | EAS login
-| `bun run logout`                 | EAS logout
-| `bun run deps:fix`               | Fix dependency versions via Expo
-| `bun run lint:fix`               | Run ESLint with auto-fix on all source files
-| `bun run type:check`             | Run TypeScript type checking (no emit)
-| `bun run doctor`                 | Run Expo doctor diagnostics
-| `bun run expo:config`            | Print public Expo config
-| `bun run export:web`             | Export web build
-| `bun run prebuild`               | Prebuild native project 
-| `bun run generate-apk`           | Build Android APK and install via ADB
-| `bun run prebuild:development`   | Prebuild native project (development env)
-| `bun run prebuild:preview`       | Prebuild native project (preview env)
-| `bun run prebuild:production`    | Prebuild native project (production env)
-| `bun run prebuild:generate`      | Prebuild native project & generate apk
-| `bun run android:development`    | Android dev server (development env)
-| `bun run ios:development`        | iOS dev server (development env)
-| `bun run android:preview`        | Android dev server (preview env)
-| `bun run ios:preview`            | iOS dev server (preview env)
-| `bun run android:production`     | Android dev server (production env)
-| `bun run ios:production`         | iOS dev server (production env)
-| `bun run workflow:build-ios`     | Trigger EAS workflow to build iOS
-| `bun run workflow:build-android` | Trigger EAS workflow to build Android
-| `bun run workflow:build-all`     | Trigger EAS workflow to build both platforms
-| `bun run submit:android`         | Submit Android build to Play Store
-| `bun run submit:ios`             | Submit iOS build to App Store
-| `bun run deploy`                 | Deploy to EAS Hosting
+| Script                                   | Purpose 
+|------------------------------------------|--------------------------------------------
+| `bun dev`                                | Start Expo dev server (fresh cache)
+| `bun run ios`                            | Dev server targeting iOS
+| `bun run android`                        | Dev server targeting Android
+| `bun run web`                            | Dev server targeting Web
+| `bun run clean`                          | Clean cache, node_modules, native builds, and lockfile
+| `bun run eas:login`                      | EAS login
+| `bun run eas:logout`                     | EAS logout
+| `bun run eas:whoami`                     | EAS reveal connected account
+| `bun run deps:fix`                       | Fix dependency versions via Expo
+| `bun run lint:fix`                       | Run ESLint with auto-fix on all source files
+| `bun run type:check`                     | Run TypeScript type checking (no emit)
+| `bun run doctor`                         | Run Expo doctor diagnostics
+| `bun run expo:config`                    | Print public Expo config
+| `bun run export:web`                     | Export web build
+| `bun run prebuild`                       | Prebuild native project 
+| `bun run generate-apk`                   | Build Android APK and install via ADB
+| `bun run prebuild:development`           | Prebuild native project (development env)
+| `bun run prebuild:preview`               | Prebuild native project (preview env)
+| `bun run prebuild:production`            | Prebuild native project (production env)
+| `bun run prebuild:generate`              | Prebuild native project & generate apk
+| `bun run android:development`            | Android dev server (development env)
+| `bun run ios:development`                | iOS dev server (development env)
+| `bun run android:preview`                | Android dev server (preview env)
+| `bun run ios:preview`                    | iOS dev server (preview env)
+| `bun run android:production`             | Android dev server (production env)
+| `bun run ios:production`                 | iOS dev server (production env)
+| `bun run workflow:build-ios:preview`     | Trigger EAS workflow to build iOS from github branch named preview
+| `bun run workflow:build-android:preview` | Trigger EAS workflow to build Android from github branch named preview
+| `bun run workflow:build-ios:main`        | Trigger EAS workflow to build iOS from github branch named main
+| `bun run workflow:build-android:main`    | Trigger EAS workflow to build Android from github branch named main
+| `bun run workflow:build-all`             | Trigger EAS workflow to build both platforms
+| `bun run submit:android`                 | Submit Android build to Play Store
+| `bun run submit:ios`                     | Submit iOS build to App Store
+| `bun run deploy`                         | Deploy to EAS Hosting
 
 
 ## Features
@@ -175,18 +175,6 @@ Use [Expo Application Services (EAS)](https://expo.dev/eas) for builds, updates,
 | `production`  | Store (AAB)  | production  | App Store / Play Store release 
 | `simulator`   | —            | —           | iOS simulator / Android emulator builds 
  
-```bash
-# Login to EAS
-bun run login
-
-# use workflow instead  Build
-bun run workflow:build-android
-bun run workflow:build-ios
-
-# Submit to stores
-bun run submit:android
-bun run submit:ios
-```
 
 - `autoIncrement: true` on `preview` and `production` — EAS auto-bumps build numbers
 - `appVersionSource: "remote"` — version numbers managed by EAS
