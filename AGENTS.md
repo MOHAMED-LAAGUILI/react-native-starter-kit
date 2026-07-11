@@ -19,14 +19,14 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `bun run lint:fix`                       | Run ESLint with auto-fix on all source files
 | `bun run type:check`                     | Run TypeScript type checking (no emit)
 | `bun run doctor`                         | Run Expo doctor diagnostics
+| `bun run checks`                         | Run all checks (deps:fix → lint:fix → type:check → doctor)
 | `bun run expo:config`                    | Print public Expo config
-| `bun run export:web`                     | Export web build
-| `bun run prebuild`                       | Prebuild native project 
-| `bun run generate-apk`                   | Build Android APK and install via ADB
+| `bun run generate:apk`                   | Build Android APK and install via ADB
+| `bun run prebuild`                       | Prebuild native project (all platforms)
 | `bun run prebuild:development`           | Prebuild native project (development env)
 | `bun run prebuild:preview`               | Prebuild native project (preview env)
 | `bun run prebuild:production`            | Prebuild native project (production env)
-| `bun run prebuild:generate`              | Prebuild native project & generate apk
+| `bun run prebuild:generate`              | Prebuild native project & generate APK
 | `bun run android:development`            | Android dev server (development env)
 | `bun run ios:development`                | iOS dev server (development env)
 | `bun run android:preview`                | Android dev server (preview env)
@@ -37,10 +37,13 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `bun run workflow:build-android:preview` | Trigger EAS workflow to build Android from github branch named preview
 | `bun run workflow:build-ios:main`        | Trigger EAS workflow to build iOS from github branch named main
 | `bun run workflow:build-android:main`    | Trigger EAS workflow to build Android from github branch named main
-| `bun run workflow:build-all`             | Trigger EAS workflow to build both platforms
 | `bun run submit:android`                 | Submit Android build to Play Store
 | `bun run submit:ios`                     | Submit iOS build to App Store
-| `bun run deploy`                         | Deploy to EAS Hosting
+| `bun run eas:update:configure`           | Configure EAS Update for the project
+| `bun run eas:update:preview`             | Push OTA update to preview channel
+| `bun run eas:update:production`          | Push OTA update to production channel
+| `bun run export:web`                     | Export web build locally static files
+| `bun run deploy:web`                     | Deploy web build to production
 
 ### Git Hooks (Husky)
 - **`pre-commit`**: runs `deps:fix` → `lint:fix` → `type:check` → `doctor`; blocks on failure
@@ -58,6 +61,23 @@ Examples:
 - `update: updated login screen layout`
 - `feat(auth): add biometric login`
 - `chore(deps): update dev dependencies`
+
+### EAS Lifecycle
+
+**First Release (App Store / Play Store):**
+1. `bun run checks` — verify everything passes
+2. `git push` — push code to github
+3. `bun run workflow:build-ios:main` / `bun run workflow:build-android:main` — trigger EAS workflow build
+4. `bun run submit:ios` / `bun run submit:android` — submit build to stores
+
+**Subsequent Updates (OTA — no resubmission):**
+1. `bun run checks` → `git push`
+2. `bun run workflow:build-ios:main` / `bun run workflow:build-android:main`
+3. `bun run eas:update:production` — push OTA update
+
+**Preview / Testing:**
+1. `bun run workflow:build-ios:preview` / `bun run workflow:build-android:preview`
+2. `bun run eas:update:preview` — push OTA update to preview channel
 
 ### EAS Build Profiles
 | Profile       | Distribution | Channel     | Use Case |

@@ -36,14 +36,14 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run lint:fix`                       | Run ESLint with auto-fix on all source files
 | `bun run type:check`                     | Run TypeScript type checking (no emit)
 | `bun run doctor`                         | Run Expo doctor diagnostics
+| `bun run checks`                         | Run all checks (deps:fix → lint:fix → type:check → doctor)
 | `bun run expo:config`                    | Print public Expo config
-| `bun run export:web`                     | Export web build
-| `bun run prebuild`                       | Prebuild native project 
-| `bun run generate-apk`                   | Build Android APK and install via ADB
+| `bun run generate:apk`                   | Build Android APK and install via ADB
+| `bun run prebuild`                       | Prebuild native project (all platforms)
 | `bun run prebuild:development`           | Prebuild native project (development env)
 | `bun run prebuild:preview`               | Prebuild native project (preview env)
 | `bun run prebuild:production`            | Prebuild native project (production env)
-| `bun run prebuild:generate`              | Prebuild native project & generate apk
+| `bun run prebuild:generate`              | Prebuild native project & generate APK
 | `bun run android:development`            | Android dev server (development env)
 | `bun run ios:development`                | iOS dev server (development env)
 | `bun run android:preview`                | Android dev server (preview env)
@@ -54,10 +54,13 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run workflow:build-android:preview` | Trigger EAS workflow to build Android from github branch named preview
 | `bun run workflow:build-ios:main`        | Trigger EAS workflow to build iOS from github branch named main
 | `bun run workflow:build-android:main`    | Trigger EAS workflow to build Android from github branch named main
-| `bun run workflow:build-all`             | Trigger EAS workflow to build both platforms
 | `bun run submit:android`                 | Submit Android build to Play Store
 | `bun run submit:ios`                     | Submit iOS build to App Store
-| `bun run deploy`                         | Deploy to EAS Hosting
+| `bun run eas:update:configure`           | Configure EAS Update for the project
+| `bun run eas:update:preview`             | Push OTA update to preview channel
+| `bun run eas:update:production`          | Push OTA update to production channel
+| `bun run export:web`                     | Export web build locally static files
+| `bun run deploy:web`                     | Deploy web build to production
 
 
 ## Git Hooks (Husky)
@@ -206,6 +209,55 @@ chore(deps): update dev dependencies
 ### Icon Generators
 - [Expo Assets Generator](https://expo-assets-generator.vercel.app/) — Generate splash, adaptive icon, favicon, and icon for Expo projects
 - [BuildIcon](https://buildicon.netlify.app/) — Generate mobile app icons for iOS, Android, and web
+
+## EAS Lifecycle
+
+### First Release (App Store / Play Store)
+
+```bash
+# 1. Development
+bun dev
+
+# 2. Run checks before committing
+bun run checks
+
+# 3. Push code to github
+git push
+
+# 4. Trigger EAS workflow build
+bun run workflow:build-ios:main
+bun run workflow:build-android:main
+
+# 5. Submit to stores
+bun run submit:ios
+bun run submit:android
+```
+
+### Subsequent Updates (OTA)
+
+```bash
+# 1. Make changes and commit
+bun run checks
+git push
+
+# 2. Trigger EAS workflow build
+bun run workflow:build-ios:main
+bun run workflow:build-android:main
+
+# 3. Push OTA update (no resubmission needed)
+bun run eas:update:production
+```
+
+### Preview / Testing
+
+```bash
+# 1. Build for preview
+bun run workflow:build-ios:preview
+bun run workflow:build-android:preview
+
+# 2. Push OTA update to preview channel
+bun run eas:update:preview
+```
 
 ## Deploy
 

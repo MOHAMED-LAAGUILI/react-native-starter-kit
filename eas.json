@@ -47,7 +47,8 @@
       },
       "env": {
         "EXPO_PUBLIC_APP_ENV": "development"
-      }
+      },
+      "channel": "development"
     },
     "simulator": {
       "environment": "development",
@@ -60,7 +61,8 @@
       },
       "env": {
         "EXPO_PUBLIC_APP_ENV": "development"
-      }
+      },
+      "channel": "simulator"
     }
   },
   "submit": {

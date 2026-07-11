@@ -23,7 +23,6 @@
     "doctor": "npx expo-doctor --verbose",
     "checks":"bun run deps:fix && bun run lint:fix && bun run type:check && bun run doctor",
     "expo:config": "npx expo config --type public",
-    "export:web": "npx expo export --platform web",
     "generate:apk": "\"C:/Program Files/Git/bin/bash.exe\" script/generate-apk-and-install",
     "prebuild": "expo prebuild --platform all",
     "prebuild:preview": "cross-env EXPO_PUBLIC_APP_ENV=preview STRICT_ENV_VALIDATION=1 expo prebuild --platform all",
@@ -42,7 +41,12 @@
     "workflow:build-android:main": "npx eas-cli@latest workflow:run create-build-android-main.yml",
     "submit:android": "eas submit --platform android",
     "submit:ios": "eas submit --platform ios",
-    "deploy": "eas deploy"
+    "eas:update:configure":"eas update:configure",
+    "eas:update:preview":"eas update --channel preview --message 'new update message' --environment preview",
+    "eas:update:production":"eas update --channel production --message 'new update message' --environment production",
+    "export:web": "npx expo export --platform web",
+    "deploy:web": "eas deploy --prod"
+    
   },
   "dependencies": {
     "@backpackapp-io/react-native-toast": "^0.15.1",
