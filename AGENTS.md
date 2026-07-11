@@ -42,6 +42,23 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `bun run submit:ios`                     | Submit iOS build to App Store
 | `bun run deploy`                         | Deploy to EAS Hosting
 
+### Git Hooks (Husky)
+- **`pre-commit`**: runs `deps:fix` → `lint:fix` → `type:check` → `doctor`; blocks on failure
+- **`commit-msg`**: validates format `type(scope?): description` (types: `feat`, `fix`, `update`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`, `improve`)
+- Auto-installs via `prepare` script after `bun install`
+
+### Commit Message Format
+
+```
+type(scope?): description
+```
+
+Examples:
+- `fix: fixed a minor bug in btn`
+- `update: updated login screen layout`
+- `feat(auth): add biometric login`
+- `chore(deps): update dev dependencies`
+
 ### EAS Build Profiles
 | Profile       | Distribution | Channel     | Use Case |
 |---------------|--------------|-------------|---------------------------
@@ -172,7 +189,9 @@ How: Essential Rules
 | HTTP          | Axios (auth interceptor, refresh queue) 
 | Animation     | react-native-reanimated + gesture-handler 
 | Font          | @expo-google-fonts/inter (4 weights, via expo-font plugin) 
-| Linting       | Eslint                                
+| Linting       | Eslint           
+| Husky         | Modern native Git hooks           
+             
 
 ## Routing Structure
 ```

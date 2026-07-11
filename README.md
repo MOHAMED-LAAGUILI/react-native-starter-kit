@@ -60,6 +60,41 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run deploy`                         | Deploy to EAS Hosting
 
 
+## Git Hooks (Husky)
+
+[Husky](https://typicode.github.io/husky/) v9 enforces code quality and commit conventions.
+
+
+- **`pre-commit`** — Runs `deps:fix` → `lint:fix` → `type:check` → `doctor`. Commit is blocked if any fail.
+- **`commit-msg`** — Validates conventional commit format: `type(scope?): description`. Commit is blocked if format is invalid.
+
+### Allowed Commit Types
+
+| Type       | Purpose 
+|------------|-------------------------------
+| `feat`     | New feature 
+| `fix`      | Bug fix 
+| `update`   | Update existing functionality 
+| `docs`     | Documentation only 
+| `style`    | Code style (formatting, semicolons, etc) 
+| `refactor` | Code refactoring 
+| `perf`     | Performance improvement 
+| `test`     | Adding or fixing tests 
+| `build`    | Build system or dependencies |
+| `ci`       | CI configuration 
+| `chore`    | Maintenance tasks 
+| `revert`   | Revert a previous commit 
+| `improve`  | Improvement without new feature or fix 
+
+### Examples
+
+```bash
+fix: fixed a minor bug in btn
+update: updated login screen layout
+feat(auth): add biometric login
+chore(deps): update dev dependencies
+```
+
 ## Features
 
 - **Expo Router** — File-based routing with Stack, Drawer, and Tab navigators
@@ -151,7 +186,9 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | HTTP          | Axios (auth interceptor, refresh queue) 
 | Animation     | react-native-reanimated + gesture-handler 
 | Font          | @expo-google-fonts/inter (4 weights, via expo-font plugin) 
-| Linting       | Eslint                                                     
+| Linting       | Eslint 
+| Husky         | Modern native Git hooks           
+
 
 ## Learn More
 
@@ -210,6 +247,5 @@ To release, just bump the version in `package.json` and push to `main`.
 ## Planned Features
 - **Expo Observe** — error tracking and performance monitoring via `expo-observe`
 - **Expo Notifications** — push notifications via `expo-notifications` with local + remote notification support
-- **Husky** — git hooks for pre-commit linting and formatting
 - **Maestro** — E2E testing framework for mobile
 

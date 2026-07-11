@@ -8,13 +8,14 @@
     "url": "git+https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit.git"
   },
   "scripts": {
+    "prepare": "husky",
     "dev": "expo start -c",
     "android": "expo start -c -a",
     "ios": "expo start -c -i",
     "web": "expo start -c -w",
     "clean": "bun pm cache rm && rm -rf .expo node_modules android ios build dist bun.lock",
     "eas:login": "eas login",
-    "eas:id":"eas whoami",
+    "eas:id": "eas whoami",
     "eas:logout": "eas logout",
     "deps:fix": "npx expo install --fix",
     "lint:fix": "eslint . --fix && npx eslint src/ --fix && npx eslint app/ --fix",
@@ -27,7 +28,7 @@
     "prebuild:preview": "cross-env EXPO_PUBLIC_APP_ENV=preview STRICT_ENV_VALIDATION=1 expo prebuild --platform all",
     "prebuild:development": "cross-env EXPO_PUBLIC_APP_ENV=development STRICT_ENV_VALIDATION=1 expo prebuild --platform all",
     "prebuild:production": "cross-env EXPO_PUBLIC_APP_ENV=production STRICT_ENV_VALIDATION=1 expo prebuild --platform all",
-    "prebuild:generate":"bun run prebuild && bun run generate:apk",
+    "prebuild:generate": "bun run prebuild && bun run generate:apk",
     "android:development": "cross-env EXPO_PUBLIC_APP_ENV=development bun run android",
     "ios:development": "cross-env EXPO_PUBLIC_APP_ENV=development bun run ios",
     "android:preview": "cross-env EXPO_PUBLIC_APP_ENV=preview bun run android",
@@ -154,6 +155,7 @@
     "eslint-plugin-react-compiler": "^19.1.0-rc.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
+    "husky": "^9.1.7",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tsx": "^4.23.0",
@@ -164,7 +166,9 @@
     "doctor": {
       "reactNativeDirectoryCheck": {
         "listUnknownPackages": false,
-        "exclude": ["expo-dynamic-app-icon"]
+        "exclude": [
+          "expo-dynamic-app-icon"
+        ]
       }
     },
     "install": {
