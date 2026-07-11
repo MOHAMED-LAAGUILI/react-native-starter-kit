@@ -13,7 +13,7 @@ If you discover a security vulnerability, please report it responsibly.
 
 **Do NOT open a public issue.**
 
-Instead, please email the maintainer directly at [INSERT EMAIL] with:
+Instead, please email the maintainer directly:
 
 - Description of the vulnerability
 - Steps to reproduce

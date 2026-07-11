@@ -21,6 +21,7 @@
     "lint:fix": "eslint . --fix && npx eslint src/ --fix && npx eslint app/ --fix",
     "type:check": "tsc --noemit",
     "doctor": "npx expo-doctor --verbose",
+    "checks":"bun run deps:fix && bun run lint:fix && bun run type:check && bun run doctor",
     "expo:config": "npx expo config --type public",
     "export:web": "npx expo export --platform web",
     "generate:apk": "\"C:/Program Files/Git/bin/bash.exe\" script/generate-apk-and-install",
@@ -166,9 +167,7 @@
     "doctor": {
       "reactNativeDirectoryCheck": {
         "listUnknownPackages": false,
-        "exclude": [
-          "expo-dynamic-app-icon"
-        ]
+        "exclude": []
       }
     },
     "install": {

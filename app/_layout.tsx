@@ -12,9 +12,13 @@ import {
   View,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { HeaderButtonsProvider } from 'react-navigation-header-buttons/HeaderButtonsProvider';
 
+import { HeaderButtonsProvider } from 'react-navigation-header-buttons/HeaderButtonsProvider';
 import { Text } from '@/components/ui';
 import { toastDefaultStyle } from '@/components/ui/toast';
 import { setupI18n } from '@/i18n';
@@ -35,6 +39,12 @@ void SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   fade: true,
   duration: 500,
+});
+
+// This is the default configuration
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false, // Reanimated runs in strict mode by default
 });
 
 function StartupScreen({ appReady, startupError, loadingStep }: { appReady: boolean; startupError: Error | null; loadingStep: string }) {

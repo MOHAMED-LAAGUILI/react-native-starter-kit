@@ -31,7 +31,7 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 | `bun run clean`                          | Clean cache, node_modules, native builds, and lockfile
 | `bun run eas:login`                      | EAS login
 | `bun run eas:logout`                     | EAS logout
-| `bun run eas:whoami`                     | EAS reveal connected account
+| `bun run eas:id`                         | EAS reveal connected account
 | `bun run deps:fix`                       | Fix dependency versions via Expo
 | `bun run lint:fix`                       | Run ESLint with auto-fix on all source files
 | `bun run type:check`                     | Run TypeScript type checking (no emit)
@@ -192,6 +192,7 @@ chore(deps): update dev dependencies
 
 ## Learn More
 
+### Documentation
 - [React Native Docs](https://reactnative.dev/docs/getting-started)
 - [Expo Docs](https://docs.expo.dev/)
 - [Uniwind Docs](https://docs.uniwind.dev/)
@@ -201,6 +202,10 @@ chore(deps): update dev dependencies
 - [Zustand](https://github.com/pmndrs/zustand)
 - [i18next](https://www.i18next.com/)
 - [@gorhom/bottom-sheet](https://github.com/gorhom/bottom-sheet)
+
+### Icon Generators
+- [Expo Assets Generator](https://expo-assets-generator.vercel.app/) — Generate splash, adaptive icon, favicon, and icon for Expo projects
+- [BuildIcon](https://buildicon.netlify.app/) — Generate mobile app icons for iOS, Android, and web
 
 ## Deploy
 

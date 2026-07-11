@@ -14,7 +14,7 @@ Production-ready Expo + React Native starter with file-based routing, Tailwind v
 | `bun run clean`                          | Clean cache, node_modules, native builds, and lockfile
 | `bun run eas:login`                      | EAS login
 | `bun run eas:logout`                     | EAS logout
-| `bun run eas:whoami`                     | EAS reveal connected account
+| `bun run eas:id`                         | EAS reveal connected account
 | `bun run deps:fix`                       | Fix dependency versions via Expo
 | `bun run lint:fix`                       | Run ESLint with auto-fix on all source files
 | `bun run type:check`                     | Run TypeScript type checking (no emit)
@@ -351,4 +351,10 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - `src/config/env.ts` — shared constants (`EXPO_PUBLIC_SLUG`, `EXPO_PUBLIC_PACKAGE`, `EAS_PROJECT_ID`)
 - EAS profiles inject `EXPO_PUBLIC_APP_ENV` via `eas.json` `env` block
 - Android package: `com.rn_template.app` (underscores, not hyphens — Android requirement)
+
+## Resources
+
+### Icon Generators
+- [Expo Assets Generator](https://expo-assets-generator.vercel.app/) — Generate splash, adaptive icon, favicon, and icon for Expo projects
+- [BuildIcon](https://buildicon.netlify.app/) — Generate mobile app icons for iOS, Android, and web
 
