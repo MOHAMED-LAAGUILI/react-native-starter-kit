@@ -1,7 +1,7 @@
 {
   "name": "react-native-starter-kit",
   "main": "expo-router/entry",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "packageManager": "bun",
   "repository": {
     "type": "git",

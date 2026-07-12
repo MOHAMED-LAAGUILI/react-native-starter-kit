@@ -1,5 +1,5 @@
 <h1 align="center">
-  RN Template
+  RN Starter Kit
 </h1><p align="center">
 <img width="1280" height="680" alt="image" src="https://github.com/user-attachments/assets/2e80075b-9131-4e2b-8dcf-42faf9bda0d1" />
 </p>
@@ -301,4 +301,6 @@ To release, just bump the version in `package.json` and push to `main`.
 - **Expo Observe / Sentry** — error tracking and performance monitoring via `expo-observe`
 - **Expo Notifications** — push notifications via `expo-notifications` with local + remote notification support
 - **Maestro + Jest** — E2E testing framework for mobile
+- **Expo** [Other Expo Features](https://docs.expo.dev/versions/latest/sdk/expo/)
+
 
