@@ -8,9 +8,9 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLOR_PALETTES } from '@/config/color-palettes';
 import { useThemeColors } from '@/hooks/use-theme-color';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useThemeStore } from '@/store';
 
 const TAB_CONFIG = {

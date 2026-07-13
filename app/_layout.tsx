@@ -150,7 +150,7 @@ export default function RootLayout() {
               <ThemeProvider>
                 <StatusBar
                   animated
-                  style="auto"
+                  style="light"
                 />
 
                 <Stack
