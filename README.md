@@ -149,6 +149,12 @@ chore(deps): update dev dependencies
 - **Splash Screen** — Custom splash with auto-hide after i18n + auth hydration ready
 - **System UI** — Background color synced with theme mode
 - **Cross-platform** — iOS, Android, Web
+- **App Store Connect** — EAS Submit pipeline for App Store and Play Store release
+- **Convex** — Realtime backend with reactive data sync
+- **PostHog** — Product analytics for feature usage and user behavior
+- **LogRocket** — Session replay and frontend performance monitoring
+- **Sentry** — Crash reporting and error tracking
+- **Vexo** — AI-powered in-app chatbot and customer support
 
 ## Project Structure
 
@@ -237,6 +243,9 @@ chore(deps): update dev dependencies
 - [Zustand](https://github.com/pmndrs/zustand)
 - [i18next](https://www.i18next.com/)
 - [@gorhom/bottom-sheet](https://github.com/gorhom/bottom-sheet)
+
+### Live Documentation (AI Agents)
+This project uses [Context7](https://ctx7.ai) to provide AI coding agents with up-to-date documentation for all libraries and frameworks. Context7 fetches current API docs at query time instead of relying on stale training data — ensuring accurate syntax, version migrations, and configuration for React Native, Expo, Tailwind, Zustand, TanStack, and every other dependency.
 
 ### Icon Generators
 - [Expo Assets Generator](https://expo-assets-generator.vercel.app/) — Generate splash, adaptive icon, favicon, and icon for Expo projects
@@ -330,5 +339,3 @@ To release, just bump the version in `package.json` and push to `main`.
 - **Expo Notifications** — push notifications via `expo-notifications` with local + remote notification support
 - **Maestro + Jest** — E2E testing framework for mobile
 - **Expo** [Other Expo Features](https://docs.expo.dev/versions/latest/sdk/expo/)
-
-

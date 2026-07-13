@@ -13,7 +13,7 @@ function ErrorFallback({ error, resetError }: ErrorFallbackProps) {
       <Text variant="h3">Something went wrong</Text>
       <Text
         variant="body"
-        className="text-center text-muted-foreground"
+        className="text-muted-foreground text-center"
       >
         {error.message}
       </Text>

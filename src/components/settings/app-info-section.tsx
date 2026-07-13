@@ -14,17 +14,17 @@ function AppInfoSection() {
 
   return (
     <View>
-      <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.info')}</Text>
-      <View className="overflow-hidden rounded-xl border border-border bg-card">
+      <Text variant="label" className="text-muted-foreground mb-3 tracking-wider uppercase">{t('settings.info')}</Text>
+      <View className="border-border bg-card overflow-hidden rounded-xl border">
         <View className="flex-row items-center p-4">
           <Info size={22} color={icon} style={{ marginRight: 12 }} />
           <View className="flex-1">
             <Text variant="body">{t('app.name')}</Text>
-            <Text variant="caption" className="mt-0.5 text-muted-foreground">{t('app.version', { version: '1.0.0' })}</Text>
+            <Text variant="caption" className="text-muted-foreground mt-0.5">{t('app.version', { version: '1.0.0' })}</Text>
             <Text variant="caption" className="text-muted-foreground">{t('app.description')}</Text>
           </View>
         </View>
-        <View className="mx-4 h-px bg-border" />
+        <View className="bg-border mx-4 h-px" />
         <SettingRow
           icon={Wifi}
           label={t('settings.network')}

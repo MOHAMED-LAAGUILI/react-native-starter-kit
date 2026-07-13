@@ -9,6 +9,7 @@ function AppearanceSection({
   currentColorLabel,
   currentPalette,
   currentLangLabel,
+  currentLangFlag,
   themeLabels,
   mode,
   onThemePress,
@@ -18,6 +19,7 @@ function AppearanceSection({
   currentColorLabel: string;
   currentPalette?: { color: string };
   currentLangLabel: string;
+  currentLangFlag?: React.ReactNode;
   themeLabels: Record<string, string>;
   mode: ThemeMode;
   onThemePress: () => void;
@@ -27,15 +29,15 @@ function AppearanceSection({
   const { t } = useTranslation();
   return (
     <View>
-      <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.appearance')}</Text>
-      <View className="overflow-hidden rounded-xl border border-border bg-card">
+      <Text variant="label" className="text-muted-foreground mb-3 tracking-wider uppercase">{t('settings.appearance')}</Text>
+      <View className="border-border bg-card overflow-hidden rounded-xl border">
         <SettingRow
           icon={mode === 'dark' ? Moon : mode === 'system' ? Monitor : Sun}
           label={t('settings.theme')}
           subtitle={themeLabels[mode]}
           onPress={onThemePress}
         />
-        <View className="mx-4 h-px bg-border" />
+        <View className="bg-border mx-4 h-px" />
         <SettingRow
           icon={Brush}
           label={t('settings.accentColor')}
@@ -43,11 +45,12 @@ function AppearanceSection({
           rightElement={<View className="mr-2 size-5 rounded-full" style={{ backgroundColor: currentPalette?.color }} />}
           onPress={onColorPress}
         />
-        <View className="mx-4 h-px bg-border" />
+        <View className="bg-border mx-4 h-px" />
         <SettingRow
           icon={Globe}
           label={t('settings.language')}
           subtitle={currentLangLabel}
+          rightElement={currentLangFlag}
           onPress={onLangPress}
         />
       </View>

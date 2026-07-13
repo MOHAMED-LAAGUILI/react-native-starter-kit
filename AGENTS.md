@@ -1,5 +1,16 @@
 # AGENTS.md — React Native Starter Kit
 
+## Context7 — Always Use On Every Request
+
+**This project uses Context7 (`npx ctx7@latest`) for all library/framework/SDK/API/CLI documentation.**
+
+- Before answering ANY question about a library, framework, SDK, API, CLI tool, or cloud service, ALWAYS run `npx ctx7@latest library "<name>" "<question>"` first.
+- Pick the best match by description, code snippet count, and source reputation.
+- Then run `npx ctx7@latest docs <libraryId> "<question>"` to get current documentation.
+- This includes: React, React Native, Expo, Tailwind, Zustand, TanStack, i18next, Axios, Lottie, Reanimated, Gesture Handler, Bottom Sheet, Primitives, and any other dependency.
+- Do NOT rely on training data for library-specific syntax, API changes, version migrations, or configuration.
+- If a command fails with a quota error, inform the user and suggest `npx ctx7@latest login`.
+
 ## Project Overview
 Production-ready Expo + React Native starter with file-based routing, Tailwind v4 (Uniwind), Zustand, TanStack Query, i18n, auth, Drawer + Tabs navigation, and @gorhom/bottom-sheet.
 

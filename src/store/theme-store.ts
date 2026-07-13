@@ -1,3 +1,4 @@
+import { Uniwind } from 'uniwind';
 import { create } from 'zustand';
 import { STORAGE_KEYS } from '@/config/constants';
 import { StorageService } from '@/storage';
@@ -47,6 +48,7 @@ export const useThemeStore = create<ThemeState>(set => ({
 
   setMode: (mode: ThemeMode) => {
     StorageService.theme.setItem(STORAGE_KEYS.THEME_MODE, mode);
+    Uniwind.setTheme(mode);
     set({ mode });
   },
 

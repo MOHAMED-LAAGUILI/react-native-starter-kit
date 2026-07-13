@@ -28,11 +28,11 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
     [themeMode, systemScheme],
   );
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     Uniwind.setTheme(themeMode);
   }, [themeMode]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const palette = COLOR_PALETTES.find(p => p.key === primaryColor);
     if (!palette)
       return;

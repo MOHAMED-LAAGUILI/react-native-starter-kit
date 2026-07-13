@@ -1,7 +1,7 @@
 {
   "name": "react-native-starter-kit",
   "main": "expo-router/entry",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "packageManager": "bun",
   "repository": {
     "type": "git",
@@ -54,8 +54,6 @@
   "dependencies": {
     "@backpackapp-io/react-native-toast": "^0.15.1",
     "@expo-google-fonts/inter": "^0.4.2",
-    "@expo/material-symbols": "^0.1.1",
-    "@expo/vector-icons": "^15.1.1",
     "@gorhom/bottom-sheet": "^5",
     "@lottiefiles/dotlottie-react": "^0.19.8",
     "@react-native-community/netinfo": "12.0.1",
@@ -95,8 +93,10 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "expo": "^57.0.0",
+    "expo-blur": "^57.0.0",
     "expo-constants": "~57.0.3",
     "expo-dev-client": "~57.0.5",
+    "expo-device": "~57.0.0",
     "expo-font": "~57.0.0",
     "expo-haptics": "~57.0.0",
     "expo-image": "^57.0.0",
@@ -128,7 +128,7 @@
     "react-native-reanimated-carousel": "^4.0.3",
     "react-native-restart-newarch": "^1.0.87",
     "react-native-safe-area-context": "~5.7.0",
-    "react-native-screens": "^4.25.2",
+    "react-native-screens": "4.25.2",
     "react-native-svg": "15.15.4",
     "react-native-toast-message": "^2.4.0",
     "react-native-web": "^0.21.0",
@@ -150,7 +150,7 @@
     "@eslint-react/eslint-plugin": "^5.13.2",
     "@expo/config": "^57.0.2",
     "@react-native-community/cli": "^20.2.0",
-    "@types/node": "^26.1.0",
+    "@types/node": "^26.1.1",
     "@types/react": "~19.2.10",
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.63.0",
@@ -175,6 +175,7 @@
     "doctor": {
       "reactNativeDirectoryCheck": {
         "listUnknownPackages": false,
+        "enabled": true,
         "exclude": []
       }
     },

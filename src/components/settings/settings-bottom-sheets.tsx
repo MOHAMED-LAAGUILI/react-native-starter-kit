@@ -13,8 +13,8 @@ import { changeLanguage } from '@/i18n';
 import { cn } from '@/lib/utils';
 
 const LANGUAGE_OPTIONS: BottomSheetOption<string>[] = [
-  { label: 'English', value: 'en', leftElement: <Image source={require('@assets/images/en-flag.png')} className="size-6 rounded-full" /> },
-  { label: 'Français', value: 'fr', leftElement: <Image source={require('@assets/images/fr-flag.png')} className="size-6 rounded-full" /> },
+  { label: 'English', value: 'en', leftElement: <Image source={require('@assets/images/en-flag.png')} style={{ width: 24, height: 24, borderRadius: 12 }} /> },
+  { label: 'Français', value: 'fr', leftElement: <Image source={require('@assets/images/fr-flag.png')} style={{ width: 24, height: 24, borderRadius: 12 }} /> },
 ];
 
 type SettingsBottomSheetsProps = {
@@ -47,7 +47,7 @@ function SettingsBottomSheets({ mode, setMode, primaryColor, setPrimaryColor, co
   const colorOptions = React.useMemo<BottomSheetOption<ColorPaletteKey>[]>(
     () => COLOR_PALETTES.map(p => ({
       label: p.label,
-      leftElement: <View className={cn('size-6 rounded-full', primaryColor === p.key && 'ring-2 ring-primary ring-offset-2')} style={{ backgroundColor: p.color }} />,
+      leftElement: <View className={cn('size-6 rounded-full', primaryColor === p.key && 'ring-primary ring-2 ring-offset-2')} style={{ backgroundColor: p.color }} />,
       value: p.key,
     })),
     [primaryColor],

@@ -20,7 +20,7 @@ function SearchScreen() {
       <View className="flex-1 items-center justify-center px-6">
         <Text
           variant="body"
-          className="text-center text-destructive"
+          className="text-destructive text-center"
         >
           {t('search.error')}
         </Text>

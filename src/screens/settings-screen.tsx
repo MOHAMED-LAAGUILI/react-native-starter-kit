@@ -13,7 +13,9 @@ function SettingsScreen() {
   const [colorSheetOpen, setColorSheetOpen] = React.useState(false);
   const [themeSheetOpen, setThemeSheetOpen] = React.useState(false);
 
-  const currentLangLabel = LANGUAGE_OPTIONS.find(o => o.value === i18n.language)?.label ?? 'English';
+  const currentLang = LANGUAGE_OPTIONS.find(o => o.value === i18n.language);
+  const currentLangLabel = currentLang?.label ?? 'English';
+  const currentLangFlag = currentLang?.leftElement ? <View className="mr-2">{currentLang.leftElement}</View> : undefined;
   const currentPalette = COLOR_PALETTES.find(p => p.key === primaryColor);
   const currentColorLabel = currentPalette?.label ?? 'Blue';
   const themeLabels: Record<ThemeMode, string> = { dark: t('theme.dark'), light: t('theme.light'), system: t('theme.system') };
@@ -26,6 +28,7 @@ function SettingsScreen() {
             currentColorLabel={currentColorLabel}
             currentPalette={currentPalette}
             currentLangLabel={currentLangLabel}
+            currentLangFlag={currentLangFlag}
             themeLabels={themeLabels}
             mode={mode}
             onThemePress={() => setThemeSheetOpen(true)}

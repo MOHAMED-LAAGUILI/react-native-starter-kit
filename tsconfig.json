@@ -24,7 +24,7 @@
     "*.d.ts",
     "**/*.d.ts",
     "expo-env.d.ts"
-  ],
+, "metro.config.js"  ],
   "exclude": [
     "node_modules",
     "babel.config.js",

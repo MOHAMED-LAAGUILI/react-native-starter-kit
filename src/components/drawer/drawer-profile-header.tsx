@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
@@ -58,14 +59,11 @@ export function DrawerProfileHeader() {
         style={{ bottom: 0, top: safeTop }}
       >
         <View className={cn('overflow-hidden rounded-full border-2 border-white/30', 'size-17')}>
-          <View className="size-full items-center justify-center bg-white/20">
-            <Text
-              variant="h1"
-              className="text-white"
-            >
-              {user?.name?.charAt(0)?.toUpperCase() ?? 'J'}
-            </Text>
-          </View>
+          <Image
+            source={require('@assets/images/react-logo.png')}
+            style={{ width: '100%', height: '100%' }}
+            contentFit="cover"
+          />
         </View>
 
         <View className="ml-4 flex-1">

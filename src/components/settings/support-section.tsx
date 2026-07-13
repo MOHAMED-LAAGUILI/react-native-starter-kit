@@ -9,22 +9,22 @@ function SupportSection() {
 
   return (
     <View>
-      <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.support')}</Text>
-      <View className="overflow-hidden rounded-xl border border-border bg-card">
+      <Text variant="label" className="text-muted-foreground mb-3 tracking-wider uppercase">{t('settings.support')}</Text>
+      <View className="border-border bg-card overflow-hidden rounded-xl border">
         <SettingRow
           icon={Share2}
           label={t('settings.shareApp')}
           subtitle={t('settings.shareAppDescription')}
           onPress={() => Share.share({ message: t('settings.shareMessage'), url: 'https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit' })}
         />
-        <View className="mx-4 h-px bg-border" />
+        <View className="bg-border mx-4 h-px" />
         <SettingRow
           icon={Heart}
           label={t('settings.supportFeedback')}
           subtitle={t('settings.supportFeedbackDescription')}
           onPress={() => Linking.openURL('https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit/issues')}
         />
-        <View className="mx-4 h-px bg-border" />
+        <View className="bg-border mx-4 h-px" />
         <SettingRow
           icon={ExternalLink}
           label={t('settings.developer')}

@@ -125,7 +125,16 @@ export default antfu(
     rules: {
       ...betterTailwindcss.configs.recommended.rules,
       'better-tailwindcss/no-unnecessary-whitespace': 'warn',
-      'better-tailwindcss/no-unknown-classes': 'warn',
+      'better-tailwindcss/no-unknown-classes': ['warn', {
+        ignore: [
+          // Uniwind semantic theme tokens (dynamically resolved at runtime)
+          '^text-(muted-foreground|primary|primary-foreground|foreground|destructive|destructive-foreground)(/\\d+)?$',
+          '^bg-(primary|card|muted|muted-foreground|destructive|secondary|border|accent)(/\\d+)?$',
+          '^border-(border|primary|destructive|ring|muted-foreground)(/\\d+)?$',
+          '^ring-primary$',
+          '^active:bg-(primary|accent|destructive)(/\\d+)?$',
+        ],
+      }],
       'better-tailwindcss/enforce-consistent-line-wrapping': 'off', // Can be too strict for some cases
     },
   },

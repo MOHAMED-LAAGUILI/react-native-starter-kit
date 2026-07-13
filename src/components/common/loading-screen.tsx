@@ -15,6 +15,7 @@ function LoadingScreen() {
         source={require('@assets/lottie/loading_animation_blue.json')}
         autoPlay
         loop
+        style={{ height: 70, width: 70 }}
       />
     </View>
   );
