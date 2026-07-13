@@ -50,20 +50,6 @@
         "EXPO_PUBLIC_APP_ENV": "development"
       },
       "channel": "development"
-    },
-    "simulator": {
-      "environment": "development",
-      "ios": {
-        "simulator": true,
-        "image": "latest"
-      },
-      "android": {
-        "image": "latest"
-      },
-      "env": {
-        "EXPO_PUBLIC_APP_ENV": "development"
-      },
-      "channel": "simulator"
     }
   },
   "submit": {

@@ -50,7 +50,7 @@ function TabItem({
   }));
 
   const inactiveBg = isDark ? '#000' : '#fff';
-  const inactiveColor = isDark ? '#a1a1aa' : primaryHex;
+  const inactiveColor = isDark ? '#fff' : '#000';
 
   return (
     <Pressable
@@ -92,7 +92,8 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
   const insets = useSafeAreaInsets();
 
   const inactiveBg = isDark ? '#000' : '#fff';
-  const inactiveColor = isDark ? '#a1a1aa' : primaryHex;
+  const inactiveColor = isDark ? '#a1a1aa' : '#71717a';
+  const inactiveBorder = isDark ? '#3f3f46' : '#d4d4d8';
 
   return (
     <View style={{ backgroundColor: inactiveBg, paddingBottom: insets.bottom }}>
@@ -140,7 +141,7 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
                           justifyContent: 'center',
                           overflow: 'hidden',
                           borderWidth: 1,
-                          borderColor: inactiveColor,
+                          borderColor: inactiveBorder,
                           backgroundColor: inactiveBg,
                         }}
                       >

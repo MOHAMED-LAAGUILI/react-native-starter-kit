@@ -32,7 +32,7 @@ export function PreferencesScreen() {
   );
 
   return (
-    <ScrollView className=" flex-1 bg-background">
+    <ScrollView className="flex-1 bg-background">
       <View className="mb-10 gap-6 p-6">
         <View className="flex-row items-center justify-between">
           <Text variant="h4">Stored Preferences</Text>

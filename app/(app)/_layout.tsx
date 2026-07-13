@@ -34,7 +34,7 @@ export default function AppLayout() {
         headerStyle: { backgroundColor: primaryHex },
         headerTintColor: '#fff',
         headerTitle: HeaderTitle,
-        drawerStyle: { width: '76%' },
+        drawerStyle: { width: '75%' },
 
       }}
     >

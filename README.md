@@ -1,5 +1,5 @@
 <h1 align="center">
-  🚀 RN Starter Kit
+   React Native Expo Starter Kit
 </h1>
 
 <p align="center">
@@ -34,21 +34,32 @@
 
 
 ## Demo Android (Old Build)
-https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7481391447850717184?compact=1
+[Demo.mp4](https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7481391447850717184?compact=1)
 
 ## Latest APK File
-**available only for 13 Days to download start from Jul 13, 2026 2:48 PM**
-https://expo.dev/accounts/gopitos-team/projects/rn-template/builds/f3bb082f-af1e-48d6-aea0-174b4c8c3708
+**available only for 13 Days to download starting from Jul 13, 2026 2:48 PM**
+[Download APK](https://expo.dev/accounts/gopitos-team/projects/rn-template/builds/2cfcd5d9-83cd-45fd-8b2f-086241053d77)
 
 ## Quick Start
 ```bash
-git clone https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit.git my-react-native-app
+git clone https://github.com/MOHAMED-LAAGUILI/react-native-expo-starter-kit.git my-react-native-app
 cd my-react-native-app
 bun install
 bun dev
 ```
 
 Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](https://expo.dev/go).
+[!IMPORTANT]
+**This project cannot run in Expo Go.**
+
+It uses **react-native-mmkv**, which relies on native modules that are **not included in Expo Go**.
+To run the app, use a development build instead:
+
+```bash
+ npm run android
+ # or
+ npm run ios
+```
 
 ## Commands
 
@@ -170,42 +181,33 @@ Press `i` (iOS), `a` (Android), or `w` (Web). Or scan the QR with [Expo Go](http
 
 ## Tech Stack
 
-| Category      | Library 
-|---------------|-------------------------------
-| Framework     | React 19 + React Native 0.86 
-| Platform      | Expo SDK 57 
-| Language      | TypeScript 6 (strict) 
-| Routing       | Expo Router (Stack/Drawer/Tabs) 
-| Styling       | Tailwind CSS v4 + Uniwind + cn() 
-| Theme         | oklch CSS variables (light/dark + 7 accent color palettes) 
-| Client State  | Zustand 5 (MMKV persistence) 
-| Server State  | TanStack Query 5 + Devtools 
-| Forms         | TanStack Form 1 + Zod 3 
-| Storage       | react-native-mmkv 4 (lazy, SSR-safe) 
-| i18n          | i18next 26 + react-i18next (EN/FR/AR, RTL) 
-| UI Primitives | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) 
-| Bottom Sheet  | @gorhom/bottom-sheet 5 
-| Icons         | lucide-react-native 
-| HTTP          | Axios (auth interceptor, refresh queue) 
-| Animation     | react-native-reanimated + gesture-handler 
-| Font          | @expo-google-fonts/inter (4 weights, via expo-font plugin) 
-| Linting       | Eslint 
-| Git hooks     | Husky
-| Dates         | date-fns
+| Category        | Library 
+|-----------------|-------------------------------
+| Framework       | React 19 + React Native 0.86 
+| Platform        | Expo SDK 57 
+| Language        | TypeScript 6 (strict) 
+| Package Manager | Bun
+| Routing         | Expo Router (Stack/Drawer/Tabs) 
+| Styling         | Tailwind CSS v4 + Uniwind + cn() 
+| Theme           | oklch CSS variables (light/dark + 7 accent color palettes) 
+| Client State    | Zustand 5 (MMKV persistence) 
+| Server State    | TanStack Query 5 + Devtools 
+| Forms           | TanStack Form 1 + Zod 3 
+| Storage         | react-native-mmkv 4 (lazy, SSR-safe) 
+| i18n            | i18next 26 + react-i18next (EN/FR/AR, RTL) 
+| UI Primitives   | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) 
+| Bottom Sheet    | @gorhom/bottom-sheet 5 
+| Icons           | lucide-react-native 
+| HTTP            | Axios (auth interceptor, refresh queue) 
+| Animation       | react-native-reanimated + gesture-handler 
+| Font            | @expo-google-fonts/inter (4 weights, via expo-font plugin) 
+| Linting         | Eslint 
+| Git hooks       | Husky
+| Dates           | date-fns
+
 
 
 ## Learn More
-
-### Documentation (Currently we don't have our own site yet but will do soon)
-- [React Native Docs](https://reactnative.dev/docs/getting-started)
-- [Expo Docs](https://docs.expo.dev/)
-- [Uniwind Docs](https://docs.uniwind.dev/)
-- [Tailwind CSS v4 Docs](https://tailwindcss.com/docs)
-- [TanStack Query](https://tanstack.com/query/latest)
-- [TanStack Form](https://tanstack.com/form/latest)
-- [Zustand](https://github.com/pmndrs/zustand)
-- [i18next](https://www.i18next.com/)
-- [@gorhom/bottom-sheet](https://github.com/gorhom/bottom-sheet)
 
 ### Live Documentation (AI Agents)
 This project uses [Context7](https://ctx7.ai) to provide AI coding agents with up-to-date documentation for all libraries and frameworks. Context7 fetches current API docs at query time instead of relying on stale training data — ensuring accurate syntax, version migrations, and configuration for React Native, Expo, Tailwind, Zustand, TanStack, and every other dependency.
@@ -228,10 +230,10 @@ bun run checks
 # 3. Push code to github
 git push
 
-# 4. login to EAS account
+# 4. login to EAS account (if u haven't)
 bun run eas:in
 
-# 4. logout (only if u exceeded 25 free build and cant pay for pro plan)
+# 4. logout (only if u exceeded 25 free build and cant pay for pro plan and login to different account)
 bun run eas:out
 
 ```
@@ -240,30 +242,33 @@ bun run eas:out
 ### Preview / Testing / Build
 
 ```bash
-# 3. Build for preview from local code (doesn't require u to push code cause on build upload from ur machine)
+# (Option 1)
+# 1. Build for preview from local code (doesn't require u to push code cause on build upload from ur machine)
 bun run build:prev:android
 bun run build:prev:ios
 
+# (Option 2)
 # 2. Build for preview from main branch (requires u to push code to main cause on build upload from ur main github branch)
-bun run flow:build-ios:main
 bun run flow:build-android:main
+bun run flow:build-ios:main
 
-#3. Enable Automatic EAS Builds (Recommended)
+# (Option 3)
+# 3. Enable Automatic EAS Builds (Recommended)
 # For a fully automated CI/CD workflow, head to EAS and connect your GitHub repository to your EAS project.
 # Once connected, every push to the main branch will automatically trigger the EAS workflows included in this project.
 # Workflow files are located in:
 # .eas/workflows/
 # This allows EAS to automatically build Android and iOS apps without manually starting builds from the Expo Dashboard or CLI.
 
-# 5. Submit to stores (skip if haven't setup google console account)
+# 5. Submit to stores for first time only (skip if haven't setup google console account)
 bun run submit:ios
 bun run submit:android
 
-# 4. Push OTA update (no resubmission needed)
+# 4. Push OTA update (no resubmission needed any changes later u launch via update)
 bun run eas:update:prod
 ```
 
-## Deploy
+## Deploy / Build / Test / Monitor / Updates ...
 
 Use [Expo Application Services (EAS)](https://expo.dev/eas) for builds, updates, and submissions.
 
@@ -271,10 +276,9 @@ Use [Expo Application Services (EAS)](https://expo.dev/eas) for builds, updates,
 
 | Profile       | Distribution   | Channel     | Use Case
 |---------------|----------------|-------------|---------------------------
-| `development` | Internal       | development | Dev client builds for local testing (Expo Go)
+| `development` | Internal (APK) | development | Dev client builds for local testing (Expo Go) development build for native
 | `preview`     | Internal (APK) | preview     | Internal QA builds 
 | `production`  | Store (AAB)    | production  | App Store / Play Store release 
-| `simulator`   | —              | —           | iOS simulator / Android emulator builds 
  
 
 - `autoIncrement: true` on `preview` and `production` — EAS auto-bumps build numbers
@@ -320,4 +324,3 @@ To release, just bump the version in `package.json` and push to `main`.
 ## Planned Features (Expected)
 - **Immersive Focus** [Hide Navigation bar](https://docs.expo.dev/versions/latest/sdk/navigation-bar/)
 - **Expo Notifications** — push notifications via `expo-notifications` with local + remote notification support
-

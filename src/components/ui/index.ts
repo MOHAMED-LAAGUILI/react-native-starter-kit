@@ -4,6 +4,8 @@ export type { BottomSheetOption, BottomSheetProps } from './bottom-sheet';
 export { BottomSheet } from './bottom-sheet';
 export type { ButtonProps, ButtonSize, ButtonVariant } from './button';
 export { Button } from './button';
+export type { CardProps, CardVariant } from './card';
+export { Card } from './card';
 export type { CheckboxProps } from './checkbox';
 export { Checkbox } from './checkbox';
 export type { ImageProps } from './image';

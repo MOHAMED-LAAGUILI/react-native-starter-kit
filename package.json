@@ -1,11 +1,11 @@
 {
-  "name": "react-native-starter-kit",
+  "name": "react-native-epo-starter-kit",
   "main": "expo-router/entry",
   "version": "2.3.0",
   "packageManager": "bun",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MOHAMED-LAAGUILI/react-native-starter-kit.git"
+    "url": "git+https://github.com/MOHAMED-LAAGUILI/react-native-expo-starter-kit.git"
   },
   "scripts": {
     "prepare": "husky",

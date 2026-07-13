@@ -95,12 +95,11 @@ Examples:
 2. `bun run eas:update:prev` — push OTA update to preview channel
 
 ### EAS Build Profiles
-| Profile       | Distribution | Channel     | Use Case |
-|---------------|--------------|-------------|---------------------------
-| `development` | Internal     | development | Dev client builds for local testing 
-| `preview`     | Store (APK)  | preview     | Internal QA builds 
-| `production`  | Store (AAB)  | production  | App Store / Play Store release 
-| `simulator`   | —            | —           | iOS simulator / Android emulator builds 
+| Profile       | Distribution  | Channel     | Use Case 
+|---------------|---------------|-------------|---------------------------
+| `development` | Internal(APK) | development | Dev client builds for local testing 
+| `preview`     | Store (APK)   | preview     | Internal QA builds 
+| `production`  | Store (AAB)   | production  | App Store / Play Store release 
 
 ## Essentials
 
@@ -205,27 +204,32 @@ How: Essential Rules
 - `React.ComponentProps<typeof Component>` + `React.RefAttributes` for wrapper props
 
 ## Tech Stack
-| Category      | Library 
-|---------------|-------------------------------
-| Framework     | React 19 + React Native 0.86 
-| Platform      | Expo SDK 57 
-| Language      | TypeScript 6 (strict) 
-| Routing       | Expo Router (Stack/Drawer/Tabs) 
-| Styling       | Tailwind CSS v4 + Uniwind + cn() 
-| Theme         | oklch CSS variables (light/dark + 7 accent color palettes) 
-| Client State  | Zustand 5 (MMKV persistence) 
-| Server State  | TanStack Query 5 + Devtools 
-| Forms         | TanStack Form 1 + Zod 3 
-| Storage       | react-native-mmkv 4 (lazy, SSR-safe) 
-| i18n          | i18next 26 + react-i18next (EN/FR/AR, RTL) 
-| UI Primitives | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) 
-| Bottom Sheet  | @gorhom/bottom-sheet 5 
-| Icons         | lucide-react-native 
-| HTTP          | Axios (auth interceptor, refresh queue) 
-| Animation     | react-native-reanimated + gesture-handler 
-| Font          | @expo-google-fonts/inter (4 weights, via expo-font plugin) 
-| Linting       | Eslint           
-| Husky         | Modern native Git hooks           
+
+
+| Category        | Library 
+|-----------------|-------------------------------
+| Framework       | React 19 + React Native 0.86 
+| Platform        | Expo SDK 57 
+| Language        | TypeScript 6 (strict) 
+| Package Manager | Bun
+| Routing         | Expo Router (Stack/Drawer/Tabs) 
+| Styling         | Tailwind CSS v4 + Uniwind + cn() 
+| Theme           | oklch CSS variables (light/dark + 7 accent color palettes) 
+| Client State    | Zustand 5 (MMKV persistence) 
+| Server State    | TanStack Query 5 + Devtools 
+| Forms           | TanStack Form 1 + Zod 3 
+| Storage         | react-native-mmkv 4 (lazy, SSR-safe) 
+| i18n            | i18next 26 + react-i18next (EN/FR/AR, RTL) 
+| UI Primitives   | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) 
+| Bottom Sheet    | @gorhom/bottom-sheet 5 
+| Icons           | lucide-react-native 
+| HTTP            | Axios (auth interceptor, refresh queue) 
+| Animation       | react-native-reanimated + gesture-handler 
+| Font            | @expo-google-fonts/inter (4 weights, via expo-font plugin) 
+| Linting         | Eslint 
+| Git hooks       | Husky
+| Dates           | date-fns
+       
              
 
 ## Routing Structure

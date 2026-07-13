@@ -1,0 +1,9 @@
+name: Create preview Builds For iOS
+
+jobs:
+  build_android:
+    name: Build iOS app
+    type: build
+    params:
+      platform: ios
+      profile: preview

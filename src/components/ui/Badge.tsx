@@ -1,6 +1,6 @@
 import type * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@/components/ui';
+import { Text } from '@/components/ui/text';
 import { cn } from '@/utils/utils';
 
 type BadgeVariant = 'default' | 'primary' | 'secondary' | 'destructive' | 'outline';
