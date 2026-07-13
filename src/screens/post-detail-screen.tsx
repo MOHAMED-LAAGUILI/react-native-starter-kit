@@ -41,7 +41,7 @@ function PostDetailScreen() {
       <View className="gap-4 p-6">
         <PostHeader post={post} />
         <PostBody post={post} />
-        
+
       </View>
     </ScrollView>
   );

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@/components/ui';
-import { Badge } from '@/components/ui';
+import { Badge, Text } from '@/components/ui';
 
 function SectionTitle({ children }: { children: string }) {
   return (

@@ -42,7 +42,7 @@ export default function AppLayout() {
         name="(tabs)"
         options={{
           drawerItemStyle: { display: 'none' },
-          
+
           headerShown: true,
         }}
       />
