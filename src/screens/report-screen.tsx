@@ -1,8 +1,8 @@
 import type { ReportProject } from '@/data/report';
 import * as React from 'react';
-import { ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView, View } from 'react-native';
 import { OverviewCards } from '@/components/home/overview-cards';
+import { AnimatedSection } from '@/components/report/animated-section';
 import { reportRangeLabels, reportTabs } from '@/components/report/constants';
 import { HoursDistribution } from '@/components/report/hours-distribution';
 import { ProjectAllocation } from '@/components/report/project-allocation';
@@ -50,29 +50,39 @@ export function ReportScreen() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView contentContainerClassName="gap-5 p-6" showsVerticalScrollIndicator={false}>
-        <ReportTabs
-          activeTab={activeTab}
-          tabs={reportTabs}
-          onTabChange={setActiveTab}
-        />
-
+    <View className="flex-1 bg-background">
+      <ReportTabs
+        activeTab={activeTab}
+        tabs={reportTabs}
+        onTabChange={setActiveTab}
+      />
+      <ScrollView contentContainerClassName="gap-5 px-6 pb-8" showsVerticalScrollIndicator={false}>
         <OverviewCards cards={overviewCards} />
-        <TrendSnapshot
-          data={tabProjectData}
-          rangeLabel={reportRangeLabels[activeTab]}
-        />
-        <HoursDistribution
-          data={tabProjectData}
-          totalHours={totalHours}
-        />
-        <TopProjectsChart
-          key={activeTab}
-          data={tabProjectData}
-        />
-        <ProjectAllocation data={tabProjectData} totalHours={totalHours} />
+
+        <AnimatedSection key={`trend-${activeTab}`} animateOn={activeTab}>
+          <TrendSnapshot
+            data={tabProjectData}
+            rangeLabel={reportRangeLabels[activeTab]}
+          />
+        </AnimatedSection>
+
+        <AnimatedSection key={`hours-${activeTab}`} animateOn={activeTab}>
+          <HoursDistribution
+            data={tabProjectData}
+            totalHours={totalHours}
+          />
+        </AnimatedSection>
+
+        <AnimatedSection key={`top-${activeTab}`} animateOn={activeTab}>
+          <TopProjectsChart
+            data={tabProjectData}
+          />
+        </AnimatedSection>
+
+        <AnimatedSection key={`alloc-${activeTab}`} animateOn={activeTab}>
+          <ProjectAllocation data={tabProjectData} totalHours={totalHours} />
+        </AnimatedSection>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

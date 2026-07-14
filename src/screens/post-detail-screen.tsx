@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
 import { usePublicPost } from '@/api/hooks/use-public-posts';
 import { LoadingScreen } from '@/components/common/loading-screen';
-import { PostBody, PostHeader, PostHero } from '@/components/post-detail';
+import { PostHero } from '@/components/post-detail';
 import { Text } from '@/components/ui';
 import { Button } from '@/components/ui/button';
 
@@ -22,7 +22,7 @@ function PostDetailScreen() {
       <View className="flex-1 items-center justify-center bg-background px-6">
         <Text
           variant="body"
-          className="mb-4 text-center text-destructive"
+          className="text-destructive mb-4 text-center"
         >
           {t('postDetail.error')}
         </Text>
@@ -38,11 +38,6 @@ function PostDetailScreen() {
   return (
     <ScrollView className="flex-1 bg-background">
       <PostHero post={post} />
-      <View className="gap-4 p-6">
-        <PostHeader post={post} />
-        <PostBody post={post} />
-
-      </View>
     </ScrollView>
   );
 }

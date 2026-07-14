@@ -81,11 +81,12 @@ export function HoursDistribution({
           donut
           radius={88}
           innerRadius={58}
-          innerCircleColor={background}
           showTooltip
           showValuesAsTooltipText={false}
           focusOnPress
           sectionAutoFocus
+          innerCircleColor={background}
+
           centerLabelComponent={() => (
             <View className="items-center">
               <Text variant="caption" className="text-muted-foreground">

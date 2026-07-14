@@ -10,11 +10,12 @@ type CalendarViewProps = {
 };
 
 function CalendarView({ onDayPress, markedDates }: CalendarViewProps) {
-  const { text, muted, background } = useThemeColors();
+  const { isDark, text, muted, background } = useThemeColors();
   const primaryHex = usePrimaryHex();
 
   return (
     <Calendar
+      key={`${primaryHex}-${isDark}`}
       onDayPress={onDayPress}
       markedDates={markedDates}
       theme={{

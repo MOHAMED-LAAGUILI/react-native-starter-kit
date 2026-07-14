@@ -1,1 +1,1 @@
-export { PostBody, PostHeader, PostHero } from './post-content';
+export { PostHero } from './post-content';

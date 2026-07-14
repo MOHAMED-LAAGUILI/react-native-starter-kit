@@ -21,6 +21,62 @@ const appIconBadgeConfig: AppIconBadgeConfig = {
   enabled: process.env.NODE_ENV !== 'production',
 };
 
+const plugins: ExpoConfig['plugins'] = [
+  'expo-system-ui',
+  [
+    'expo-splash-screen',
+    {
+      image: './assets/images/splash-icon.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff',
+      imageWidth: 150,
+    },
+  ],
+  [
+    'expo-dev-client',
+    {
+      android: {
+        defaultLaunchURL: 'http://10.0.0.2:8081',
+      },
+      defaultLaunchURL: 'http://localhost:8081',
+      launchMode: 'most-recent',
+    },
+  ],
+  'expo-localization',
+  'expo-router',
+  ['app-icon-badge', appIconBadgeConfig],
+  'expo-status-bar',
+  ['react-native-edge-to-edge'],
+  [
+    'expo-navigation-bar',
+    {
+      enforceContrast: true,
+      hidden: false,
+      style: 'light',
+    },
+  ],
+  [
+    'expo-build-properties',
+    {
+      android: {
+        compileSdkVersion: 36,
+        targetSdkVersion: 36,
+        buildToolsVersion: '36.0.0',
+      },
+      ios: {
+        deploymentTarget: '16.4',
+      },
+    },
+  ],
+  [
+    'expo-video',
+    {
+      supportsBackgroundPlayback: true,
+      supportsPictureInPicture: true,
+    },
+  ],
+];
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   android: {
@@ -70,54 +126,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   newArchEnabled: true,
   orientation: 'portrait',
   owner: ENV.EXPO_ACCOUNT_OWNER,
-  plugins: [
-    'expo-system-ui',
-    [
-      'expo-splash-screen',
-      {
-        image: './assets/images/splash-icon.png',
-        resizeMode: 'contain',
-        backgroundColor: '#ffffff',
-        imageWidth: 150,
-      },
-    ],
-    [
-      'expo-dev-client',
-      {
-        android: {
-          defaultLaunchURL: 'http://10.0.0.2:8081',
-        },
-        defaultLaunchURL: 'http://localhost:8081',
-        launchMode: 'most-recent',
-      },
-    ],
-    'expo-localization',
-    'expo-router',
-    ['app-icon-badge', appIconBadgeConfig],
-    'expo-status-bar',
-    ['react-native-edge-to-edge'],
-    [
-      'expo-navigation-bar',
-      {
-        enforceContrast: true,
-        hidden: false,
-        style: 'light',
-      },
-    ],
-    [
-      'expo-build-properties',
-      {
-        android: {
-          compileSdkVersion: 36,
-          targetSdkVersion: 36,
-          buildToolsVersion: '36.0.0',
-        },
-        ios: {
-          deploymentTarget: '16.4',
-        },
-      },
-    ],
-  ],
+  plugins,
   scheme: ENV.EXPO_PUBLIC_SCHEME,
   slug: ENV.EXPO_PUBLIC_SLUG,
 

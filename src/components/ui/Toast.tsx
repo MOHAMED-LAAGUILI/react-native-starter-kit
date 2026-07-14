@@ -8,29 +8,6 @@ export type ToastProps = {
   message?: string;
 };
 
-export const toastDefaultStyle = {
-  indicator: {
-    alignSelf: 'stretch' as const,
-    borderRadius: 2,
-    marginRight: 12,
-    width: 3,
-  },
-  pressable: {
-    backgroundColor: '#ffffff',
-    borderColor: '#e5e5ea',
-    borderRadius: 10,
-    borderWidth: 0.5,
-  },
-  text: {
-    color: '#1c1c1e',
-    fontWeight: '600' as const,
-  },
-  view: {
-    overflow: 'hidden' as const,
-    paddingLeft: 0,
-  },
-};
-
 export function showToast({ variant = 'info', title, message }: ToastProps) {
   const text = message ? `${title}\n${message}` : title;
 

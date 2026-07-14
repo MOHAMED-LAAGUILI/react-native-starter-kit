@@ -1,42 +1,56 @@
+import { useEvent } from 'expo';
+import { useVideoPlayer, VideoView } from 'expo-video';
 import * as React from 'react';
-import { Platform, View } from 'react-native';
-import Video from 'react-native-video';
+import { View } from 'react-native';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/utils';
 
-type VideoPlayerProps = {
-  uri: string;
+type VideoProps = {
+  source: string;
   className?: string;
-  paused?: boolean;
-  controls?: boolean;
-  resizeMode?: 'contain' | 'cover' | 'stretch';
+  style?: React.ComponentProps<typeof VideoView>['style'];
 };
 
-function VideoPlayer({ uri, className, paused, controls = true, resizeMode = 'contain' }: VideoPlayerProps) {
-  if (Platform.OS === 'web') {
-    return (
-      <View className={cn('h-48 overflow-hidden rounded-xl bg-black', className)}>
-        <video
-          src={uri}
-          controls={controls}
-          autoPlay={!paused}
-          style={{ width: '100%', height: '100%', objectFit: resizeMode as 'contain' | 'cover' | 'fill' }}
-        />
-      </View>
-    );
-  }
+function Video({ source, className, style }: VideoProps) {
+  const player = useVideoPlayer(source, (player) => {
+    player.loop = true;
+    player.muted = true;
+  });
+
+  const { isPlaying } = useEvent(player, 'playingChange', { isPlaying: player.playing });
 
   return (
-    <View className={cn('h-48 overflow-hidden rounded-xl bg-black', className)}>
-      <Video
-        source={{ uri }}
-        style={{ flex: 1 }}
-        paused={paused}
-        controls={controls}
-        resizeMode={resizeMode}
+    <View className={cn('gap-3', className)}>
+      <VideoView
+        style={[{ width: '100%', aspectRatio: 16 / 9 }, style]}
+        player={player}
+        nativeControls
       />
+      <View className="flex-row justify-center gap-3">
+        <Button
+          title={isPlaying ? 'Pause' : 'Play'}
+          variant="primary"
+          onPress={() => {
+            if (isPlaying) {
+              player.pause();
+            }
+            else {
+              player.play();
+            }
+          }}
+        />
+        <Button
+          title="Restart"
+          variant="outline"
+          onPress={() => {
+            player.replay();
+            player.play();
+          }}
+        />
+      </View>
     </View>
   );
 }
 
-export type { VideoPlayerProps };
-export { VideoPlayer };
+export type { VideoProps };
+export { Video };

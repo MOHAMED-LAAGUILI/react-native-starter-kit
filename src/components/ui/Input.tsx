@@ -77,7 +77,7 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
         ? (
             <Text
               variant="label"
-              className="mb-0.5 text-muted-foreground"
+              className="text-muted-foreground mb-0.5"
             >
               {label}
             </Text>
@@ -93,7 +93,7 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
       >
         {showLeftIcon && <View className="items-center justify-center">{showLeftIcon}</View>}
         <TextInput
-          className={cn('h-full flex-1 text-base text-foreground outline-0', className)}
+          className={cn('text-foreground h-full flex-1 text-base outline-0', className)}
           placeholderTextColor="#9CA3AF"
           secureTextEntry={resolvedSecureTextEntry}
           onFocus={(e) => {
@@ -112,7 +112,7 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
         ? (
             <Text
               variant="caption"
-              className="mt-0.5 text-destructive"
+              className="text-destructive mt-0.5"
             >
               {error}
             </Text>

@@ -13,18 +13,19 @@ type PostCardProps = {
 export function PostCard({ id, title, body, imageUrl, onPress }: PostCardProps) {
   return (
     <Pressable
-      className="overflow-hidden rounded-xl border border-border bg-card active:opacity-80"
+      className="border-border bg-card overflow-hidden rounded-xl border active:opacity-80"
       onPress={onPress}
     >
       <Image
         source={{ uri: imageUrl }}
         className="h-40 w-full"
         contentFit="cover"
+        style={{ height: 160, width: '100%' }}
       />
       <View className="p-4">
         <Text
           variant="label"
-          className="mb-1 text-muted-foreground"
+          className="text-muted-foreground mb-1"
         >
           Post #
           {id}

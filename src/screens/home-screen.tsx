@@ -1,7 +1,6 @@
 import { ScrollView, View } from 'react-native';
 import {
   BadgeDemo,
-  BottomSheetDemo,
   ButtonsDemo,
   CalendarDemo,
   CenteredActionDemo,
@@ -11,6 +10,7 @@ import {
   ImageDemo,
   InputDemo,
   MenuDemo,
+  PickerDemo,
   ProgressDemo,
   QRCodeDemo,
   RadioGroupDemo,
@@ -23,7 +23,6 @@ import {
   ToggleDemo,
   TypographyDemo,
   VideoDemo,
-  WebViewDemo,
 } from '@/components/home';
 import { CardsDemo } from '@/components/home/cards-demo';
 import { Text } from '@/components/ui';
@@ -32,7 +31,7 @@ function HomeScreen() {
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="p-6 gap-2">
       <Text variant="h2" className="mb-2">Component Demo</Text>
-      <Text variant="body" className="mb-2 text-muted-foreground">All UI components with available variants.</Text>
+      <Text variant="body" className="text-muted-foreground mb-2">All UI components with available variants.</Text>
 
       <SectionTitle>Card</SectionTitle>
       <CardsDemo />
@@ -82,24 +81,23 @@ function HomeScreen() {
       <SectionTitle>Text Area</SectionTitle>
       <TextAreaDemo />
 
+      <SectionTitle>Picker</SectionTitle>
+      <PickerDemo />
+
+      <SectionTitle>Video Player</SectionTitle>
+      <VideoDemo />
+
       <SectionTitle>Calendar</SectionTitle>
       <CalendarDemo />
 
       <SectionTitle>Modals</SectionTitle>
       <View className="flex-row flex-wrap gap-3">
-        <BottomSheetDemo />
         <CenteredDemo />
         <CenteredActionDemo />
       </View>
 
-      <SectionTitle>WebView</SectionTitle>
-      <WebViewDemo />
-
       <SectionTitle>Context Menu</SectionTitle>
       <MenuDemo />
-
-      <SectionTitle>Video Player</SectionTitle>
-      <VideoDemo />
 
       <SectionTitle>QR Code</SectionTitle>
       <QRCodeDemo />

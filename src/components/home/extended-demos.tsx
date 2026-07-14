@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { Check, CircleAlert, Info } from 'lucide-react-native';
 import * as React from 'react';
 import { Pressable } from 'react-native';
-import { Button, CalendarView, DateTimePickerField, Modal, QRCodeView, Text, TextArea, VideoPlayer, WebViewWrapper } from '@/components/ui';
+import { Button, CalendarView, DateTimePickerField, Modal, QRCodeView, Text, TextArea } from '@/components/ui';
 import { Menu } from '@/components/ui/menu';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 
@@ -16,6 +16,12 @@ function DateTimePickerDemo() {
         value={date}
         onChange={setDate}
         mode="date"
+      />
+      <DateTimePickerField
+        label="Select Time"
+        value={date}
+        onChange={setDate}
+        mode="time"
       />
     </>
   );
@@ -46,28 +52,12 @@ function CalendarDemo() {
         markedDates={selected ? { [selected]: { selected: true } } : {}}
       />
       {selected && (
-        <Text variant="caption" className="mt-1 text-center text-muted-foreground">
+        <Text variant="caption" className="text-muted-foreground mt-1 text-center">
           Selected:
           {' '}
           {format(new Date(selected), 'PPP')}
         </Text>
       )}
-    </>
-  );
-}
-
-function BottomSheetDemo() {
-  const [visible, setVisible] = React.useState(false);
-
-  return (
-    <>
-      <Button title="Bottom Sheet" variant="outline" onPress={() => setVisible(true)} />
-      <Modal isVisible={visible} onClose={() => setVisible(false)} title="Bottom Sheet Modal">
-        <Text variant="body" className="mb-4 text-muted-foreground">
-          Slide up from bottom with fading backdrop. Tap backdrop or X to close.
-        </Text>
-        <Button title="Confirm" variant="primary" onPress={() => setVisible(false)} />
-      </Modal>
     </>
   );
 }
@@ -115,12 +105,6 @@ function CenteredActionDemo() {
   );
 }
 
-function WebViewDemo() {
-  return (
-    <WebViewWrapper uri="https://expo.dev" />
-  );
-}
-
 function MenuDemo() {
   const [selected, setSelected] = React.useState('None');
 
@@ -134,21 +118,12 @@ function MenuDemo() {
         ]}
         onPress={key => setSelected(key)}
       >
-        <Pressable className="h-11 flex-row items-center justify-between rounded-md border border-border bg-secondary px-3">
+        <Pressable className="border-border bg-secondary h-11 flex-row items-center justify-between rounded-md border px-3">
           <Text className="text-foreground">Long press for menu</Text>
           <Text variant="caption" className="text-muted-foreground">{selected}</Text>
         </Pressable>
       </Menu>
     </>
-  );
-}
-
-function VideoDemo() {
-  return (
-    <VideoPlayer
-      uri="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-      controls
-    />
   );
 }
 
@@ -159,7 +134,6 @@ function QRCodeDemo() {
 }
 
 export {
-  BottomSheetDemo,
   CalendarDemo,
   CenteredActionDemo,
   CenteredDemo,
@@ -167,6 +141,4 @@ export {
   MenuDemo,
   QRCodeDemo,
   TextAreaDemo,
-  VideoDemo,
-  WebViewDemo,
 };

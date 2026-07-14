@@ -1,3 +1,4 @@
+import type { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { router } from 'expo-router';
 import * as React from 'react';
 import { useWindowDimensions, View } from 'react-native';
@@ -15,6 +16,7 @@ function OnboardingScreen() {
   const insets = useSafeAreaInsets();
   const isLast = activeIndex === ONBOARDING_SLIDES.length - 1;
   const complete = useOnboardingStore(s => s.complete);
+  const carouselRef = React.useRef<ICarouselInstance>(null);
 
   const handleProgressChange = (_: number, absoluteProgress: number) => {
     progress.set(absoluteProgress);
@@ -34,15 +36,19 @@ function OnboardingScreen() {
     if (isLast) {
       completeOnboarding();
     }
+    else {
+      carouselRef.current?.next();
+    }
   }
 
   return (
     <View className="flex-1 bg-background">
-      <View className="flex-1 pt-20">
+      <View className="flex-1 justify-center">
         <Carousel
+          ref={carouselRef}
           data={ONBOARDING_SLIDES}
           width={width}
-          height={400}
+          height={380}
           pagingEnabled
           loop={false}
           onProgressChange={handleProgressChange}
@@ -51,9 +57,12 @@ function OnboardingScreen() {
         />
       </View>
 
-      <View className="gap-6 px-6 pb-8" style={{ paddingBottom: insets.bottom + 24 }}>
+      <View
+        className="flex-row items-end justify-between px-6"
+        style={{ paddingBottom: insets.bottom + 24 }}
+      >
         <OnboardingPagination data={ONBOARDING_SLIDES} progress={progress} />
-        <OnboardingActions isLast={isLast} onNext={onNext} onSkip={completeOnboarding} />
+        <OnboardingActions isLast={isLast} onNext={onNext} />
       </View>
     </View>
   );

@@ -183,7 +183,7 @@ function CenteredBody({ title, description, icon, actions, className, onClose, t
       )}
 
       {description && (
-        <Text variant="body" className="mb-6 text-center text-muted-foreground">{description}</Text>
+        <Text variant="body" className="text-muted-foreground mb-6 text-center">{description}</Text>
       )}
 
       {children}
