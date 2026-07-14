@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useAuthStore, useOnboardingStore } from '@/store';
 
 export default function AuthLayout() {
-  const isAuthenticated = useAuthStore((s: { isAuthenticated: any }) => s.isAuthenticated);
-  const isOnboarded = useOnboardingStore((s: { isComplete: any }) => s.isComplete);
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated);
+  const isOnboarded = useOnboardingStore(s => s.isComplete);
   const router = useRouter();
 
   useEffect(() => {

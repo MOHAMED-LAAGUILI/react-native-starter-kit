@@ -2,8 +2,9 @@ import type { ThemeMode } from '@/store';
 import { Brush, Globe, Monitor, Moon, Sun } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { SectionHeader } from '@/components/common/section-header';
+import { SettingGroup } from '@/components/common/setting-group';
 import { SettingRow } from '@/components/common/setting-row';
-import { Text } from '@/components/ui';
 
 function AppearanceSection({
   currentColorLabel,
@@ -29,15 +30,14 @@ function AppearanceSection({
   const { t } = useTranslation();
   return (
     <View>
-      <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.appearance')}</Text>
-      <View className="overflow-hidden rounded-xl border border-border bg-card">
+      <SectionHeader label={t('settings.appearance')} />
+      <SettingGroup>
         <SettingRow
           icon={mode === 'dark' ? Moon : mode === 'system' ? Monitor : Sun}
           label={t('settings.theme')}
           subtitle={themeLabels[mode]}
           onPress={onThemePress}
         />
-        <View className="mx-4 h-px bg-border" />
         <SettingRow
           icon={Brush}
           label={t('settings.accentColor')}
@@ -45,7 +45,6 @@ function AppearanceSection({
           rightElement={<View className="mr-2 size-5 rounded-full" style={{ backgroundColor: currentPalette?.color }} />}
           onPress={onColorPress}
         />
-        <View className="mx-4 h-px bg-border" />
         <SettingRow
           icon={Globe}
           label={t('settings.language')}
@@ -53,7 +52,7 @@ function AppearanceSection({
           rightElement={currentLangFlag}
           onPress={onLangPress}
         />
-      </View>
+      </SettingGroup>
     </View>
   );
 }

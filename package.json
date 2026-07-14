@@ -3,6 +3,17 @@
   "main": "expo-router/entry",
   "version": "2.3.0",
   "packageManager": "bun",
+   "keywords": [
+    "react-native",
+    "expo",
+    "ui",
+    "cli",
+    "starter-kit",
+    "template",
+    "typescript"
+  ],
+  "author": "MOHAMED-LAAGUILI <mohamed.dev.2001@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MOHAMED-LAAGUILI/react-native-expo-starter-kit.git"
@@ -55,7 +66,7 @@
     "@backpackapp-io/react-native-toast": "^0.15.1",
     "@expo-google-fonts/inter": "^0.4.2",
     "@gorhom/bottom-sheet": "^5",
-    "@lottiefiles/dotlottie-react": "^0.19.8",
+    "@lottiefiles/dotlottie-react": "^0.19.9",
     "@react-native-community/netinfo": "12.0.1",
     "@react-native-community/slider": "5.2.0",
     "@react-navigation/drawer": "^7",
@@ -85,7 +96,6 @@
     "@rn-primitives/toggle-group": "^1.5.2",
     "@rn-primitives/tooltip": "^1.5.2",
     "@shopify/flash-list": "2.0.2",
-    "@shopify/react-native-skia": "2.6.2",
     "@tanstack/react-form": "^1",
     "@tanstack/react-query": "^5",
     "@tanstack/react-query-devtools": "^5",
@@ -95,7 +105,6 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
     "expo": "^57.0.0",
-    "expo-battery": "^57.0.0",
     "expo-build-properties": "^57.0.3",
     "expo-constants": "~57.0.3",
     "expo-dev-client": "~57.0.5",

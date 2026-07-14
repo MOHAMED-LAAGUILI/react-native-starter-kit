@@ -6,8 +6,7 @@ import { COLOR_PALETTES } from '@/config/color-palettes';
 import { useThemeStore } from '@/store/theme-store';
 
 function buildNavTheme(currentTheme: 'light' | 'dark', primaryColor: string) {
-  const palette = COLOR_PALETTES.find(p => p.key === primaryColor);
-  const primaryHex = palette?.color ?? '#3b82f6';
+  const primaryHex = COLOR_PALETTES.find(p => p.key === primaryColor)?.color ?? '#3b82f6';
   const base = currentTheme === 'dark' ? DarkTheme : DefaultTheme;
   return {
     ...base,

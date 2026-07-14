@@ -1,6 +1,5 @@
 import { Tabs, useRouter } from 'expo-router';
 import { Home, Search, Settings, Smartphone, User } from 'lucide-react-native';
-import { useMemo } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -8,9 +7,8 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { COLOR_PALETTES } from '@/config/color-palettes';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { useThemeColors } from '@/hooks/use-theme-color';
-import { useThemeStore } from '@/store';
 
 const TAB_CONFIG = {
   'search': { icon: Search, label: 'Search', href: '/(app)/(tabs)/search' as const },
@@ -50,7 +48,7 @@ function TabItem({
   }));
 
   const inactiveBg = isDark ? '#000' : '#fff';
-  const inactiveColor = isDark ? '#fff' : '#000';
+  const inactiveColor = isDark ? '#a1a1aa' : '#71717a';
 
   return (
     <Pressable
@@ -85,8 +83,7 @@ function TabItem({
 }
 
 function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: string }>; index: number }; descriptors: Record<string, { options: Record<string, unknown> }> }) {
-  const primaryColor = useThemeStore(s => s.primaryColor);
-  const primaryHex = useMemo(() => COLOR_PALETTES.find(p => p.key === primaryColor)?.color ?? '#3b82f6', [primaryColor]);
+  const primaryHex = usePrimaryHex();
   const { isDark } = useThemeColors();
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -102,6 +99,9 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
           const isFocused = i === state.index;
           const config = TAB_CONFIG[r.name as keyof typeof TAB_CONFIG];
           const isHome = r.name === 'index';
+
+          if (!config)
+            return null;
 
           if (isHome) {
             return (
@@ -139,7 +139,6 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
                           borderRadius: 26,
                           alignItems: 'center',
                           justifyContent: 'center',
-                          overflow: 'hidden',
                           borderWidth: 1,
                           borderColor: inactiveBorder,
                           backgroundColor: inactiveBg,
@@ -182,6 +181,7 @@ export default function TabLayout() {
       <Tabs.Screen name="index" options={{ headerTitle: 'Home' }} />
       <Tabs.Screen name="settings" options={{ headerTitle: 'Settings' }} />
       <Tabs.Screen name="device-info" options={{ headerTitle: 'Device Info' }} />
+      <Tabs.Screen name="expo-ui" options={{ headerTitle: 'Expo UI' }} />
     </Tabs>
   );
 }

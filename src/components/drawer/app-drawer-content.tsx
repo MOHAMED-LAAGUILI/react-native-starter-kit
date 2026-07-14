@@ -4,10 +4,9 @@ import { router, usePathname } from 'expo-router';
 import { DrawerContentScrollView } from 'expo-router/drawer';
 import { View } from 'react-native';
 import { Button } from '@/components/ui';
-import { COLOR_PALETTES } from '@/config/color-palettes';
 import { NAV_ITEMS } from '@/config/navigation';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { useThemeColors } from '@/hooks/use-theme-color';
-import { useThemeStore } from '@/store';
 import { cn } from '@/utils/utils';
 import { DrawerProfileHeader } from './drawer-profile-header';
 
@@ -20,9 +19,7 @@ function normalizePath(path: string | { pathname: string; params?: unknown }) {
 export function AppDrawerContent(props: AppDrawerContentProps) {
   const pathname = usePathname();
   const { background, text } = useThemeColors();
-  const primaryColor = useThemeStore((s: { primaryColor: any }) => s.primaryColor);
-  const palette = COLOR_PALETTES.find(p => p.key === primaryColor);
-  const primaryHex = palette?.color ?? '#3b82f6';
+  const primaryHex = usePrimaryHex();
 
   return (
     <DrawerContentScrollView

@@ -1,19 +1,17 @@
 import { useRouter } from 'expo-router';
 import Drawer from 'expo-router/drawer';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { AppDrawerContent } from '@/components/drawer/app-drawer-content';
 import { DrawerHeaderLeft } from '@/components/drawer/drawer-header-left';
 import { DrawerHeaderRight } from '@/components/drawer/drawer-header-right';
 import { HeaderTitle } from '@/components/drawer/header-title';
-import { COLOR_PALETTES } from '@/config/color-palettes';
-import { useAuthStore, useThemeStore } from '@/store';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
+import { useAuthStore } from '@/store';
 
 export default function AppLayout() {
-  const isAuthenticated = useAuthStore((state: { isAuthenticated: any }) => state.isAuthenticated);
-  const primaryColor = useThemeStore(s => s.primaryColor);
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated);
+  const primaryHex = usePrimaryHex();
   const navigation = useRouter();
-
-  const primaryHex = useMemo(() => COLOR_PALETTES.find(p => p.key === primaryColor)?.color ?? '#3b82f6', [primaryColor]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -35,14 +33,12 @@ export default function AppLayout() {
         headerTintColor: '#fff',
         headerTitle: HeaderTitle,
         drawerStyle: { width: '75%' },
-
       }}
     >
       <Drawer.Screen
         name="(tabs)"
         options={{
           drawerItemStyle: { display: 'none' },
-
           headerShown: true,
         }}
       />
@@ -50,12 +46,6 @@ export default function AppLayout() {
         name="post/[id]"
         options={{
           drawerItemStyle: { display: 'none' },
-          headerShown: true,
-        }}
-      />
-      <Drawer.Screen
-        name="expo-ui"
-        options={{
           headerShown: true,
         }}
       />

@@ -6,7 +6,7 @@ import { QUERY_KEYS } from '@/config/constants';
 import { useAuthStore } from '@/store';
 
 export function useLogin() {
-  const login = useAuthStore((s: { login: any }) => s.login);
+  const login = useAuthStore(s => s.login);
 
   return useMutation({
     mutationFn: (data: LoginRequest) => authApi.login(data),
@@ -25,7 +25,7 @@ export function useLogin() {
 }
 
 export function useRegister() {
-  const login = useAuthStore((s: { login: any }) => s.login);
+  const login = useAuthStore(s => s.login);
 
   return useMutation({
     mutationFn: (data: { email: string; password: string; name: string }) => authApi.register(data),
@@ -40,19 +40,19 @@ export function useRegister() {
 }
 
 export function useLogout() {
-  const logout = useAuthStore((s: { logout: any }) => s.logout);
+  const logout = useAuthStore(s => s.logout);
 
   return useMutation({
     mutationFn: () => authApi.logout(),
     onSettled: () => {
       logout();
-      showToast({ message: 'You have been logged out.', title: 'Signed out', variant: 'info' });
+      showToast({ message: 'You have been logged out.', title: 'Signed out', variant: 'success' });
     },
   });
 }
 
 export function useCurrentUser() {
-  const isAuthenticated = useAuthStore((s: { isAuthenticated: any }) => s.isAuthenticated);
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated);
 
   return useQuery({
     enabled: isAuthenticated,

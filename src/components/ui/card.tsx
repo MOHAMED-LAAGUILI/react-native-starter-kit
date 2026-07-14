@@ -2,8 +2,7 @@ import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@/components/ui/text';
-import { COLOR_PALETTES } from '@/config/color-palettes';
-import { useThemeStore } from '@/store/theme-store';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { cn } from '@/utils/utils';
 
 type CardVariant = 'primary' | 'secondary' | 'stats' | 'compact' | 'action';
@@ -18,23 +17,6 @@ type CardProps = {
   children?: React.ReactNode;
 };
 
-function getCardBg(variant: CardVariant, primaryHex: string): string {
-  switch (variant) {
-    case 'primary':
-      return primaryHex;
-    case 'secondary':
-      return `${primaryHex}12`;
-    case 'stats':
-      return 'bg-card';
-    case 'compact':
-      return 'bg-card';
-    case 'action':
-      return 'bg-card';
-    default:
-      return 'bg-card';
-  }
-}
-
 function Card({
   variant = 'stats',
   title,
@@ -44,8 +26,7 @@ function Card({
   className,
   children,
 }: CardProps) {
-  const primaryKey = useThemeStore(s => s.primaryColor);
-  const primaryHex = React.useMemo(() => COLOR_PALETTES.find(p => p.key === primaryKey)?.color ?? '#3b82f6', [primaryKey]);
+  const primaryHex = usePrimaryHex();
 
   const isLightSolid = variant === 'primary';
   const iconBg = isLightSolid ? 'rgba(255,255,255,0.2)' : `${primaryHex}15`;
@@ -57,7 +38,9 @@ function Card({
         'overflow-hidden rounded-2xl border border-border',
         isLightSolid && 'border-transparent',
         variant === 'secondary' && 'border-transparent',
-        getCardBg(variant, primaryHex),
+        variant === 'stats' && 'bg-card',
+        variant === 'compact' && 'bg-card',
+        variant === 'action' && 'bg-card',
         className,
       )}
       style={variant === 'primary' ? { backgroundColor: primaryHex } : undefined}
@@ -95,11 +78,7 @@ function Card({
           {Icon && (
             <View
               className="ml-3 items-center justify-center rounded-xl"
-              style={{
-                width: 44,
-                height: 44,
-                backgroundColor: iconBg,
-              }}
+              style={{ width: 44, height: 44, backgroundColor: iconBg }}
             >
               <Icon size={22} color={iconColor} />
             </View>

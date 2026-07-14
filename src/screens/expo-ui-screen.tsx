@@ -1,4 +1,4 @@
-import { BarChart3, Box, Users, Wallet, Zap } from 'lucide-react-native';
+import { BarChart3, Box, Zap } from 'lucide-react-native';
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -45,20 +45,6 @@ export function ExpoUiScreen() {
             />
           </View>
 
-          <Text variant="h3">Actions rapides</Text>
-
-          <View className="flex-row gap-3">
-            <Card variant="action" title="Catégories" icon={Users} className="flex-1" />
-            <Card variant="action" title="Clients" icon={Wallet} className="flex-1" />
-          </View>
-
-          <Card
-            variant="secondary"
-            title="Statistiques"
-            value="128"
-            subtitle="vues cette semaine"
-            icon={BarChart3}
-          />
         </View>
       </ScrollView>
     </SafeAreaView>

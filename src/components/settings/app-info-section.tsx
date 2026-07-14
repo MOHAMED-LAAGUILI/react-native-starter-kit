@@ -2,6 +2,8 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { Info, Wifi } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { SectionHeader } from '@/components/common/section-header';
+import { SettingGroup } from '@/components/common/setting-group';
 import { SettingRow } from '@/components/common/setting-row';
 import { Text } from '@/components/ui';
 import { useThemeColors } from '@/hooks/use-theme-color';
@@ -14,8 +16,8 @@ function AppInfoSection() {
 
   return (
     <View>
-      <Text variant="label" className="mb-3 tracking-wider text-muted-foreground uppercase">{t('settings.info')}</Text>
-      <View className="overflow-hidden rounded-xl border border-border bg-card">
+      <SectionHeader label={t('settings.info')} />
+      <SettingGroup>
         <View className="flex-row items-center p-4">
           <Info size={22} color={icon} style={{ marginRight: 12 }} />
           <View className="flex-1">
@@ -24,7 +26,6 @@ function AppInfoSection() {
             <Text variant="caption" className="text-muted-foreground">{t('app.description')}</Text>
           </View>
         </View>
-        <View className="mx-4 h-px bg-border" />
         <SettingRow
           icon={Wifi}
           label={t('settings.network')}
@@ -46,7 +47,7 @@ function AppInfoSection() {
             />
           )}
         />
-      </View>
+      </SettingGroup>
     </View>
   );
 }

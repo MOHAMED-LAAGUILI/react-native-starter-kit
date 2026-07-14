@@ -22,7 +22,7 @@
     "preview": {
       "channel": "preview",
       "distribution": "internal",
-      "autoIncrement": true,
+      "autoIncrement": true,      
       "ios": {
         "image": "latest"
       },

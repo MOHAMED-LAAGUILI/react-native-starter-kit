@@ -34,7 +34,7 @@ export const NAV_ITEMS: NavItem[] = [
     match: ['/settings'],
   },
   {
-    href: '/(app)/expo-ui' as Href,
+    href: '/(app)/(tabs)/expo-ui' as Href,
     icon: Sparkles,
     label: 'Expo UI',
     match: ['/expo-ui'],

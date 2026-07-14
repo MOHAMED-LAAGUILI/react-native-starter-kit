@@ -1,6 +1,7 @@
 import type { ProfileInfoItem } from '@/data/profile-info';
 import * as React from 'react';
 import { Linking, View } from 'react-native';
+import { Divider } from '@/components/common/divider';
 import { InfoRow } from '@/components/common/info-row';
 
 type InfoCardsProps = {
@@ -19,7 +20,7 @@ function InfoCards({ items }: InfoCardsProps) {
     <View className="overflow-hidden rounded-2xl border border-border bg-card">
       {itemsWithHref.map((item, index) => (
         <React.Fragment key={item.label}>
-          {index > 0 && <View className="mx-4 h-px bg-border" />}
+          {index > 0 && <Divider />}
           <InfoRow
             icon={item.icon}
             label={item.label}

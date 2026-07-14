@@ -19,7 +19,7 @@ import { Text } from '@/components/ui';
 
 function HomeScreen() {
   return (
-    <ScrollView className="flex-1 bg-background" contentContainerClassName="p-6 gap-2 pb-32">
+    <ScrollView className="flex-1 bg-background" contentContainerClassName="p-6 gap-2">
       <Text variant="h2" className="mb-2">Component Demo</Text>
       <Text variant="body" className="mb-2 text-muted-foreground">All UI components with available variants.</Text>
 

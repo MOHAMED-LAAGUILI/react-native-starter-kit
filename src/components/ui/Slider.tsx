@@ -1,8 +1,7 @@
 import SliderNative from '@react-native-community/slider';
 import { View } from 'react-native';
-import { COLOR_PALETTES } from '@/config/color-palettes';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { useThemeColors } from '@/hooks/use-theme-color';
-import { useThemeStore } from '@/store';
 import { cn } from '@/utils/utils';
 
 type SliderProps = {
@@ -26,10 +25,8 @@ function Slider({
   disabled,
   className,
 }: SliderProps) {
-  const primaryColor = useThemeStore((s: { primaryColor: any }) => s.primaryColor);
+  const primaryHex = usePrimaryHex();
   const { border } = useThemeColors();
-  const palette = COLOR_PALETTES.find(p => p.key === primaryColor);
-  const trackColor = palette?.color ?? '#3b82f6';
 
   return (
     <View className={cn('h-10 justify-center', className)}>
@@ -42,9 +39,9 @@ function Slider({
         onValueChange={onValueChange}
         onSlidingComplete={onSlidingComplete}
         disabled={disabled}
-        minimumTrackTintColor={trackColor}
+        minimumTrackTintColor={primaryHex}
         maximumTrackTintColor={border}
-        thumbTintColor={trackColor}
+        thumbTintColor={primaryHex}
         tapToSeek
       />
     </View>

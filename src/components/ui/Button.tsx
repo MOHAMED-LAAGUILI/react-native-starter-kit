@@ -1,8 +1,7 @@
 import type { PressableProps } from 'react-native';
 import * as React from 'react';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
-import { COLOR_PALETTES } from '@/config/color-palettes';
-import { useThemeStore } from '@/store/theme-store';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { cn } from '@/utils/utils';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
@@ -29,8 +28,7 @@ function Button({
   ...props
 }: ButtonProps) {
   const [pressed, setPressed] = React.useState(false);
-  const primaryKey = useThemeStore(s => s.primaryColor);
-  const primaryHex = React.useMemo(() => COLOR_PALETTES.find(p => p.key === primaryKey)?.color ?? '#3b82f6', [primaryKey]);
+  const primaryHex = usePrimaryHex();
 
   const iconColor = variant === 'primary' || variant === 'destructive' ? '#fff' : primaryHex;
 

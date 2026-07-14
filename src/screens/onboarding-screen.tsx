@@ -14,7 +14,7 @@ function OnboardingScreen() {
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const isLast = activeIndex === ONBOARDING_SLIDES.length - 1;
-  const complete = useOnboardingStore((s: { complete: any }) => s.complete);
+  const complete = useOnboardingStore(s => s.complete);
 
   function completeOnboarding() {
     complete();
