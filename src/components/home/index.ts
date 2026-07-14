@@ -1,4 +1,17 @@
 export { ButtonsDemo } from './buttons-demo';
+export {
+  BottomSheetDemo,
+  CalendarDemo,
+  CenteredActionDemo,
+  CenteredDemo,
+  DateTimePickerDemo,
+  MaskedViewDemo,
+  MenuDemo,
+  QRCodeDemo,
+  TextAreaDemo,
+  VideoDemo,
+  WebViewDemo,
+} from './extended-demos';
 export { ImageDemo } from './image-demo';
 export { InputDemo } from './input-demo';
 export { ProgressDemo } from './progress-demo';

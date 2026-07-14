@@ -123,9 +123,9 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
                           justifyContent: 'center',
                           shadowColor: primaryHex,
                           shadowOffset: { width: 0, height: 2 },
-                          shadowOpacity: 0.35,
-                          shadowRadius: 6,
-                          elevation: 5,
+                          shadowOpacity: 0.6,
+                          shadowRadius: 10,
+                          elevation: 1,
                         }}
                       >
                         <Home size={26} color="#fff" />
@@ -181,7 +181,7 @@ export default function TabLayout() {
       <Tabs.Screen name="index" options={{ headerTitle: 'Home' }} />
       <Tabs.Screen name="settings" options={{ headerTitle: 'Settings' }} />
       <Tabs.Screen name="device-info" options={{ headerTitle: 'Device Info' }} />
-      <Tabs.Screen name="expo-ui" options={{ headerTitle: 'Expo UI' }} />
+      <Tabs.Screen name="report" options={{ headerTitle: 'Report Graph' }} />
     </Tabs>
   );
 }

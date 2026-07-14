@@ -219,7 +219,7 @@ How: Essential Rules
 | Server State    | TanStack Query 5 + Devtools 
 | Forms           | TanStack Form 1 + Zod 3 
 | Storage         | react-native-mmkv 4 (lazy, SSR-safe) 
-| i18n            | i18next 26 + react-i18next (EN/FR/AR, RTL) 
+| i18n            | i18next 26 + react-i18next (EN/FR, RTL) 
 | UI Primitives   | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) 
 | Bottom Sheet    | @gorhom/bottom-sheet 5 
 | Icons           | lucide-react-native 
@@ -229,6 +229,13 @@ How: Essential Rules
 | Linting         | Eslint 
 | Git hooks       | Husky
 | Dates           | date-fns
+| Charts          | react-native-gifted-charts (PieChart, BarChart)
+| Calendar        | react-native-calendars
+| Video           | react-native-video (native) / HTML `<video>` (web)
+| WebView         | react-native-webview
+| QR Code         | react-native-qrcode-svg
+| Carousel        | react-native-reanimated-carousel
+| Animation Extras| moti
        
              
 
@@ -244,13 +251,14 @@ app/
 │   └── login.tsx        — Login screen
 └── (app)/
     ├── _layout.tsx      — Drawer (left hamburger via DrawerToggleButton) + auth guard
-    ├── expo-ui.tsx      — Expo Universal UI
+    ├── report.tsx       — Report Graphs
     ├── preferences.tsx  — App Preferences 
     └── (tabs)/
-        ├── _layout.tsx  — Tabs (Home, Search, Profile, Settings) with lucide icons
+        ├── _layout.tsx  — Tabs (Home, Search, Profile, Settings, Report) with lucide icons
         ├── index.tsx    — Home tab
         ├── search.tsx   — Search tab
         ├── profile.tsx  — Profile tab
+        ├── report.tsx   — Report tab (charts, trends, project allocation)
         └── settings.tsx — Settings tab (theme/lang bottom-sheets, app info)
 ```
 
@@ -261,16 +269,19 @@ src/
 ├── components/
 │   ├── common/       — LoadingScreen, ErrorFallback, SettingRow, InfoRow, PostCard
 │   ├── drawer/       — DrawerHeaderLeft, DrawerHeaderRight, DrawerProfileHeader, HeaderTitle, AppDrawerContent
-│   └── ui/           — Button, Text, Input, BottomSheet, Badge, Switch, Checkbox, RadioGroup, Slider, Spinner, Image, Progress, Toggle
+│   ├── home/         — Demo components for component showcase (cards-demo, overview-cards, extended-demos, etc.)
+│   ├── report/       — Report screen components (ReportTabs, ReportSection, TrendSnapshot, HoursDistribution, TopProjectsChart, ProjectAllocation)
+│   └── ui/           — Button, Text, Input, BottomSheet, Badge, Switch, Checkbox, RadioGroup, Slider, Spinner, Image, Progress, Toggle, Modal, Calendar, DateTimePicker, Video, WebView, QRCode, Menu, TextArea, MaskedView, Moti
 ├── config/           — Constants, env helpers, color-palettes.ts (7 palettes)
-├── hooks/            — Shared hooks
-├── i18n/             — i18next setup + locales/{en,fr,ar}/, RNRestart restart
-├── providers/        — QueryProvider, ThemeProvider (Uniwind.setTheme + nav theme)
-├── screens/          — LoginScreen, HomeScreen, SearchScreen, ProfileScreen, SettingsScreen, OnboardingScreen, FeaturesScreen
+├── data/             — Mock data (report.ts)
+├── hooks/            — Shared hooks (useThemeColors, usePrimaryHex, useDebounce, useRefreshOnFocus)
+├── i18n/             — i18next setup + locales/{en,fr}/, RNRestart restart
+├── providers/        — QueryProvider, ThemeProvider (Uniwind.setTheme + nav theme), AuthProvider
+├── screens/          — LoginScreen, HomeScreen, SearchScreen, ProfileScreen, SettingsScreen, OnboardingScreen, ReportScreen, PreferencesScreen, PostDetailScreen, DeviceInfoScreen
 ├── storage/          — MMKV wrapper (lazy, SSR-safe, try/catch fallback)
 ├── store/            — Zustand stores (authStore, themeStore, onboardingStore) with MMKV persist
 ├── types/            — Global type declarations (uniwind.d.ts)
-├── utils/            — format utilities, platform helpers
+├── utils/            — cn utility, format helpers, platform helpers
 ├── validation/       — Zod schemas (login, register, forgotPassword)
 assets/
 global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @variant)
@@ -296,6 +307,7 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - Namespaces: `common`, `auth`
 - Language persisted in MMKV via `StorageService`
 - `changeLanguage(lang)` updates i18next + persists to MMKV
+- RTL not supported — Arabic removed from language options
 
 ## Auth Flow
 1. App boots → `SplashScreen.preventAutoHideAsync()`
@@ -310,7 +322,8 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 ## Navigation Patterns
 - **Left Drawer**: single `(tabs)` route group, accessible via `DrawerToggleButton` in header (top-left hamburger)
 - **Drawer-only routes**: Features — registered under `(app)/` (not inside `(tabs)`), no bottom tab
-- **Bottom Tabs**: Home, Search, Profile, Settings with lucide icons
+- **Report routes**: `report` appears both as a drawer-only route (full-page report) and a tab route (compact chart view)
+- **Bottom Tabs**: Home, Search, Profile, Settings, Report with lucide icons
 - **Auth guard**: redirect logic in `(app)/_layout.tsx` (check `isAuthenticated`, replace to login if false)
 - **Header**: custom `headerLeft` with `DrawerToggleButton` positioned via `ml-3`
 
@@ -329,6 +342,16 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - `Progress` — progress bar with primary color fill
 - `Toggle` — pressed-state toggle button (on/off)
 - `Toast` — wrapper around `@backpackapp-io/react-native-toast` with `showToast({ variant, title, message })`, variants: `success`/`error`/`info`. Mounted in root layout, callable from anywhere.
+- `Modal` — custom modal with 3 variants: `bottom-sheet` (slides up), `centered` (scales in with icon/title/description), `centered-action` (centered + action buttons). Uses `react-native-reanimated` for enter/exit animations. Backdrop fades, sheet slides/scales independently.
+- `Calendar` — date picker built on `react-native-calendars` with marked dates
+- `DateTimePicker` — date/time field built on `@react-native-community/datetimepicker`
+- `VideoPlayer` — video player using `react-native-video` (native) or `<video>` HTML element (web)
+- `WebViewWrapper` — webview wrapper using `react-native-webview`
+- `QRCodeView` — QR code generator using `react-native-qrcode-svg`
+- `Menu` — context/popup menu using `@react-native-menu/menu`
+- `TextArea` — multiline text input with character count
+- `MaskedViewWrapper` — masked view using `@react-native-community/masked-view`
+- `Moti` — animation components using `moti`
 
 ## Important Packages
 - `@gorhom/bottom-sheet` (v5) — native gesture-driven bottom sheet with snap points
@@ -351,6 +374,16 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - `react-native-restart-newarch` — app restart on RTL language change
 - `react-native-edge-to-edge` — edge-to-edge display
 - `react-native-reanimated` + `react-native-gesture-handler` — animations + gestures
+- `react-native-video` — video player
+- `react-native-webview` — webview component
+- `react-native-qrcode-svg` — QR code generation
+- `react-native-calendars` — calendar date picker
+- `react-native-gifted-charts` — chart library (PieChart, BarChart)
+- `@react-native-community/datetimepicker` — native date/time picker
+- `@react-native-community/masked-view` — text masking
+- `@react-native-menu/menu` — context/popup menu
+- `moti` — animation primitives
+- `react-native-reanimated-carousel` — carousel component
 
 ## Notes
 - No test framework installed
@@ -369,7 +402,6 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 | `development` | Internal     | development | Dev client builds for local testing 
 | `preview`     | Store (APK)  | preview     | Internal QA builds 
 | `production`  | Store (AAB)  | production  | App Store / Play Store release 
-| `simulator`   | —            | —           | iOS simulator / Android emulator builds 
  
 
 - `autoIncrement: true` on `preview` and `production` — EAS auto-bumps build numbers

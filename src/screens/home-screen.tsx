@@ -1,20 +1,32 @@
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import {
   BadgeDemo,
+  BottomSheetDemo,
   ButtonsDemo,
+  CalendarDemo,
+  CenteredActionDemo,
+  CenteredDemo,
   CheckboxDemo,
+  DateTimePickerDemo,
   ImageDemo,
   InputDemo,
+  MaskedViewDemo,
+  MenuDemo,
   ProgressDemo,
+  QRCodeDemo,
   RadioGroupDemo,
   SectionTitle,
   SliderDemo,
   SpinnerDemo,
   SwitchDemo,
+  TextAreaDemo,
   ToastDemo,
   ToggleDemo,
   TypographyDemo,
+  VideoDemo,
+  WebViewDemo,
 } from '@/components/home';
+import { CardsDemo } from '@/components/home/cards-demo';
 import { Text } from '@/components/ui';
 
 function HomeScreen() {
@@ -22,6 +34,9 @@ function HomeScreen() {
     <ScrollView className="flex-1 bg-background" contentContainerClassName="p-6 gap-2">
       <Text variant="h2" className="mb-2">Component Demo</Text>
       <Text variant="body" className="mb-2 text-muted-foreground">All UI components with available variants.</Text>
+
+      <SectionTitle>Card</SectionTitle>
+      <CardsDemo />
 
       <SectionTitle>Typography</SectionTitle>
       <TypographyDemo />
@@ -61,6 +76,38 @@ function HomeScreen() {
 
       <SectionTitle>Input</SectionTitle>
       <InputDemo />
+
+      <SectionTitle>Date Time Picker</SectionTitle>
+      <DateTimePickerDemo />
+
+      <SectionTitle>Text Area</SectionTitle>
+      <TextAreaDemo />
+
+      <SectionTitle>Calendar</SectionTitle>
+      <CalendarDemo />
+
+      <SectionTitle>Modals</SectionTitle>
+      <View className="flex-row flex-wrap gap-3">
+        <BottomSheetDemo />
+        <CenteredDemo />
+        <CenteredActionDemo />
+      </View>
+
+      <SectionTitle>WebView</SectionTitle>
+      <WebViewDemo />
+
+      <SectionTitle>Context Menu</SectionTitle>
+      <MenuDemo />
+
+      <SectionTitle>Video Player</SectionTitle>
+      <VideoDemo />
+
+      <SectionTitle>QR Code</SectionTitle>
+      <QRCodeDemo />
+
+      <SectionTitle>Masked View</SectionTitle>
+      <MaskedViewDemo />
+
     </ScrollView>
   );
 }

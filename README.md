@@ -116,16 +116,23 @@ To run the app, use a development build instead:
 - **TanStack Query** — Server state, caching, and auto-refetching (staleTime 5min, gcTime 30min, retry 2)
 - **TanStack Form + Zod** — Type-safe form validation
 - **Axios** — HTTP client with auth token interceptor and refresh queue
-- **i18next** — Internationalization (English, French, Arabic) with RTL support (restart on RTL toggle)
+- **i18next** — Internationalization (English, French)
 - **MMKV** — High-performance key-value storage (SSR-safe lazy init)
 - **Authentication** — Login/register flow with token management, demo mode skip
-- **Drawer + Tabs** — Left drawer with hamburger menu header button, bottom tab bar (Home, Search, Profile, Settings)
+- **Drawer + Tabs** — Left drawer with hamburger menu header button, bottom tab bar (Home, Search, Profile, Settings, Report)
 - **Bottom Sheet** — Reusable bottom sheet component via `@gorhom/bottom-sheet` with snap points, backdrop, pan-to-close
+- **Modal** — Three variants: bottom-sheet (slide-up), centered (scale-in with icon/title/description), centered-action (with action buttons). Uses Reanimated for enter/exit animations.
 - **Toast** — Notification toasts via `@backpackapp-io/react-native-toast` with success/error/info variants, callable from anywhere via `showToast()`
 - **Dark/Light/System theme** — CSS variables in oklch, persisted preference, follows system
-- **Accent Color System** — 7 color palettes (blue, purple, green, orange, red, teal, pink) switchable at runtime; all screens (drawer, tabs, profile) react instantly via `Uniwind.updateCSSVariables()`
+- **Accent Color System** — 7 color palettes (blue, purple, green, orange, red, teal, pink) switchable at runtime; all screens react instantly via `Uniwind.updateCSSVariables()`
 - **Splash Screen** — Custom splash with auto-hide after i18n + auth hydration ready
 - **System UI** — Background color synced with theme mode
+- **Charts** — Interactive donut and bar charts via `react-native-gifted-charts` for report screens
+- **Calendar** — Date picking via `react-native-calendars` with marked dates
+- **Video** — Cross-platform video player (`react-native-video` on native, HTML `<video>` on web)
+- **WebView** — Embed web content via `react-native-webview`
+- **QR Code** — QR code generation via `react-native-qrcode-svg`
+- **Carousel** — Reanimated-driven carousel via `react-native-reanimated-carousel`
 - **Cross-platform** — iOS, Android, Web
 
 
@@ -142,26 +149,33 @@ To run the app, use a development build instead:
 │   │   └── login.tsx
 │   └── (app)/                  # Authenticated routes
 │       ├── _layout.tsx         # Drawer (left hamburger menu) + auth guard
+│       ├── report.tsx          # Drawer-only report route
+│       ├── preferences.tsx
 │       └── (tabs)/             # Bottom tabs
 │           ├── _layout.tsx
-│           ├── index.tsx       # Home
+│           ├── index.tsx       # Home (component showcase)
 │           ├── search.tsx
 │           ├── profile.tsx
+│           ├── report.tsx      # Report (charts, trends, allocation)
 │           └── settings.tsx
 ├── src/
 │   ├── api/                    # Axios client + TanStack Query hooks
 │   ├── components/
 │   │   ├── common/             # LoadingScreen, ErrorFallback
-│   │   └── ui/                 # Button, Text, Input, BottomSheet ...
+│   │   ├── drawer/             # DrawerHeaderLeft, AppDrawerContent, etc.
+│   │   ├── home/               # Demo components (cards-demo, extended-demos, overview-cards, etc.)
+│   │   ├── report/             # ReportTabs, ReportSection, TrendSnapshot, HoursDistribution, TopProjectsChart, ProjectAllocation
+│   │   └── ui/                 # Button, Text, Input, BottomSheet, Modal, Calendar, Video, WebView, QRCode, Menu, ...
 │   ├── config/                 # Constants, env helpers, color-palettes.ts
-│   ├── hooks/                  # Shared hooks
-│   ├── i18n/                   # i18next + locales/{en,fr,ar}
-│   ├── providers/              # QueryProvider, ThemeProvider
-│   ├── screens/                # Screen components
+│   ├── data/                   # Mock data (report.ts)
+│   ├── hooks/                  # Shared hooks (useThemeColors, usePrimaryHex, useDebounce, useRefreshOnFocus)
+│   ├── i18n/                   # i18next + locales/{en,fr}
+│   ├── providers/              # QueryProvider, ThemeProvider, AuthProvider
+│   ├── screens/                # Screen components (HomeScreen, ReportScreen, etc.)
 │   ├── storage/                # MMKV wrapper (SSR-safe, lazy init)
-│   ├── store/                  # Zustand stores (authStore, themeStore)
+│   ├── store/                  # Zustand stores (authStore, themeStore, onboardingStore)
 │   ├── types/                  # Type declarations (uniwind.d.ts)
-│   ├── utils/                  # cn() utility, date utils, helpers ...
+│   ├── utils/                  # cn() utility, format helpers, platform helpers
 │   └── validation/             # Zod schemas (login, register, forgotPassword)
 ├── global.css                  # Tailwind v4 + Uniwind entry, oklch CSS vars (light/dark)
 ├── app.config.ts               # Expo config (EAS, plugins, fonts, localization)
@@ -194,7 +208,7 @@ To run the app, use a development build instead:
 | Server State    | TanStack Query 5 + Devtools 
 | Forms           | TanStack Form 1 + Zod 3 
 | Storage         | react-native-mmkv 4 (lazy, SSR-safe) 
-| i18n            | i18next 26 + react-i18next (EN/FR/AR, RTL) 
+| i18n            | i18next 26 + react-i18next (EN/FR) 
 | UI Primitives   | @rn-primitives 1.5 (Portal, Slot, Dialog, etc.) 
 | Bottom Sheet    | @gorhom/bottom-sheet 5 
 | Icons           | lucide-react-native 
@@ -204,6 +218,13 @@ To run the app, use a development build instead:
 | Linting         | Eslint 
 | Git hooks       | Husky
 | Dates           | date-fns
+| Charts          | react-native-gifted-charts (PieChart, BarChart)
+| Calendar        | react-native-calendars
+| Video           | react-native-video (native) / HTML `<video>` (web)
+| WebView         | react-native-webview
+| QR Code         | react-native-qrcode-svg
+| Carousel        | react-native-reanimated-carousel
+| Animation Extras| moti
 
 
 

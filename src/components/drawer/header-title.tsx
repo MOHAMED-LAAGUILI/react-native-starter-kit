@@ -12,8 +12,8 @@ export function HeaderTitle() {
     const currentSegment = segments.at(-1);
 
     switch (currentSegment) {
-      case 'expo-ui':
-        return 'Expo UI';
+      case 'report':
+        return 'Report Graphs';
       case 'preferences':
         return 'Preferences';
       case 'search':
