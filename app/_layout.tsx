@@ -20,10 +20,9 @@ import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
 } from 'react-native-reanimated';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import { HeaderButtonsProvider } from 'react-navigation-header-buttons/HeaderButtonsProvider';
-import { withUniwind } from 'uniwind';
-import { WebErrorBoundary } from '@/components/common/web-error-boundary';
 import { Text } from '@/components/ui';
 import { setupI18n } from '@/i18n';
 import { QueryProvider } from '@/providers/query-provider';
@@ -36,15 +35,13 @@ import {
 import { isAndroid, isWeb } from '@/utils/platform';
 import '../global.css';
 
-const StyledSafeAreaView = withUniwind(SafeAreaView);
-
 export { ErrorBoundary } from 'expo-router';
 
 void SplashScreen.preventAutoHideAsync();
 
 SplashScreen.setOptions({
   fade: true,
-  duration: 600,
+  duration: 500,
 });
 
 // This is the default configuration
@@ -82,19 +79,17 @@ function StartupScreen({ appReady, startupError, loadingStep }: { appReady: bool
 
 function AppProviders({ children }: { children: ReactNode }) {
   return (
-    <GestureHandlerRootView className="flex-1">
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <StyledSafeAreaView className="flex-1 bg-background">
-          <HeaderButtonsProvider stackType={isWeb ? 'js' : 'native'}>
-            <QueryProvider>
-              <BottomSheetModalProvider>
-                <ThemeProvider>
-                  {children}
-                </ThemeProvider>
-              </BottomSheetModalProvider>
-            </QueryProvider>
-          </HeaderButtonsProvider>
-        </StyledSafeAreaView>
+        <HeaderButtonsProvider stackType={isWeb ? 'js' : 'native'}>
+          <QueryProvider>
+            <BottomSheetModalProvider>
+              <ThemeProvider>
+                {children}
+              </ThemeProvider>
+            </BottomSheetModalProvider>
+          </QueryProvider>
+        </HeaderButtonsProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
@@ -172,6 +167,9 @@ export default function RootLayout() {
     }
   }, [themeMode]);
 
+  if (!appReady || startupError)
+    return <StartupScreen appReady={appReady} startupError={startupError} loadingStep={loadingStep} />;
+
   return (
     <AppProviders>
       <StatusBar
@@ -180,27 +178,23 @@ export default function RootLayout() {
         hidden={false}
       />
 
-      {(!appReady || startupError)
-        ? (
-            <StartupScreen appReady={appReady} startupError={startupError} loadingStep={loadingStep} />
-          )
-        : (
-            <WebErrorBoundary>
-              <Stack screenOptions={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
 
-              <Toasts
-                overrideDarkMode={themeMode === 'dark'}
-                globalAnimationType="spring"
-                globalAnimationConfig={{
-                  dampingRatio: 0.7,
-                  duration: 200,
-                  flingPositionReturnDuration: 200,
-                }}
-              />
+      <Toasts
+        overrideDarkMode={themeMode === 'dark'}
+        globalAnimationType="spring"
+        globalAnimationConfig={{
+          dampingRatio: 0.7,
+          duration: 200,
+          flingPositionReturnDuration: 200,
+        }}
+      />
 
-              <PortalHost />
-            </WebErrorBoundary>
-          )}
+      <PortalHost />
     </AppProviders>
   );
 }
