@@ -1,6 +1,8 @@
 name: Create preview Builds For Android
 
-branches: [main]
+on:
+  push:
+    branches: [main]
 
 jobs:
   build_android:

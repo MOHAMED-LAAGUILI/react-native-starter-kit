@@ -22,7 +22,7 @@ export function DrawerHeaderLeft() {
             />
           )}
           onPress={() => router.back()}
-          className="h-auto px-0"
+          className="h-auto p-0 active:bg-transparent"
         />
       </View>
     );

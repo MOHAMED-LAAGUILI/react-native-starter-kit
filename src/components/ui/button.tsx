@@ -2,9 +2,9 @@ import type { LucideIcon } from 'lucide-react-native';
 import type { PressableProps } from 'react-native';
 import * as React from 'react';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
-import { Icon } from '@/components/ui';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { cn } from '@/utils/utils';
+import { Icon } from './icon';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
 type ButtonSize = 'sm' | 'md' | 'lg';

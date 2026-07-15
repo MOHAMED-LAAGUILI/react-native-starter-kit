@@ -30,6 +30,10 @@ const plugins: ExpoConfig['plugins'] = [
       resizeMode: 'contain',
       backgroundColor: '#ffffff',
       imageWidth: 150,
+      dark: {
+        image: './assets/images/splash-icon-dark.png',
+        backgroundColor: '#000000',
+      },
     },
   ],
   [

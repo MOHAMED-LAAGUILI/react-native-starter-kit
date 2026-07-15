@@ -1,9 +1,9 @@
 import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@/components/ui';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { cn } from '@/utils/utils';
+import { Text } from './text';
 
 type CardVariant = 'primary' | 'secondary' | 'stats' | 'compact' | 'action';
 

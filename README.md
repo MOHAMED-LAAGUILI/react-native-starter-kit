@@ -251,51 +251,72 @@ bun run checks
 ### Perfect Score
 <img width="592" height="759" alt="image" src="https://github.com/user-attachments/assets/f93166a4-f0d4-4fe6-8968-0de1785fd96d" />
 
+## Git & EAS
+
 ```bash
-# 3. Push code to github
+# Push changes
 git push
 
-# 4. login to EAS account (if u haven't) this is a one time process
+# Login to EAS (one-time)
 bun run eas:in
 
-# 4. logout (only if u exceeded 25 free build and can't pay for pro plan. then u can login to different account)
+# Logout (optional, e.g. switch accounts)
 bun run eas:out
-
 ```
 
+## Build Options
 
-### Preview / Testing / Build
+### Option 1 — Local Preview Build (Recommended)
+
+Build directly from your local code. No need to push to GitHub.
 
 ```bash
-# (Option 1)
-# 1. Build for preview from local code (doesn't require u to push code cause on build upload from ur machine)
-# good option before u commit code
 bun run build:prev:android
 bun run build:prev:ios
+```
 
-# (Option 2) same as (Option 1) but with full control from .yml file
-# 2. Build for preview from main branch (requires u to push code to main cause on build upload from ur main github branch)
+### Option 2 — Build from `main`
+
+Build using the latest code on the `main` branch via the EAS workflow.
+
+> Requires pushing your changes first.
+
+```bash
 bun run flow:build-android:main
 bun run flow:build-ios:main
+```
 
-# (Option 3-1)
-# 3. Enable Automatic EAS Builds 
-# For a fully automated CI/CD workflow, head to EAS and connect your GitHub repository to your EAS project.
-# Once connected, every push to the main branch will automatically trigger the EAS workflows included in this project.
-# Workflow files are located in:
-# .eas/workflows/
-# This allows EAS to automatically build Android and iOS apps without manually starting builds from the Expo Dashboard or CLI.
+### Option 3 — Automatic CI/CD
 
-# (Option 3-2)
-#  in eas.dev after connecting with github u can also choose repo/branch/channel/env to build from the eas website
+Connect your GitHub repository in Expo EAS.
 
+Once connected, every push to `main` automatically runs the workflows in:
 
-# 5. Submit to stores for first time only (skip if haven't setup google console account)
+```text
+.eas/workflows/
+```
+
+No manual CLI commands required.
+
+### Option 4 — Build from Expo Dashboard
+
+After connecting your GitHub repository, you can manage builds, updates, and deployments entirely from the Expo website.
+
+## OTA Updates
+
+Publish JavaScript/asset updates without submitting a new app version.
+
+```bash
+bun run eas:update:prod
+```
+
+## Store Submission (First Time Only)
+
+Only needed after configuring your App Store Connect / Google Play accounts.
+
+```bash
 bun run submit:ios
 bun run submit:android
-
-# 4. Push OTA update (no resubmission needed any changes later u launch via update)
-bun run eas:update:prod
 ```
 
 ## Deploy / Build / Test / Monitor / Updates ...
