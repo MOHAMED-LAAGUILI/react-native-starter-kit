@@ -2,7 +2,7 @@ import type { DateTimePickerEvent } from '@react-native-community/datetimepicker
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
-import { Text } from '@/components/ui/text';
+import { Text } from '@/components/ui';
 
 type DateTimePickerMode = 'date' | 'time' | 'datetime';
 
@@ -40,7 +40,7 @@ function DateTimePickerField({ value, onChange, mode = 'date', label, display }:
       {label && <Text variant="label" className="text-muted-foreground">{label}</Text>}
       <Pressable
         onPress={() => setShow(true)}
-        className="border-border bg-secondary h-11 flex-row items-center rounded-md border px-3"
+        className="h-11 flex-row items-center rounded-md border border-border bg-secondary px-3"
       >
         <Text className="text-foreground">{formatDate(value, mode)}</Text>
       </Pressable>

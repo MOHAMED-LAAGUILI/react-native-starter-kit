@@ -1,12 +1,12 @@
-import type { BottomSheetOption } from '@/components/ui/bottom-sheet';
+import type { BottomSheetOption } from '@/components/ui';
 import type { ColorPaletteKey } from '@/config/color-palettes';
 import type { ThemeMode } from '@/store';
 import { Monitor, Moon, Sun } from 'lucide-react-native';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import { Image } from '@/components/ui';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
+import { BottomSheet, Image } from '@/components/ui';
+
 import { COLOR_PALETTES } from '@/config/color-palettes';
 import { useThemeColors } from '@/hooks/use-theme-color';
 import { changeLanguage } from '@/i18n';
@@ -43,7 +43,7 @@ function SettingsBottomSheets({ mode, setMode, primaryColor, setPrimaryColor, co
 
   const colorOptions: BottomSheetOption<ColorPaletteKey>[] = COLOR_PALETTES.map(p => ({
     label: p.label,
-    leftElement: <View className={cn('size-6 rounded-full', primaryColor === p.key && 'ring-primary ring-2 ring-offset-2')} style={{ backgroundColor: p.color }} />,
+    leftElement: <View className={cn('size-6 rounded-full', primaryColor === p.key && 'ring-2 ring-primary ring-offset-2')} style={{ backgroundColor: p.color }} />,
     value: p.key,
   }));
 

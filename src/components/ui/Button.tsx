@@ -1,6 +1,8 @@
+import type { LucideIcon } from 'lucide-react-native';
 import type { PressableProps } from 'react-native';
 import * as React from 'react';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
+import { Icon } from '@/components/ui';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { cn } from '@/utils/utils';
 
@@ -14,6 +16,8 @@ type ButtonProps = {
   title: string;
   leftIcon?: (color: string) => React.ReactNode;
   rightIcon?: (color: string) => React.ReactNode;
+  leftIconComponent?: LucideIcon;
+  rightIconComponent?: LucideIcon;
 } & PressableProps;
 
 function Button({
@@ -23,6 +27,8 @@ function Button({
   title,
   leftIcon,
   rightIcon,
+  leftIconComponent,
+  rightIconComponent,
   disabled,
   className,
   ...props
@@ -31,6 +37,16 @@ function Button({
   const primaryHex = usePrimaryHex();
 
   const iconColor = variant === 'primary' || variant === 'destructive' ? '#fff' : primaryHex;
+
+  const iconClassName = cn(
+    size === 'sm' && 'size-4',
+    size !== 'sm' && 'size-5',
+    variant === 'primary' && 'text-primary-foreground',
+    variant === 'secondary' && 'text-primary',
+    variant === 'outline' && 'text-primary',
+    variant === 'ghost' && 'text-foreground',
+    variant === 'destructive' && 'text-destructive-foreground',
+  );
 
   return (
     <Pressable
@@ -41,7 +57,7 @@ function Button({
         size === 'lg' && 'h-12 px-8',
         variant === 'primary' && 'bg-primary active:bg-primary/90',
         variant === 'secondary' && 'bg-primary/10 active:bg-primary/20',
-        variant === 'outline' && 'border-primary active:bg-primary/10 border bg-background',
+        variant === 'outline' && 'border border-primary bg-background active:bg-primary/10',
         variant === 'ghost' && 'active:bg-accent',
         variant === 'destructive' && 'bg-destructive active:bg-destructive/90',
         disabled && 'opacity-50',
@@ -62,7 +78,9 @@ function Button({
           )
         : (
             <>
-              {leftIcon?.(iconColor)}
+              {leftIconComponent
+                ? <Icon as={leftIconComponent} className={iconClassName} />
+                : leftIcon?.(iconColor)}
               <Text
                 className={cn(
                   'font-semibold',
@@ -78,7 +96,9 @@ function Button({
               >
                 {title}
               </Text>
-              {rightIcon?.(iconColor)}
+              {rightIconComponent
+                ? <Icon as={rightIconComponent} className={iconClassName} />
+                : rightIcon?.(iconColor)}
             </>
           )}
     </Pressable>

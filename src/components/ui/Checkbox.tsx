@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react-native';
 import { Pressable } from 'react-native';
+import { Icon } from '@/components/ui';
 import { cn } from '@/utils/utils';
 
 type CheckboxProps = {
@@ -21,10 +22,7 @@ function Checkbox({ checked, onCheckedChange, disabled, className }: CheckboxPro
       )}
     >
       {checked && (
-        <Check
-          size={14}
-          className="text-primary-foreground"
-        />
+        <Icon as={Check} className="size-3.5 text-primary-foreground" />
       )}
     </Pressable>
   );

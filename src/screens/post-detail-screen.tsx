@@ -4,8 +4,7 @@ import { ScrollView, View } from 'react-native';
 import { usePublicPost } from '@/api/hooks/use-public-posts';
 import { LoadingScreen } from '@/components/common/loading-screen';
 import { PostHero } from '@/components/post-detail';
-import { Text } from '@/components/ui';
-import { Button } from '@/components/ui/button';
+import { Button, Text } from '@/components/ui';
 
 function PostDetailScreen() {
   const { t } = useTranslation();
@@ -22,7 +21,7 @@ function PostDetailScreen() {
       <View className="flex-1 items-center justify-center bg-background px-6">
         <Text
           variant="body"
-          className="text-destructive mb-4 text-center"
+          className="mb-4 text-center text-destructive"
         >
           {t('postDetail.error')}
         </Text>

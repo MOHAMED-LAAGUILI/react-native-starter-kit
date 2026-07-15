@@ -13,6 +13,8 @@ export type { CheckboxProps } from './checkbox';
 export { Checkbox } from './checkbox';
 export type { DateTimePickerMode, DateTimePickerProps } from './date-time-picker';
 export { DateTimePickerField } from './date-time-picker';
+export type { IconProps } from './icon';
+export { Icon } from './icon';
 export type { ImageProps } from './image';
 export { Image } from './image';
 export type { InputProps } from './input';
@@ -22,8 +24,7 @@ export type { MenuItem, MenuProps } from './menu';
 export { Menu } from './menu';
 export type { ModalProps } from './modal';
 export { Modal } from './modal';
-export type { PickerItem, PickerProps } from './picker';
-export { Picker } from './picker';
+
 export type { ProgressProps } from './progress';
 export { Progress } from './progress';
 export type { QRCodeProps } from './qr-code';

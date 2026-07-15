@@ -2,8 +2,8 @@ import { useEvent } from 'expo';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/utils';
+import { Button } from './button';
 
 type VideoProps = {
   source: string;

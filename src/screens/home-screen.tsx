@@ -7,10 +7,11 @@ import {
   CenteredDemo,
   CheckboxDemo,
   DateTimePickerDemo,
+  DropdownDemo,
+  IconDemo,
   ImageDemo,
   InputDemo,
   MenuDemo,
-  PickerDemo,
   ProgressDemo,
   QRCodeDemo,
   RadioGroupDemo,
@@ -31,13 +32,16 @@ function HomeScreen() {
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="p-6 gap-2">
       <Text variant="h2" className="mb-2">Component Demo</Text>
-      <Text variant="body" className="text-muted-foreground mb-2">All UI components with available variants.</Text>
+      <Text variant="body" className="mb-2 text-muted-foreground">All UI components with available variants.</Text>
 
       <SectionTitle>Card</SectionTitle>
       <CardsDemo />
 
       <SectionTitle>Typography</SectionTitle>
       <TypographyDemo />
+
+      <SectionTitle>Icons</SectionTitle>
+      <IconDemo />
 
       <SectionTitle>Buttons</SectionTitle>
       <ButtonsDemo />
@@ -81,8 +85,8 @@ function HomeScreen() {
       <SectionTitle>Text Area</SectionTitle>
       <TextAreaDemo />
 
-      <SectionTitle>Picker</SectionTitle>
-      <PickerDemo />
+      <SectionTitle>Dropdown</SectionTitle>
+      <DropdownDemo />
 
       <SectionTitle>Video Player</SectionTitle>
       <VideoDemo />

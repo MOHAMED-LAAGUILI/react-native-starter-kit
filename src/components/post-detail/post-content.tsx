@@ -6,7 +6,7 @@ import { Text } from '@/components/ui';
 
 function PostHero({ post }: { post: Post }) {
   return (
-    <View className="h-130">
+    <View className="h-[500px]">
       <Image
         source={{ uri: post.imageUrl }}
         className="absolute size-full"

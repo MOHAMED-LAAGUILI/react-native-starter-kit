@@ -37,13 +37,13 @@ function SearchResults({ posts, query, isLoading }: { posts: Post[]; query: stri
                 ? (
                     <>
                       <SearchX size={48} color={muted} />
-                      <Text variant="body" className="text-muted-foreground mt-4 text-center">{t('search.noResults')}</Text>
+                      <Text variant="body" className="mt-4 text-center text-muted-foreground">{t('search.noResults')}</Text>
                     </>
                   )
                 : (
                     <>
                       <Search size={48} color={muted} />
-                      <Text variant="body" className="text-muted-foreground mt-4 text-center">{t('search.startTyping')}</Text>
+                      <Text variant="body" className="mt-4 text-center text-muted-foreground">{t('search.startTyping')}</Text>
                     </>
                   )}
             </View>

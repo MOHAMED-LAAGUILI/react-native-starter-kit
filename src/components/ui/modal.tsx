@@ -2,10 +2,10 @@ import { X } from 'lucide-react-native';
 import * as React from 'react';
 import { Pressable, Modal as RNModal, View } from 'react-native';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-import { useThemeColors } from '@/hooks/use-theme-color';
 import { cn } from '@/utils/utils';
+import { Button } from './button';
+import { Icon } from './icon';
+import { Text } from './text';
 
 type ModalVariant = 'bottom-sheet' | 'centered' | 'centered-action';
 
@@ -29,7 +29,6 @@ type ModalProps = {
 };
 
 function Modal({ isVisible, onClose, variant = 'bottom-sheet', title, description, icon, actions, children, className }: ModalProps) {
-  const { text } = useThemeColors();
   const [show, setShow] = React.useState(isVisible);
   const [prevVisible, setPrevVisible] = React.useState(isVisible);
   const opacity = useSharedValue(0);
@@ -104,7 +103,6 @@ function Modal({ isVisible, onClose, variant = 'bottom-sheet', title, descriptio
             title={title}
             className={className}
             onClose={handleClose}
-            text={text}
             sheetTranslateStyle={sheetTranslateStyle}
           >
             {children}
@@ -119,7 +117,6 @@ function Modal({ isVisible, onClose, variant = 'bottom-sheet', title, descriptio
             actions={variant === 'centered-action' ? actions : undefined}
             className={className}
             onClose={handleClose}
-            text={text}
             sheetScaleStyle={sheetScaleStyle}
           >
             {children}
@@ -130,11 +127,10 @@ function Modal({ isVisible, onClose, variant = 'bottom-sheet', title, descriptio
   );
 }
 
-function BottomSheetBody({ title, className, onClose, text, sheetTranslateStyle, children }: {
+function BottomSheetBody({ title, className, onClose, sheetTranslateStyle, children }: {
   title?: string;
   className?: string;
   onClose: () => void;
-  text: string;
   sheetTranslateStyle: any;
   children: React.ReactNode;
 }) {
@@ -144,7 +140,7 @@ function BottomSheetBody({ title, className, onClose, text, sheetTranslateStyle,
         <View className="mb-4 flex-row items-center justify-between">
           <Text variant="h3">{title}</Text>
           <Pressable onPress={onClose} hitSlop={8}>
-            <X size={20} color={text} />
+            <Icon as={X} className="size-5 text-foreground" />
           </Pressable>
         </View>
       )}
@@ -153,14 +149,13 @@ function BottomSheetBody({ title, className, onClose, text, sheetTranslateStyle,
   );
 }
 
-function CenteredBody({ title, description, icon, actions, className, onClose, text, sheetScaleStyle, children }: {
+function CenteredBody({ title, description, icon, actions, className, onClose, sheetScaleStyle, children }: {
   title?: string;
   description?: string;
   icon?: React.ReactNode;
   actions?: ModalAction[];
   className?: string;
   onClose: () => void;
-  text: string;
   sheetScaleStyle: any;
   children: React.ReactNode;
 }) {
@@ -168,7 +163,7 @@ function CenteredBody({ title, description, icon, actions, className, onClose, t
     <Animated.View style={sheetScaleStyle} className={cn('w-full max-w-sm rounded-2xl bg-background p-6', className)}>
       <View className="mb-2 items-end">
         <Pressable onPress={onClose} hitSlop={8}>
-          <X size={20} color={text} />
+          <Icon as={X} className="size-5 text-foreground" />
         </Pressable>
       </View>
 
@@ -183,7 +178,7 @@ function CenteredBody({ title, description, icon, actions, className, onClose, t
       )}
 
       {description && (
-        <Text variant="body" className="text-muted-foreground mb-6 text-center">{description}</Text>
+        <Text variant="body" className="mb-6 text-center text-muted-foreground">{description}</Text>
       )}
 
       {children}

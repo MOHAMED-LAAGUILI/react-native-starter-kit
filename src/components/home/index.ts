@@ -1,4 +1,5 @@
 export { ButtonsDemo } from './buttons-demo';
+export { DropdownDemo } from './drop-down-demo';
 export {
   CalendarDemo,
   CenteredActionDemo,
@@ -8,9 +9,9 @@ export {
   QRCodeDemo,
   TextAreaDemo,
 } from './extended-demos';
+export { IconDemo } from './icon-demo';
 export { ImageDemo } from './image-demo';
 export { InputDemo } from './input-demo';
-export { PickerDemo } from './picker-demo';
 export { ProgressDemo } from './progress-demo';
 export { RadioGroupDemo } from './radio-group-demo';
 export { SliderDemo } from './slider-demo';

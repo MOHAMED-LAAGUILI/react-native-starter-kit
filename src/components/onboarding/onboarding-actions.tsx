@@ -23,19 +23,28 @@ function OnboardingActions({ isLast, onNext }: OnboardingActionsProps) {
     borderColor: primaryHex,
   }));
 
+  const arrowStyle = useAnimatedStyle(() => ({
+    opacity: 1 - filled.value,
+    transform: [{ scale: 1 - filled.value * 0.2 }],
+  }));
+
+  const playStyle = useAnimatedStyle(() => ({
+    opacity: filled.value,
+    transform: [{ scale: 0.2 + filled.value * 0.8 }],
+  }));
+
   return (
     <Pressable onPress={onNext}>
       <Animated.View
         className="size-14 items-center justify-center rounded-full"
         style={containerStyle}
       >
-        {isLast
-          ? (
-              <Play size={22} color="#ffffff" fill="#ffffff" />
-            )
-          : (
-              <ArrowRight size={22} color={primaryHex} />
-            )}
+        <Animated.View className="absolute" style={arrowStyle}>
+          <ArrowRight size={22} color={primaryHex} />
+        </Animated.View>
+        <Animated.View className="absolute" style={playStyle}>
+          <Play size={22} color="#ffffff" fill="#ffffff" />
+        </Animated.View>
       </Animated.View>
     </Pressable>
   );

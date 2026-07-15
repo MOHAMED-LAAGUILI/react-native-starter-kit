@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@/components/ui/text';
+import { Text } from '@/components/ui';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { cn } from '@/utils/utils';
 
@@ -35,7 +35,7 @@ function Card({
   return (
     <View
       className={cn(
-        'border-border overflow-hidden rounded-2xl border',
+        'overflow-hidden rounded-2xl border border-border',
         isLightSolid && 'border-transparent',
         variant === 'secondary' && 'border-transparent',
         variant === 'stats' && 'bg-card',

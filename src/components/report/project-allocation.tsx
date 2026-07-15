@@ -43,7 +43,7 @@ export function ProjectAllocation({
                   %
                 </Text>
               </View>
-              <View className="bg-muted h-3 rounded-full">
+              <View className="h-3 rounded-full bg-muted">
                 <View
                   className="h-3 rounded-full"
                   style={{

@@ -2,8 +2,8 @@ import type { TextInputProps, ViewStyle } from 'react-native';
 import { Eye, EyeOff, KeyRound, Mail, Phone, Search, User } from 'lucide-react-native';
 import * as React from 'react';
 import { Pressable, TextInput, View } from 'react-native';
-import { useThemeColors } from '@/hooks/use-theme-color';
 import { cn } from '@/utils/utils';
+import { Icon } from './icon';
 import { Text } from './text';
 
 type InputType = 'email' | 'password' | 'phone' | 'search' | 'text' | 'username';
@@ -20,25 +20,22 @@ type InputProps = {
 function Input({ label, error, leftIcon, rightIcon, containerStyle, className, type = 'text', ...props }: InputProps) {
   const [focused, setFocused] = React.useState(false);
   const [secureVisible, setSecureVisible] = React.useState(false);
-  const { text, muted } = useThemeColors();
-  const iconColor = muted || text;
 
   const isSecure = type === 'password';
   const resolvedSecureTextEntry = isSecure ? !secureVisible : props.secureTextEntry;
 
   const builtinLeftIcon = (() => {
-    const iconProps = { color: iconColor, size: 18 };
     switch (type) {
       case 'search':
-        return <Search {...iconProps} />;
+        return <Icon as={Search} className="size-[18px] text-muted-foreground" />;
       case 'phone':
-        return <Phone {...iconProps} />;
+        return <Icon as={Phone} className="size-[18px] text-muted-foreground" />;
       case 'username':
-        return <User {...iconProps} />;
+        return <Icon as={User} className="size-[18px] text-muted-foreground" />;
       case 'password':
-        return <KeyRound {...iconProps} />;
+        return <Icon as={KeyRound} className="size-[18px] text-muted-foreground" />;
       case 'email':
-        return <Mail {...iconProps} />;
+        return <Icon as={Mail} className="size-[18px] text-muted-foreground" />;
       default:
         return null;
     }
@@ -54,16 +51,10 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
         >
           {secureVisible
             ? (
-                <EyeOff
-                  size={18}
-                  color={iconColor}
-                />
+                <Icon as={EyeOff} className="size-[18px] text-muted-foreground" />
               )
             : (
-                <Eye
-                  size={18}
-                  color={iconColor}
-                />
+                <Icon as={Eye} className="size-[18px] text-muted-foreground" />
               )}
         </Pressable>
       );
@@ -77,7 +68,7 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
         ? (
             <Text
               variant="label"
-              className="text-muted-foreground mb-0.5"
+              className="mb-0.5 text-muted-foreground"
             >
               {label}
             </Text>
@@ -93,7 +84,7 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
       >
         {showLeftIcon && <View className="items-center justify-center">{showLeftIcon}</View>}
         <TextInput
-          className={cn('text-foreground h-full flex-1 text-base outline-0', className)}
+          className={cn('h-full flex-1 text-base text-foreground outline-0', className)}
           placeholderTextColor="#9CA3AF"
           secureTextEntry={resolvedSecureTextEntry}
           onFocus={(e) => {
@@ -112,7 +103,7 @@ function Input({ label, error, leftIcon, rightIcon, containerStyle, className, t
         ? (
             <Text
               variant="caption"
-              className="text-destructive mt-0.5"
+              className="mt-0.5 text-destructive"
             >
               {error}
             </Text>

@@ -2,8 +2,7 @@ import { format } from 'date-fns';
 import { Check, CircleAlert, Info } from 'lucide-react-native';
 import * as React from 'react';
 import { Pressable } from 'react-native';
-import { Button, CalendarView, DateTimePickerField, Modal, QRCodeView, Text, TextArea } from '@/components/ui';
-import { Menu } from '@/components/ui/menu';
+import { Button, CalendarView, DateTimePickerField, Menu, Modal, QRCodeView, Text, TextArea } from '@/components/ui';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 
 function DateTimePickerDemo() {
@@ -52,7 +51,7 @@ function CalendarDemo() {
         markedDates={selected ? { [selected]: { selected: true } } : {}}
       />
       {selected && (
-        <Text variant="caption" className="text-muted-foreground mt-1 text-center">
+        <Text variant="caption" className="mt-1 text-center text-muted-foreground">
           Selected:
           {' '}
           {format(new Date(selected), 'PPP')}
@@ -118,7 +117,7 @@ function MenuDemo() {
         ]}
         onPress={key => setSelected(key)}
       >
-        <Pressable className="border-border bg-secondary h-11 flex-row items-center justify-between rounded-md border px-3">
+        <Pressable className="h-11 flex-row items-center justify-between rounded-md border border-border bg-secondary px-3">
           <Text className="text-foreground">Long press for menu</Text>
           <Text variant="caption" className="text-muted-foreground">{selected}</Text>
         </Pressable>
