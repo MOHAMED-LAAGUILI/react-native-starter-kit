@@ -249,6 +249,8 @@ bun dev
 bun run checks
 ```
 ### Perfect Score
+[![React Doctor](https://www.react.doctor/share/badge?p=react-native-expo-starter-kit&s=100&w=0&f=0)](https://www.react.doctor/share?p=react-native-expo-starter-kit&s=100&w=0&f=0)
+
 <img width="592" height="759" alt="image" src="https://github.com/user-attachments/assets/f93166a4-f0d4-4fe6-8968-0de1785fd96d" />
 
 ## Git & EAS

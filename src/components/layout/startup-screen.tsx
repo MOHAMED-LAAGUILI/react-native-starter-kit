@@ -1,5 +1,5 @@
 import { ActivityIndicator, ScrollView, View } from 'react-native';
-import { Text } from '../ui';
+import { Text } from '../ui/text';
 
 export function StartupScreen({ appReady, startupError, loadingStep }: { appReady: boolean; startupError: Error | null; loadingStep: string }) {
   if (appReady && !startupError)

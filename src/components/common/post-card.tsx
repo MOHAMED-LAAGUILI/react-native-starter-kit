@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { Pressable, View } from 'react-native';
-import { Text } from '../ui';
+import { Text } from '../ui/text';
 
 type PostCardProps = {
   id: number;
