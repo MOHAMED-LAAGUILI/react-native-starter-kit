@@ -54,22 +54,14 @@ export default function RootLayout() {
 
     const initializeApp = async () => {
       try {
-        setLoadingStep('Loading fonts...');
-        await Font.loadAsync({ Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold });
-
-        setLoadingStep('Initializing i18n...');
-        await setupI18n();
-
-        setLoadingStep('Hydrating authentication...');
-        await Promise.resolve(hydrateAuth());
-
-        setLoadingStep('Hydrating theme...');
-        await Promise.resolve(hydrateTheme());
-
-        setLoadingStep('Hydrating onboarding...');
-        await Promise.resolve(hydrateOnboarding());
-
-        setLoadingStep('Finalizing startup...');
+        setLoadingStep('Initializing application...');
+        await Promise.all([
+          Font.loadAsync({ Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold }),
+          setupI18n(),
+          Promise.resolve(hydrateAuth()),
+          Promise.resolve(hydrateTheme()),
+          Promise.resolve(hydrateOnboarding()),
+        ]);
       }
       catch (error) {
         console.error('Startup Error:', error);

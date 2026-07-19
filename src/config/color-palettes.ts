@@ -145,6 +145,28 @@ export const COLOR_PALETTES = [
       '--color-sidebar-primary': 'oklch(0.592 0.249 0.584)',
       '--color-sidebar-primary-foreground': 'oklch(0.985 0 0)',
     },
+
+  },
+  {
+    color: '#84cc16',
+    key: 'dark-lime',
+    label: 'Dark Lime',
+    light: {
+      '--color-chart-1': 'oklch(0.768 0.233 130.85)',
+      '--color-primary': 'oklch(0.768 0.233 130.85)',
+      '--color-primary-foreground': 'oklch(0.205 0 0)',
+      '--color-ring': 'oklch(0.768 0.233 130.85)',
+      '--color-sidebar-primary': 'oklch(0.768 0.233 130.85)',
+      '--color-sidebar-primary-foreground': 'oklch(0.205 0 0)',
+    },
+    dark: {
+      '--color-chart-1': 'oklch(0.62 0.19 130.85)',
+      '--color-primary': 'oklch(0.62 0.19 130.85)',
+      '--color-primary-foreground': 'oklch(0.985 0 0)',
+      '--color-ring': 'oklch(0.62 0.19 130.85)',
+      '--color-sidebar-primary': 'oklch(0.62 0.19 130.85)',
+      '--color-sidebar-primary-foreground': 'oklch(0.985 0 0)',
+    },
   },
 ] as const;
 

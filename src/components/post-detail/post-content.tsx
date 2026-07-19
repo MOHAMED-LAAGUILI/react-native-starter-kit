@@ -11,28 +11,26 @@ function PostHero({ post }: { post: Post }) {
           source={{ uri: post.imageUrl }}
           className="absolute size-full"
           contentFit="cover"
-          blurRadius={15}
         />
         <LinearGradient
-          colors={['transparent', 'rgba(0,0,0,0.85)']}
+          colors={['transparent', 'rgba(0,0,0,0.4)']}
           className="absolute size-full"
         />
         <View className="absolute inset-x-0 bottom-0 gap-2 p-6 pb-8">
-          <Text variant="caption" className="text-white/70">
-            {`Post #${post.id} — User #${post.userId}`}
-          </Text>
-          <Text variant="h2" className="text-white">
-            {post.title}
-          </Text>
+          <View className="mb-1 self-start rounded-lg bg-black/30 px-3 py-1.5">
+            <Text variant="caption" className="text-white/90">
+              {`Post #${post.id} — User #${post.userId}`}
+            </Text>
+          </View>
+          <View className="rounded-lg bg-black/40 px-4 py-2">
+            <Text variant="h2" className="text-white">
+              {post.title}
+            </Text>
+          </View>
         </View>
       </View>
       <View className="gap-4 p-6">
-        <Image
-          fallback=""
-          source={{ uri: post.imageUrl }}
-          className="h-64 w-full rounded-xl"
-          contentFit="cover"
-        />
+
         <Text variant="body" className="leading-6">
           {post.body}
         </Text>

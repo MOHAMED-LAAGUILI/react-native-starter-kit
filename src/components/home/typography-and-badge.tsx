@@ -1,3 +1,4 @@
+import { AlertTriangle, Check, Info, X } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
 import { Badge, Text } from '@/components/ui';
@@ -41,6 +42,25 @@ function BadgeDemo() {
         <Badge variant="secondary">secondary</Badge>
         <Badge variant="destructive">destructive</Badge>
         <Badge variant="outline">outline</Badge>
+        <Badge variant="success">success</Badge>
+        <Badge variant="warning">warning</Badge>
+        <Badge variant="info">info</Badge>
+      </Row>
+
+      <Text variant="label" className="mt-4 mb-1 text-muted-foreground">With Icons</Text>
+      <Row>
+        <Badge variant="success" icon={Check}>Completed</Badge>
+        <Badge variant="destructive" icon={X}>Error</Badge>
+        <Badge variant="warning" icon={AlertTriangle}>Warning</Badge>
+        <Badge variant="info" icon={Info}>Info</Badge>
+        <Badge variant="primary" icon={Check}>Verified</Badge>
+      </Row>
+
+      <Text variant="label" className="mt-4 mb-1 text-muted-foreground">Sizes</Text>
+      <Row>
+        <Badge variant="primary" size="sm" icon={Check}>Small</Badge>
+        <Badge variant="primary" size="md" icon={Check}>Medium</Badge>
+        <Badge variant="primary" size="lg" icon={Check}>Large</Badge>
       </Row>
     </>
   );

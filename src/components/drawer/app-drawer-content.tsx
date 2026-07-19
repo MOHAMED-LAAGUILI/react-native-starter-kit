@@ -51,7 +51,7 @@ export function AppDrawerContent(props: AppDrawerContentProps) {
                   color={isActive ? '#fff' : text}
                 />
               )}
-              className={cn('mb-2 w-full justify-start gap-3', !isActive && 'bg-transparent')}
+              className={cn('mb-2 w-full justify-start gap-3', !isActive && 'bg-transparent', isActive && 'text-white!')}
               style={isActive ? { backgroundColor: primaryHex } : undefined}
               onPress={() => router.push(href)}
             />

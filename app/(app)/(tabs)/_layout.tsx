@@ -1,5 +1,5 @@
 import { Tabs, useRouter } from 'expo-router';
-import { Home, Search, Settings, Smartphone, User } from 'lucide-react-native';
+import { BarChart3, Home, Search, Settings, Smartphone } from 'lucide-react-native';
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Animated, {
@@ -13,7 +13,7 @@ import { useThemeColors } from '@/hooks/use-theme-color';
 
 const TAB_CONFIG = {
   'search': { icon: Search, label: 'Search', href: '/(app)/(tabs)/search' as const },
-  'profile': { icon: User, label: 'Profile', href: '/(app)/(tabs)/profile' as const },
+  'report': { icon: BarChart3, label: 'Charts', href: '/(app)/(tabs)/report' as const },
   'index': { icon: Home, label: 'Home', href: '/' as const },
   'settings': { icon: Settings, label: 'Settings', href: '/(app)/(tabs)/settings' as const },
   'device-info': { icon: Smartphone, label: 'Device Info', href: '/(app)/(tabs)/device-info' as const },
@@ -167,11 +167,10 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen name="search" options={{ headerTitle: 'Search' }} />
-      <Tabs.Screen name="profile" options={{ headerTitle: 'Profile' }} />
+      <Tabs.Screen name="report" options={{ headerTitle: 'Charts' }} />
       <Tabs.Screen name="index" options={{ headerTitle: 'Home' }} />
       <Tabs.Screen name="settings" options={{ headerTitle: 'Settings' }} />
       <Tabs.Screen name="device-info" options={{ headerTitle: 'Device Info' }} />
-      <Tabs.Screen name="report" options={{ headerTitle: 'Report Graph' }} />
     </Tabs>
   );
 }

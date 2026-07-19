@@ -23,8 +23,10 @@
     ".expo/types/**/*.ts",
     "*.d.ts",
     "**/*.d.ts",
-    "expo-env.d.ts"
-, "metro.config.js"  ],
+    "expo-env.d.ts",
+    "uniwind-types.d.ts",
+
+  ],
   "exclude": [
     "node_modules",
     "babel.config.js",

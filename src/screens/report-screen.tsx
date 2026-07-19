@@ -5,10 +5,9 @@ import { OverviewCards } from '@/components/home/overview-cards';
 import { AnimatedSection } from '@/components/report/animated-section';
 import { reportRangeLabels, reportTabs } from '@/components/report/constants';
 import { HoursDistribution } from '@/components/report/hours-distribution';
-import { ProjectAllocation } from '@/components/report/project-allocation';
 import { ReportTabs } from '@/components/report/report-tabs';
-import { TopProjectsChart } from '@/components/report/top-projects-chart';
 import { TrendSnapshot } from '@/components/report/trend-snapshot';
+import { UnifiedProjects } from '@/components/report/unified-projects';
 import { projectData } from '@/data/report';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 
@@ -18,10 +17,10 @@ export function ReportScreen() {
   const [activeTab, setActiveTab] = React.useState<ReportTab>('daily');
   const primaryHex = usePrimaryHex();
 
-  const divisor = { daily: 1, weekly: 7, monthly: 15, yearly: 20 }[activeTab];
+  const multiplier = { daily: 1, weekly: 7, monthly: 30, yearly: 365 }[activeTab];
   const tabProjectData: ReportProject[] = projectData.map(p => ({
     ...p,
-    hours: Math.round(p.hours / divisor),
+    hours: Math.round(p.hours * multiplier),
   }));
 
   const totalHours = tabProjectData.reduce((s, p) => s + p.hours, 0);
@@ -73,14 +72,8 @@ export function ReportScreen() {
           />
         </AnimatedSection>
 
-        <AnimatedSection key={`top-${activeTab}`} animateOn={activeTab}>
-          <TopProjectsChart
-            data={tabProjectData}
-          />
-        </AnimatedSection>
-
-        <AnimatedSection key={`alloc-${activeTab}`} animateOn={activeTab}>
-          <ProjectAllocation data={tabProjectData} totalHours={totalHours} />
+        <AnimatedSection key={`unified-${activeTab}`} animateOn={activeTab}>
+          <UnifiedProjects data={tabProjectData} totalHours={totalHours} />
         </AnimatedSection>
       </ScrollView>
     </View>

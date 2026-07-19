@@ -3,6 +3,7 @@ import type { PressableProps } from 'react-native';
 import * as React from 'react';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
+import { useThemeColors } from '@/hooks/use-theme-color';
 import { cn } from '@/utils/utils';
 import { Icon } from './icon';
 
@@ -35,8 +36,15 @@ function Button({
 }: ButtonProps) {
   const [pressed, setPressed] = React.useState(false);
   const primaryHex = usePrimaryHex();
+  const { isDark } = useThemeColors();
 
-  const iconColor = variant === 'primary' || variant === 'destructive' ? '#fff' : primaryHex;
+  const iconColor = variant === 'primary' || variant === 'destructive'
+    ? '#fff'
+    : variant === 'secondary' || variant === 'outline'
+      ? primaryHex
+      : isDark
+        ? '#fff'
+        : '#000';
 
   const iconClassName = cn(
     size === 'sm' && 'size-4',
@@ -79,12 +87,12 @@ function Button({
         : (
             <>
               {leftIconComponent
-                ? <Icon as={leftIconComponent} className={iconClassName} />
+                ? <Icon as={leftIconComponent} className={iconClassName} color={iconColor} />
                 : leftIcon?.(iconColor)}
               <Text
                 className={cn(
                   'font-semibold',
-                  variant === 'primary' && 'text-primary-foreground dark:text-white',
+                  variant === 'primary' && 'text-white!',
                   variant === 'secondary' && 'text-primary',
                   variant === 'outline' && 'text-primary',
                   variant === 'ghost' && 'text-foreground',
@@ -97,7 +105,7 @@ function Button({
                 {title}
               </Text>
               {rightIconComponent
-                ? <Icon as={rightIconComponent} className={iconClassName} />
+                ? <Icon as={rightIconComponent} className={iconClassName} color={iconColor} />
                 : rightIcon?.(iconColor)}
             </>
           )}

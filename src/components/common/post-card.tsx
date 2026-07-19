@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useCallback } from 'react';
 import { Pressable, View } from 'react-native';
 import { Text } from '../ui/text';
 
@@ -7,15 +8,17 @@ type PostCardProps = {
   title: string;
   body: string;
   imageUrl: string;
-  onPress: () => void;
+  onPress: (id: number) => void;
 };
 
 export function PostCard({ id, title, body, imageUrl, onPress }: PostCardProps) {
+  const handlePress = useCallback(() => {
+    onPress(id);
+  }, [id, onPress]);
+
   return (
-    <Pressable
-      className="overflow-hidden rounded-xl border border-border bg-card active:opacity-80"
-      onPress={onPress}
-    >
+
+    <Pressable onPress={handlePress} className="overflow-hidden rounded-xl border border-border bg-card">
       <Image
         source={{ uri: imageUrl }}
         className="h-40 w-full"

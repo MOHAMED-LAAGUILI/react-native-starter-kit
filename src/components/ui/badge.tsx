@@ -1,9 +1,11 @@
+import type { LucideIcon } from 'lucide-react-native';
 import type * as React from 'react';
 import { View } from 'react-native';
 import { cn } from '@/utils/utils';
+import { Icon } from './icon';
 import { Text } from './text';
 
-type BadgeVariant = 'default' | 'primary' | 'secondary' | 'destructive' | 'outline';
+type BadgeVariant = 'default' | 'primary' | 'secondary' | 'destructive' | 'outline' | 'success' | 'warning' | 'info';
 type BadgeSize = 'sm' | 'md' | 'lg';
 
 type BadgeProps = {
@@ -11,22 +13,29 @@ type BadgeProps = {
   size?: BadgeSize;
   className?: string;
   children: React.ReactNode;
+  icon?: LucideIcon;
 };
 
 const bgStyles: Record<BadgeVariant, string> = {
   default: 'bg-muted-foreground/15',
   destructive: 'bg-destructive',
-  outline: 'bg-transparent border border-border',
+  outline: 'bg-transparent border border-primary',
   primary: 'bg-primary',
-  secondary: 'bg-secondary',
+  secondary: 'bg-primary/20',
+  success: 'bg-green-500',
+  warning: 'bg-yellow-500',
+  info: 'bg-blue-500',
 };
 
 const textStyles: Record<BadgeVariant, string> = {
   default: 'text-muted-foreground',
   destructive: 'text-destructive-foreground',
-  outline: 'text-foreground',
+  outline: 'text-primary',
   primary: 'text-primary-foreground',
-  secondary: 'text-secondary-foreground',
+  secondary: 'text-primary',
+  success: 'text-white',
+  warning: 'text-white',
+  info: 'text-white',
 };
 
 const sizeStyles: Record<BadgeSize, string> = {
@@ -41,9 +50,22 @@ const textSizeStyles: Record<BadgeSize, string> = {
   sm: 'text-[10px]',
 };
 
-function Badge({ variant = 'default', size = 'md', className, children }: BadgeProps) {
+const iconSizeStyles: Record<BadgeSize, number> = {
+  lg: 14,
+  md: 10,
+  sm: 4,
+};
+
+function Badge({ variant = 'default', size = 'md', className, children, icon: IconComponent }: BadgeProps) {
   return (
-    <View className={cn('self-start rounded-full', bgStyles[variant], sizeStyles[size], className)}>
+    <View className={cn('flex-row items-center gap-1.5 self-start rounded-md', bgStyles[variant], sizeStyles[size], className)}>
+      {IconComponent && (
+        <Icon
+          as={IconComponent}
+          size={iconSizeStyles[size]}
+          className={textStyles[variant]}
+        />
+      )}
       <Text className={cn('font-semibold', textStyles[variant], textSizeStyles[size])}>{children}</Text>
     </View>
   );

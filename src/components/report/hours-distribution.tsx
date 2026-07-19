@@ -21,28 +21,32 @@ function DistributionLegend({
   totalHours,
 }: Pick<HoursDistributionProps, 'data' | 'totalHours'>) {
   return (
-    <View className="mt-5 gap-3">
+    <View className="mt-6 gap-2">
       {data.map((project: any) => {
         const percent = getProjectPercent(project.hours, totalHours);
 
         return (
           <View
             key={`pie-${project.project}`}
-            className="flex-row items-center justify-between gap-3"
+            className="flex-row items-center justify-between px-2 py-1"
           >
             <View className="flex-1 flex-row items-center gap-3">
               <View
-                className="size-3 rounded-full"
+                className="size-4 rounded-full"
                 style={{ backgroundColor: project.color }}
               />
               <Text className="flex-1 text-sm font-medium">
                 {project.project}
               </Text>
             </View>
-            <Text variant="caption" className="text-muted-foreground">
-              {percent.toFixed(0)}
-              %
-            </Text>
+            <View className="flex-row items-center gap-1">
+              <Text variant="caption" className="text-muted-foreground">
+                {percent.toFixed(0)}
+              </Text>
+              <Text variant="caption" className="text-muted-foreground">
+                %
+              </Text>
+            </View>
           </View>
         );
       })}
@@ -73,28 +77,33 @@ export function HoursDistribution({
     <ReportSection
       title="Hours Distribution"
       subtitle="Donut chart"
-      bodyClassName="p-4"
+      bodyClassName="p-5"
     >
-      <View className="items-center">
+      <View className="items-center py-2">
         <PieChart
           data={pieChartData}
           donut
-          radius={88}
-          innerRadius={58}
+          radius={92}
+          innerRadius={62}
           showTooltip
           showValuesAsTooltipText={false}
           focusOnPress
           sectionAutoFocus
           innerCircleColor={background}
+          strokeColor={background}
+          strokeWidth={2}
+          isAnimated
 
           centerLabelComponent={() => (
             <View className="items-center">
-              <Text variant="caption" className="text-muted-foreground">
+              <Text variant="caption" className="mb-1 text-muted-foreground">
                 Total
               </Text>
-              <Text variant="h2">
+              <Text variant="h2" className="font-bold">
                 {totalHours}
-                h
+                <Text variant="caption" className="ml-0.5 text-muted-foreground">
+                  h
+                </Text>
               </Text>
             </View>
           )}
