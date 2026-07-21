@@ -148,9 +148,9 @@ export const COLOR_PALETTES = [
 
   },
   {
-    color: '#84cc16',
+    color: '#76b911',
     key: 'dark-lime',
-    label: 'Dark Lime',
+    label: 'Lime',
     light: {
       '--color-chart-1': 'oklch(0.768 0.233 130.85)',
       '--color-primary': 'oklch(0.768 0.233 130.85)',

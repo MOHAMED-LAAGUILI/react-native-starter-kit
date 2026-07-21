@@ -2,6 +2,7 @@ import type Drawer from 'expo-router/drawer';
 import type { ComponentProps } from 'react';
 import { router, usePathname } from 'expo-router';
 import { DrawerContentScrollView } from 'expo-router/drawer';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { Button } from '@/components/ui';
 import { NAV_ITEMS } from '@/config/navigation';
@@ -20,6 +21,7 @@ export function AppDrawerContent(props: AppDrawerContentProps) {
   const pathname = usePathname();
   const { background, text } = useThemeColors();
   const primaryHex = usePrimaryHex();
+  const { t } = useTranslation();
 
   return (
     <DrawerContentScrollView
@@ -34,7 +36,7 @@ export function AppDrawerContent(props: AppDrawerContentProps) {
       <DrawerProfileHeader />
 
       <View className="mt-4 flex-1 px-4">
-        {NAV_ITEMS.map(({ label, href, icon: Icon, match }) => {
+        {NAV_ITEMS.map(({ label, translationKey, href, icon: Icon, match }) => {
           const currentPath = normalizePath(pathname);
           const normalizedPath = currentPath.replace(/\/+$/, '') || '/';
           const isActive = match.includes(normalizedPath);
@@ -43,7 +45,7 @@ export function AppDrawerContent(props: AppDrawerContentProps) {
             <Button
               key={label}
               variant={isActive ? 'primary' : 'ghost'}
-              title={label}
+              title={t(translationKey)}
               size="md"
               leftIcon={() => (
                 <Icon

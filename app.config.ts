@@ -9,7 +9,7 @@ const appIconBadgeConfig: AppIconBadgeConfig = {
   badges: [
     {
       color: 'white',
-      text: 'preview',
+      text: process.env.NODE_ENV,
       type: 'banner',
     },
     {

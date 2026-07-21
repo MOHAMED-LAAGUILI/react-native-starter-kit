@@ -1,11 +1,10 @@
 const { getDefaultConfig } = require('expo/metro-config');
 const { withUniwindConfig } = require('uniwind/metro');
 
-process.env.EXPO_ROUTER_APP_ROOT = './app';
-process.env.EXPO_ROUTER_IMPORT_MODE = 'sync';
-
-/** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
+
+//
+config.watchFolders = [__dirname]; // keep it minimal
 
 module.exports = withUniwindConfig(config, {
   cssEntryFile: './global.css',

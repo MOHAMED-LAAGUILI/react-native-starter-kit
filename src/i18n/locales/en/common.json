@@ -24,7 +24,14 @@
     "home": "Home",
     "search": "Search",
     "profile": "Profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "reportGraphs": "Report Graphs",
+    "preferences": "Preferences",
+    "deviceInfo": "Device Info",
+    "charts": "Charts",
+    "pageOne": "Page One",
+    "pageTwo": "Page Two",
+    "post": "Post"
   },
   "theme": {
     "light": "Light",

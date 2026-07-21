@@ -5,7 +5,8 @@ import { useWindowDimensions, View } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { OnboardingActions, OnboardingPagination, OnboardingSlideItem } from '@/components/onboarding';
+import { OnboardingActions, OnboardingSlideItem } from '@/components/onboarding';
+import { OnboardingPagination } from '@/components/onboarding/onboarding-pagination';
 import { ONBOARDING_SLIDES } from '@/data/onboarding-slides';
 import { useOnboardingStore } from '@/store';
 

@@ -1,6 +1,5 @@
-import { Image } from 'expo-image';
 import { ScrollView, View } from 'react-native';
-import { Text } from '@/components/ui';
+import { Image, Text } from '@/components/ui';
 import { cn } from '@/utils/utils';
 
 type ImageCardProps = {
@@ -22,8 +21,9 @@ function ImageCard({ title, subtitle, imageUrl, orientation = 'vertical' }: Imag
     >
       <Image
         source={{ uri: imageUrl }}
+        contentFit="cover"
+        style={{ height: '100%', width: '100%' }}
         className="absolute inset-0 size-full"
-        resizeMode="cover"
       />
       <View className="absolute inset-0 bg-black/40" />
       <View className={cn(

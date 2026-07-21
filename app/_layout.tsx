@@ -13,7 +13,6 @@ import {
   ReanimatedLogLevel,
 } from 'react-native-reanimated';
 
-import { WebErrorBoundary } from '@/components/common/web-error-boundary';
 import { AppProviders } from '@/components/layout/app-providers';
 import { StartupScreen } from '@/components/layout/startup-screen';
 import { setupI18n } from '@/i18n';
@@ -115,7 +114,7 @@ export default function RootLayout() {
             <StartupScreen appReady={appReady} startupError={startupError} loadingStep={loadingStep} />
           )
         : (
-            <WebErrorBoundary>
+            <>
               <Stack screenOptions={{ headerShown: false }} />
 
               <Toasts
@@ -129,7 +128,7 @@ export default function RootLayout() {
               />
 
               <PortalHost />
-            </WebErrorBoundary>
+            </>
           )}
     </AppProviders>
   );

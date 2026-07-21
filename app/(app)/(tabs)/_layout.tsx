@@ -1,6 +1,7 @@
 import { Tabs, useRouter } from 'expo-router';
 import { BarChart3, Home, Search, Settings, Smartphone } from 'lucide-react-native';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -12,27 +13,29 @@ import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { useThemeColors } from '@/hooks/use-theme-color';
 
 const TAB_CONFIG = {
-  'search': { icon: Search, label: 'Search', href: '/(app)/(tabs)/search' as const },
-  'report': { icon: BarChart3, label: 'Charts', href: '/(app)/(tabs)/report' as const },
-  'index': { icon: Home, label: 'Home', href: '/' as const },
-  'settings': { icon: Settings, label: 'Settings', href: '/(app)/(tabs)/settings' as const },
-  'device-info': { icon: Smartphone, label: 'Device Info', href: '/(app)/(tabs)/device-info' as const },
+  'search': { icon: Search, translationKey: 'navigation.search', href: '/(app)/(tabs)/search' as const },
+  'report': { icon: BarChart3, translationKey: 'navigation.charts', href: '/(app)/(tabs)/report' as const },
+  'index': { icon: Home, translationKey: 'navigation.home', href: '/' as const },
+  'settings': { icon: Settings, translationKey: 'navigation.settings', href: '/(app)/(tabs)/settings' as const },
+  'device-info': { icon: Smartphone, translationKey: 'navigation.deviceInfo', href: '/(app)/(tabs)/device-info' as const },
 } as const;
 
 function TabItem({
   focused,
   icon: Icon,
-  label,
+  translationKey,
   href,
   primaryHex,
   isDark,
+  t,
 }: {
   focused: boolean;
   icon: typeof Home;
-  label: string;
+  translationKey: string;
   href: string;
   primaryHex: string;
   isDark: boolean;
+  t: (key: string) => string;
 }) {
   const router = useRouter();
 
@@ -79,7 +82,7 @@ function TabItem({
         className="text-[10px]"
         style={{ color: focused ? primaryHex : inactiveColor }}
       >
-        {label}
+        {t(translationKey)}
       </Text>
     </Pressable>
   );
@@ -90,6 +93,7 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
   const { isDark } = useThemeColors();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   const inactiveBg = isDark ? '#000' : '#fff';
   const inactiveColor = isDark ? '#a1a1aa' : '#71717a';
@@ -97,7 +101,7 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
 
   return (
     <View style={{ backgroundColor: inactiveBg, paddingBottom: insets.bottom }}>
-      <View className="relative flex-row border-t border-border">
+      <View className="border-border relative flex-row border-t">
         {state.routes.map((r, i) => {
           const isFocused = i === state.index;
           const config = TAB_CONFIG[r.name as keyof typeof TAB_CONFIG];
@@ -146,10 +150,11 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
               key={r.key}
               focused={isFocused}
               icon={config.icon}
-              label={config.label}
+              translationKey={config.translationKey}
               href={config.href}
               primaryHex={primaryHex}
               isDark={isDark}
+              t={t}
             />
           );
         })}
@@ -159,6 +164,8 @@ function CustomTabBar({ state }: { state: { routes: Array<{ key: string; name: s
 }
 
 export default function TabLayout() {
+  const { t } = useTranslation();
+
   return (
     <Tabs
       tabBar={props => <CustomTabBar {...props} />}
@@ -166,11 +173,11 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-      <Tabs.Screen name="search" options={{ headerTitle: 'Search' }} />
-      <Tabs.Screen name="report" options={{ headerTitle: 'Charts' }} />
-      <Tabs.Screen name="index" options={{ headerTitle: 'Home' }} />
-      <Tabs.Screen name="settings" options={{ headerTitle: 'Settings' }} />
-      <Tabs.Screen name="device-info" options={{ headerTitle: 'Device Info' }} />
+      <Tabs.Screen name="search" options={{ headerTitle: t('navigation.search') }} />
+      <Tabs.Screen name="report" options={{ headerTitle: t('navigation.charts') }} />
+      <Tabs.Screen name="index" options={{ headerTitle: t('navigation.home') }} />
+      <Tabs.Screen name="settings" options={{ headerTitle: t('navigation.settings') }} />
+      <Tabs.Screen name="device-info" options={{ headerTitle: t('navigation.deviceInfo') }} />
     </Tabs>
   );
 }

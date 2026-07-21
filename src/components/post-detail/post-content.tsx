@@ -11,9 +11,11 @@ function PostHero({ post }: { post: Post }) {
           source={{ uri: post.imageUrl }}
           className="absolute size-full"
           contentFit="cover"
+          style={{ height: '100%', width: '100%' }}
         />
+
         <LinearGradient
-          colors={['transparent', 'rgba(0,0,0,0.4)']}
+          colors={['transparent', 'rgba(0,0,0,0.5)']}
           className="absolute size-full"
         />
         <View className="absolute inset-x-0 bottom-0 gap-2 p-6 pb-8">
