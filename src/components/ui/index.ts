@@ -27,8 +27,14 @@ export { Menu } from './menu';
 export type { ModalProps } from './modal';
 export { Modal } from './modal';
 
-export type { ProgressProps } from './progress';
 export { Progress } from './progress';
+export type {
+  BarPropTypes,
+  CirclePropTypes,
+  CircleSnailPropTypes,
+  DefaultPropTypes,
+  PiePropTypes,
+} from './progress';
 export type { QRCodeProps } from './qr-code';
 export { QRCodeView } from './qr-code';
 export type { RadioGroupItemProps, RadioGroupProps } from './radio-group';

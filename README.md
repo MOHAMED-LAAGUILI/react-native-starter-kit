@@ -374,11 +374,12 @@ To release, just bump the version in `package.json` and push to `main`.
 - **Vexo** — AI-powered in-app chatbot and customer support
 
 ## Planned Features (Expected Soon)
+- **Backend Service** - Supabase / Convex
 - **Expo Notifications** — push notifications via `expo-notifications` with local + remote notification support
 - **Expo** [Other Expo Features](https://docs.expo.dev/versions/latest/sdk/expo/)
 - **Immersive Focus** [Hide Navigation bar](https://docs.expo.dev/versions/latest/sdk/navigation-bar/)
-- - **Widget** [Android Widgets](https://github.com/sAleksovski/react-native-android-widget)
-- 
+- **Expo Widget** [Android Widgets](https://github.com/sAleksovski/react-native-android-widget)
+
 
 
 

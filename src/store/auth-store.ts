@@ -11,6 +11,7 @@ type AuthState = {
   setTokens: (tokens: AuthTokens | null) => void;
   login: (user: User, tokens: AuthTokens) => void;
   logout: () => void;
+  updateProfile: (updates: Partial<User>) => void;
   hydrate: () => void;
 };
 
@@ -74,6 +75,17 @@ export const useAuthStore = create<AuthState>(set => ({
   },
 
   setUser: user => set({ user }),
+
+  updateProfile: (updates) => {
+    set((state) => {
+      if (!state.user)
+        return state;
+      const updatedUser = { ...state.user, ...updates };
+      StorageService.auth.setItem(STORAGE_KEYS.AUTH_USER, updatedUser);
+      return { user: updatedUser };
+    });
+  },
+
   tokens: initialTokens,
   user: initialUser,
 }));

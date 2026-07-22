@@ -18,7 +18,7 @@ function ProfileHeader({ gradientColor: _gradientColor, name: _name }: ProfileHe
   return (
     <View
       className="relative -mx-4 mb-2"
-      style={{ height: 130 + safeTop }}
+      style={{ height: 115 + safeTop }}
     >
       <Svg
         height="100%"
@@ -61,7 +61,8 @@ function ProfileHeader({ gradientColor: _gradientColor, name: _name }: ProfileHe
             {user?.name ?? 'James Martin'}
           </Text>
           <Text variant="bodySmall" className="mt-0.5 text-white/80">
-            Senior Graphic Designer
+            {user?.role ?? 'Administrator'}
+
           </Text>
         </View>
       </View>

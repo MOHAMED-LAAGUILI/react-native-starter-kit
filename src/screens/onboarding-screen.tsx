@@ -1,72 +1,37 @@
-import type { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { router } from 'expo-router';
-import * as React from 'react';
-import { useWindowDimensions, View } from 'react-native';
-import { useSharedValue } from 'react-native-reanimated';
-import Carousel from 'react-native-reanimated-carousel';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { OnboardingActions, OnboardingSlideItem } from '@/components/onboarding';
-import { OnboardingPagination } from '@/components/onboarding/onboarding-pagination';
-import { ONBOARDING_SLIDES } from '@/data/onboarding-slides';
+import { OnboardingScreen } from '@/components/onboarding/onboarding-screen';
 import { useOnboardingStore } from '@/store';
 
-function OnboardingScreen() {
-  const [activeIndex, setActiveIndex] = React.useState(0);
-  const progress = useSharedValue(0);
-  const { width } = useWindowDimensions();
-  const insets = useSafeAreaInsets();
-  const isLast = activeIndex === ONBOARDING_SLIDES.length - 1;
+const steps = [
+  {
+    image: require('@assets/lottie/welcome.json'),
+    title: 'Welcome',
+    description:
+      'Welcome to your starter kit. Everything is set up to help you build faster, scale smarter, and deliver high-quality applications from day one.',
+  },
+  {
+    image: require('@assets/lottie/people_reading_news_on_phone.json'),
+    title: 'Stay Informed',
+    description:
+      'Access the latest updates, features, and best practices. Stay aligned with modern development standards and continuously improve your workflow.',
+  },
+  {
+    image: require('@assets/lottie/hello.json'),
+    title: 'Get Started',
+    description:
+      'You’re ready to go. Explore the project structure, customize your setup, and start building your next great product with confidence.',
+  },
+];
+
+function Screen() {
   const complete = useOnboardingStore(s => s.complete);
-  const carouselRef = React.useRef<ICarouselInstance>(null);
-
-  const handleProgressChange = (_: number, absoluteProgress: number) => {
-    progress.set(absoluteProgress);
-  };
-
-  const handleSnapToItem = (index: number) => {
-    progress.set(index);
-    setActiveIndex(index);
-  };
 
   function completeOnboarding() {
     complete();
     router.replace('/(auth)/login');
   }
 
-  function onNext() {
-    if (isLast) {
-      completeOnboarding();
-    }
-    else {
-      carouselRef.current?.next();
-    }
-  }
-
-  return (
-    <View className="flex-1 bg-background">
-      <View className="flex-1 justify-center">
-        <Carousel
-          ref={carouselRef}
-          data={ONBOARDING_SLIDES}
-          width={width}
-          height={380}
-          pagingEnabled
-          loop={false}
-          onProgressChange={handleProgressChange}
-          onSnapToItem={handleSnapToItem}
-          renderItem={({ item }) => <OnboardingSlideItem item={item} />}
-        />
-      </View>
-
-      <View
-        className="flex-row items-end justify-between px-6"
-        style={{ paddingBottom: insets.bottom + 24 }}
-      >
-        <OnboardingPagination data={ONBOARDING_SLIDES} progress={progress} />
-        <OnboardingActions isLast={isLast} onNext={onNext} />
-      </View>
-    </View>
-  );
+  return <OnboardingScreen steps={steps} onComplete={completeOnboarding} />;
 }
 
-export { OnboardingScreen };
+export { Screen as OnboardingScreen };

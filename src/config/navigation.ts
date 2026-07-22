@@ -1,5 +1,13 @@
 import type { Href } from 'expo-router';
-import { Book, Database, Home, Search, Settings, Smartphone, Sparkles, User } from 'lucide-react-native';
+import {
+  Database,
+  Home,
+  Search,
+  Settings,
+  Smartphone,
+  Sparkles,
+  User,
+} from 'lucide-react-native';
 
 export type NavItem = {
   href: Href;
@@ -9,7 +17,7 @@ export type NavItem = {
   match: string[];
 };
 
-export const NAV_ITEMS: NavItem[] = [
+const BASE_NAV_ITEMS: NavItem[] = [
   {
     href: '/(app)/(tabs)' as Href,
     icon: Home,
@@ -46,25 +54,25 @@ export const NAV_ITEMS: NavItem[] = [
     match: ['/report'],
   },
   {
-    href: '/(app)/preferences' as Href,
-    icon: Database,
-    label: 'Preferences',
-    translationKey: 'navigation.preferences',
-    match: ['/preferences'],
-  },
-  {
     href: '/(app)/(tabs)/device-info' as Href,
     icon: Smartphone,
     label: 'Device Info',
     translationKey: 'navigation.deviceInfo',
     match: ['/device-info'],
   },
-  {
-    href: '/(app)/page-one' as Href,
-    icon: Book,
-    label: 'Page One',
-    translationKey: 'navigation.pageOne',
-    match: ['/page-one'],
-  },
-
 ];
+
+const DEV_NAV_ITEMS: NavItem[] = [
+  {
+    href: '/(app)/preferences' as Href,
+    icon: Database,
+    label: 'Preferences',
+    translationKey: 'navigation.preferences',
+    match: ['/preferences'],
+  },
+];
+
+// Final export
+export const NAV_ITEMS: NavItem[] = __DEV__
+  ? [...BASE_NAV_ITEMS, ...DEV_NAV_ITEMS]
+  : BASE_NAV_ITEMS;

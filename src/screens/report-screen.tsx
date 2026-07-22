@@ -2,7 +2,6 @@ import type { ReportProject } from '@/data/report';
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { OverviewCards } from '@/components/home/overview-cards';
-import { AnimatedSection } from '@/components/report/animated-section';
 import { reportRangeLabels, reportTabs } from '@/components/report/constants';
 import { HoursDistribution } from '@/components/report/hours-distribution';
 import { LineTrend } from '@/components/report/line-trend';
@@ -59,27 +58,21 @@ export function ReportScreen() {
       <ScrollView contentContainerClassName="gap-5 px-6 pb-8" showsVerticalScrollIndicator={false}>
         <OverviewCards cards={overviewCards} />
 
-        <AnimatedSection key={`trend-${activeTab}`} animateOn={activeTab}>
-          <TrendSnapshot
-            data={tabProjectData}
-            rangeLabel={reportRangeLabels[activeTab]}
-          />
-        </AnimatedSection>
+        <TrendSnapshot
+          key={`trend-${activeTab}`}
+          data={tabProjectData}
+          rangeLabel={reportRangeLabels[activeTab]}
+        />
 
-        <AnimatedSection key={`hours-${activeTab}`} animateOn={activeTab}>
-          <HoursDistribution
-            data={tabProjectData}
-            totalHours={totalHours}
-          />
-        </AnimatedSection>
+        <HoursDistribution
+          key={`hours-${activeTab}`}
+          data={tabProjectData}
+          totalHours={totalHours}
+        />
 
-        <AnimatedSection key={`unified-${activeTab}`} animateOn={activeTab}>
-          <UnifiedProjects data={tabProjectData} totalHours={totalHours} />
-        </AnimatedSection>
+        <UnifiedProjects key={`unified-${activeTab}`} data={tabProjectData} totalHours={totalHours} />
 
-        <AnimatedSection key={`line-${activeTab}`} animateOn={activeTab}>
-          <LineTrend data={tabProjectData} />
-        </AnimatedSection>
+        <LineTrend key={`line-${activeTab}`} data={tabProjectData} />
       </ScrollView>
     </View>
   );

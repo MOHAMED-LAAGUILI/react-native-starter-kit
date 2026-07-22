@@ -84,6 +84,7 @@ const plugins: ExpoConfig['plugins'] = [
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   android: {
+
     adaptiveIcon: {
       backgroundColor: '#ffffff',
       foregroundImage: './assets/images/adaptive-icon.png',

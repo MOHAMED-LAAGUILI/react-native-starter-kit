@@ -183,19 +183,6 @@ function ChartLine({
   const lineChartData: lineDataItem[] = data.map(item => ({
     value: item.value,
     label: item.label ?? '',
-    dataPointText: item.value.toString(),
-    dataPointLabelComponent: () => (
-      <View className="items-center">
-        <Text variant="caption" className="text-muted-foreground">
-          {item.value}
-        </Text>
-        {item.tooltipText && (
-          <Text variant="caption" className="text-muted-foreground">
-            {item.tooltipText}
-          </Text>
-        )}
-      </View>
-    ),
     showDataPoint: true,
     dataPointColor: item.color,
     dataPointRadius: 4,
@@ -386,4 +373,4 @@ function Chart({
 }
 
 export type { ChartDataItem, ChartProps, ChartVariant };
-export { Chart };
+export { Chart, ChartLegend };

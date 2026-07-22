@@ -7,7 +7,7 @@ import { useThemeColors } from '@/hooks/use-theme-color';
 import { cn } from '@/utils/utils';
 import { Icon } from './icon';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'success';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 type ButtonProps = {
@@ -38,7 +38,7 @@ function Button({
   const primaryHex = usePrimaryHex();
   const { isDark } = useThemeColors();
 
-  const iconColor = variant === 'primary' || variant === 'destructive'
+  const iconColor = variant === 'primary' || variant === 'destructive' || variant === 'success'
     ? '#fff'
     : variant === 'secondary' || variant === 'outline'
       ? primaryHex
@@ -54,6 +54,7 @@ function Button({
     variant === 'outline' && 'text-primary',
     variant === 'ghost' && 'text-foreground',
     variant === 'destructive' && 'text-destructive-foreground',
+    variant === 'success' && 'text-white',
   );
 
   return (
@@ -68,6 +69,7 @@ function Button({
         variant === 'outline' && 'border border-primary bg-background active:bg-primary/10',
         variant === 'ghost' && 'active:bg-accent',
         variant === 'destructive' && 'bg-destructive active:bg-destructive/90',
+        variant === 'success' && 'bg-green-600 active:bg-green-700',
         disabled && 'opacity-50',
         pressed && !disabled && 'opacity-80',
         className,
@@ -81,7 +83,7 @@ function Button({
         ? (
             <ActivityIndicator
               size="small"
-              color={variant === 'primary' || variant === 'destructive' ? '#ffffff' : undefined}
+              color={variant === 'primary' || variant === 'destructive' || variant === 'success' ? '#ffffff' : undefined}
             />
           )
         : (
@@ -97,6 +99,7 @@ function Button({
                   variant === 'outline' && 'text-primary',
                   variant === 'ghost' && 'text-foreground',
                   variant === 'destructive' && 'text-destructive-foreground',
+                  variant === 'success' && 'text-white',
                   size === 'sm' && 'text-sm',
                   size === 'md' && 'text-base',
                   size === 'lg' && 'text-lg',

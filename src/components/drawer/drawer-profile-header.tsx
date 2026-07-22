@@ -60,7 +60,7 @@ export function DrawerProfileHeader() {
             {user?.name ?? 'James Martin'}
           </Text>
           <Text variant="bodySmall" className="mt-0.5 text-white/80">
-            Senior Graphic Designer
+            {user?.role ?? 'Administrator'}
           </Text>
         </View>
       </View>

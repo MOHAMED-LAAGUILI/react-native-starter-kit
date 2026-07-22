@@ -1,0 +1,19 @@
+name: Create preview Builds For Android and iOS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build_android:
+    name: Build Android app
+    type: build
+    params:
+      platform: android
+      profile: preview
+  build_ios:
+    name: Build iOS app
+    type: build
+    params:
+      platform: ios
+      profile: preview

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 
-import { Chart } from '@/components/ui';
+import { Chart, Spinner } from '@/components/ui';
 import { ReportSection } from './report-section';
 
 type TrendSnapshotProps = {
@@ -12,6 +13,13 @@ export function TrendSnapshot({
   data,
   rangeLabel,
 }: TrendSnapshotProps) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(setIsLoading, 100, false);
+    return () => clearTimeout(timer);
+  }, [data]);
+
   const chartData = data.map((project: any) => ({
     value: project.hours,
     label: project.project.replace('Project ', ''),
@@ -20,7 +28,15 @@ export function TrendSnapshot({
 
   return (
     <ReportSection title="Trend Snapshot" subtitle={rangeLabel} bodyClassName="p-4">
-      <Chart variant="trend" data={chartData} />
+      {isLoading
+        ? (
+            <View className="h-[150px] items-center justify-center">
+              <Spinner size="lg" />
+            </View>
+          )
+        : (
+            <Chart variant="trend" data={chartData} />
+          )}
     </ReportSection>
   );
 }

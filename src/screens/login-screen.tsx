@@ -5,7 +5,7 @@ import * as React from 'react';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { useLogin, useRegister } from '@/api/hooks/use-auth';
 import { DemoLoginButton, ForgotPasswordLink, LoginFormFields, ToggleModeLink } from '@/components/auth';
-import { Text } from '@/components/ui';
+import { Image, Text } from '@/components/ui';
 import { loginSchema, registerSchema } from '@/validation';
 
 type Mode = 'login' | 'signup';
@@ -36,6 +36,11 @@ function LoginScreen() {
     <KeyboardAvoidingView className="flex-1 bg-background">
       <ScrollView contentContainerClassName="flex-grow justify-center px-6" keyboardShouldPersistTaps="handled">
         <View className="mb-8 items-center gap-2">
+          <Image
+            source={require('@assets/images/icon.png')}
+            className="mb-2 size-20 rounded-2xl"
+            style={{ height: 80, width: 80 }}
+          />
           <Text variant="h1">{isLogin ? 'Welcome' : 'Create Account'}</Text>
           <Text variant="body" className="text-muted-foreground">
             {isLogin ? 'Sign in to your account' : 'Sign up for a new account'}

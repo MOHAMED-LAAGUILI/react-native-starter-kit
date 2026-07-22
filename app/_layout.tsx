@@ -8,11 +8,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
 import { useEffect, useState } from 'react';
-import {
-  configureReanimatedLogger,
-  ReanimatedLogLevel,
-} from 'react-native-reanimated';
-
 import { AppProviders } from '@/components/layout/app-providers';
 import { StartupScreen } from '@/components/layout/startup-screen';
 import { setupI18n } from '@/i18n';
@@ -30,13 +25,7 @@ void SplashScreen.preventAutoHideAsync();
 
 SplashScreen.setOptions({
   fade: true,
-  duration: 600,
-});
-
-// This is the default configuration
-configureReanimatedLogger({
-  level: ReanimatedLogLevel.warn,
-  strict: false, // Reanimated runs in strict mode by default
+  duration: 500,
 });
 
 export default function RootLayout() {

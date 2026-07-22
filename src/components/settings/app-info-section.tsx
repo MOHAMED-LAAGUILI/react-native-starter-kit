@@ -6,6 +6,7 @@ import { SectionHeader } from '@/components/common/section-header';
 import { SettingGroup } from '@/components/common/setting-group';
 import { SettingRow } from '@/components/common/setting-row';
 import { Text } from '@/components/ui';
+import { ENV } from '@/config/env';
 import { useThemeColors } from '@/hooks/use-theme-color';
 import { cn } from '@/utils/utils';
 
@@ -21,8 +22,8 @@ function AppInfoSection() {
         <View className="flex-row items-center p-4">
           <Info size={22} color={icon} style={{ marginRight: 12 }} />
           <View className="flex-1">
-            <Text variant="body">{t('app.name')}</Text>
-            <Text variant="caption" className="mt-0.5 text-muted-foreground">{t('app.version', { version: '1.0.0' })}</Text>
+            <Text variant="body">{ENV.EXPO_PUBLIC_NAME}</Text>
+            <Text variant="caption" className="mt-0.5 text-muted-foreground">{t('app.version', { version: ENV.EXPO_PUBLIC_VERSION })}</Text>
             <Text variant="caption" className="text-muted-foreground">{t('app.description')}</Text>
           </View>
         </View>

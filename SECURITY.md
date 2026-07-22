@@ -4,8 +4,8 @@
 
 | Version | Supported          |
 |---------|--------------------|
-| 2.1.x   | :white_check_mark: |
-| < 2.1   | :x:                |
+| 2.5.x   | :white_check_mark: |
+| < 2.5   | :x:                |
 
 ## Reporting a Vulnerability
 
@@ -30,4 +30,4 @@ When using this starter kit:
 - Use environment variables for sensitive configuration
 - Enable code signing for production builds
 - Keep dependencies updated (`bun run deps:fix`)
-- Run `bun run doctor` to check for known vulnerabilities
+- Run `bun run checks` to check for known vulnerabilities

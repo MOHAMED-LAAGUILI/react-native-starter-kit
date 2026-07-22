@@ -1,6 +1,6 @@
 export const COLOR_PALETTES = [
   {
-    color: '#3b82f6',
+    color: '#0958e9',
     dark: {
       '--color-chart-1': 'oklch(0.488 0.243 264.376)',
       '--color-primary': 'oklch(0.707 0.165 254.624)',

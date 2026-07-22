@@ -12,6 +12,7 @@ function ButtonsDemo() {
         <Button title="Outline" variant="outline" size="sm" />
         <Button title="Ghost" variant="ghost" size="sm" />
         <Button title="Destructive" variant="destructive" size="sm" />
+        <Button title="Success" variant="success" size="sm" />
       </Row>
 
       <Text variant="label" className="mb-1 text-muted-foreground">Sizes</Text>

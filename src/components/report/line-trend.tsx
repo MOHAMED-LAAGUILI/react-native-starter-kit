@@ -1,6 +1,7 @@
-import React from 'react';
-import { Chart } from '@/components/ui';
-import { usePrimaryHex } from '@/hooks/use-primary-hex';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import { Chart, Spinner } from '@/components/ui';
+import { ChartLegend } from '@/components/ui/chart';
 import { ReportSection } from './report-section';
 
 type LineTrendProps = {
@@ -11,13 +12,17 @@ export function LineTrend({
   data,
 }: LineTrendProps) {
   const [chartWidth, setChartWidth] = React.useState(0);
-  const primaryHex = usePrimaryHex();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(setIsLoading, 100, false);
+    return () => clearTimeout(timer);
+  }, [data]);
 
   const chartData = data.map((project: any) => ({
     value: project.hours,
     label: project.project,
-    color: primaryHex,
-    tooltipText: `${project.project}: ${project.hours} h`,
+    color: project.color,
   }));
 
   return (
@@ -26,13 +31,24 @@ export function LineTrend({
       subtitle="Line chart"
       bodyClassName="p-4"
     >
-      <Chart
-        variant="line"
-        data={chartData}
-        width={chartWidth}
-        height={200}
-        onLayout={e => setChartWidth(e.nativeEvent.layout.width)}
-      />
+      <View className="gap-4">
+        {isLoading
+          ? (
+              <View className="h-[200px] items-center justify-center">
+                <Spinner size="lg" />
+              </View>
+            )
+          : (
+              <Chart
+                variant="line"
+                data={chartData}
+                width={chartWidth}
+                height={200}
+                onLayout={e => setChartWidth(e.nativeEvent.layout.width)}
+              />
+            )}
+        <ChartLegend data={chartData} />
+      </View>
     </ReportSection>
   );
 }

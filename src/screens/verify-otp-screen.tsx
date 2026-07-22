@@ -4,7 +4,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as React from 'react';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { useVerifyOtp } from '@/api/hooks/use-auth';
-import { Button, Input, Text } from '@/components/ui';
+import { Button, Image, Input, Text } from '@/components/ui';
 import { getFieldError } from '@/utils/form-helpers';
 import { verifyOtpSchema } from '@/validation';
 
@@ -28,6 +28,11 @@ function VerifyOtpScreen() {
     <KeyboardAvoidingView className="flex-1 bg-background">
       <ScrollView contentContainerClassName="flex-grow justify-center px-6" keyboardShouldPersistTaps="handled">
         <View className="mb-8 items-center gap-2">
+          <Image
+            source={require('@assets/images/icon.png')}
+            className="mb-2 size-20 rounded-2xl"
+            style={{ height: 80, width: 80 }}
+          />
           <Text variant="h1">Verify OTP</Text>
           <Text variant="body" className="text-center text-muted-foreground">
             Enter the 6-digit code sent to

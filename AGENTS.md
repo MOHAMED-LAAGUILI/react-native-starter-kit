@@ -308,6 +308,7 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - Language persisted in MMKV via `StorageService`
 - `changeLanguage(lang)` updates i18next + persists to MMKV
 - RTL not supported — Arabic removed from language options
+- **When adding or removing pages**: Always add/remove corresponding translation keys in `src/i18n/locales/{en,fr}/` for all user-facing strings
 
 ## Auth Flow
 1. App boots → `SplashScreen.preventAutoHideAsync()`

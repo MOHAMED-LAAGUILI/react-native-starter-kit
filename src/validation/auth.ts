@@ -31,7 +31,15 @@ export const verifyOtpSchema = z
     path: ['confirmPassword'],
   });
 
+export const editProfileSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  password: z.string().min(6, 'Password must be at least 6 characters').optional().or(z.literal('')),
+  role: z.string().min(2, 'Role must be at least 2 characters').optional().or(z.literal('')),
+});
+
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterFormData = z.infer<typeof registerSchema>;
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 export type VerifyOtpFormData = z.infer<typeof verifyOtpSchema>;
+export type EditProfileFormData = z.infer<typeof editProfileSchema>;
