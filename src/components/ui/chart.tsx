@@ -33,6 +33,7 @@ type ChartProps = {
   centerSubtitle?: string;
   className?: string;
   onLayout?: (event: LayoutChangeEvent) => void;
+  hideLabels?: boolean;
 };
 
 function ChartLegend({ data }: { data: ChartDataItem[] }) {
@@ -173,6 +174,7 @@ function ChartLine({
   stepValue,
   className,
   onLayout,
+  hideLabels,
 }: ChartProps) {
   const { isDark, background, muted } = useThemeColors();
 
@@ -180,23 +182,27 @@ function ChartLine({
   const computedMaxValue = maxValue ?? Math.max(...data.map(d => d.value), 1);
   const computedStepValue = stepValue ?? Math.max(Math.ceil(computedMaxValue / 4), 1);
 
-  const lineChartData: lineDataItem[] = data.map(item => ({
-    value: item.value,
-    label: item.label ?? '',
-    showDataPoint: true,
-    dataPointColor: item.color,
-    dataPointRadius: 4,
-    customDataPoint: () => (
-      <View
-        className="rounded-full"
-        style={{
-          width: 8,
-          height: 8,
-          backgroundColor: item.color,
-        }}
-      />
-    ),
-  }));
+  const lineChartData: lineDataItem[] = data.map((item) => {
+    const base: lineDataItem = {
+      value: item.value,
+      dataPointColor: item.color,
+      dataPointRadius: 4,
+      customDataPoint: () => (
+        <View
+          className="rounded-full"
+          style={{
+            width: 8,
+            height: 8,
+            backgroundColor: item.color,
+          }}
+        />
+      ),
+    };
+    if (!hideLabels) {
+      base.label = item.label ?? '';
+    }
+    return base;
+  });
 
   return (
     <View className={cn('w-full overflow-hidden rounded-xl', className)} onLayout={onLayout}>
@@ -257,6 +263,7 @@ function ChartBars({
   stepValue,
   className,
   onLayout,
+  hideLabels,
 }: ChartProps) {
   const { isDark, background, muted } = useThemeColors();
 
@@ -265,13 +272,18 @@ function ChartBars({
   const computedMaxValue = maxValue ?? Math.max(...data.map(d => d.value), 1);
   const computedStepValue = stepValue ?? Math.max(Math.ceil(computedMaxValue / 4), 1);
 
-  const barChartData: barDataItem[] = data.map(item => ({
-    value: item.value,
-    label: item.label ?? '',
-    frontColor: item.color,
-    labelWidth: 0,
-    barWidth: variant === 'bar-horizontal' ? 32 : 24,
-  }));
+  const barChartData: barDataItem[] = data.map((item) => {
+    const base: barDataItem = {
+      value: item.value,
+      frontColor: item.color,
+      labelWidth: 0,
+      barWidth: variant === 'bar-horizontal' ? 32 : 24,
+    };
+    if (!hideLabels) {
+      base.label = item.label ?? '';
+    }
+    return base;
+  });
 
   return (
     <View className={cn('w-full overflow-hidden rounded-xl', className)} onLayout={onLayout}>
@@ -345,8 +357,9 @@ function Chart({
   centerSubtitle,
   className,
   onLayout,
+  hideLabels,
 }: ChartProps) {
-  const shared = { data, width, height, maxValue, stepValue, className, onLayout };
+  const shared = { data, width, height, maxValue, stepValue, className, onLayout, hideLabels };
 
   if (variant === 'pie') {
     return (

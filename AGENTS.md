@@ -7,7 +7,7 @@
 - Before answering ANY question about a library, framework, SDK, API, CLI tool, or cloud service, ALWAYS run `npx ctx7@latest library "<name>" "<question>"` first.
 - Pick the best match by description, code snippet count, and source reputation.
 - Then run `npx ctx7@latest docs <libraryId> "<question>"` to get current documentation.
-- This includes: React, React Native, Expo, Tailwind, Zustand, TanStack, i18next, Axios, Lottie, Reanimated, Gesture Handler, Bottom Sheet, Primitives, and any other dependency.
+- This includes: React, React Native, Expo, Tailwind, Zustand, TanStack, i18next, Axios, Reanimated, Gesture Handler, Bottom Sheet, Primitives, and any other dependency.
 - Do NOT rely on training data for library-specific syntax, API changes, version migrations, or configuration.
 - If a command fails with a quota error, inform the user and suggest `npx ctx7@latest login`.
 
@@ -132,6 +132,8 @@ How: Essential Rules
 - ✅ DO extract components when a function exceeds 110 lines (`max-lines-per-function`)
 - ✅ DO cap function params at 3; use options object beyond that (`max-params`)
 - ✅ DO write React Compiler–compatible code (`react-compiler/react-compiler`)
+- ✅ DO use `NAV_TITLE_MAP` from `@/config/navigation` for header title keys (single source, derived from `NAV_ITEMS`)
+- ✅ DO add `tab` field to `NavItem` with `name`, `icon`, and `order` when adding a bottom tab route — tabs render sorted by `order`
 - ❌ DO NOT use raw `Text`/`Pressable` from `react-native` — use wrapped versions
 - ❌ DO NOT modify `android/` or `ios/` directly — use Expo config plugins
 
@@ -181,10 +183,9 @@ How: Essential Rules
 
 ### Cross-Platform (Web + iOS + Android)
 - **Icons** (lucide-react-native): always use `color` prop, never `className` — `className` colors don't work on native. Use `useThemeColors()` to get hex values: `color={text}`, `color={muted}`
-- **Lottie**: wrap in sized container (`width`/`height` via `style`); no dimensions = large default
 - **Spacing**: test on all platforms — drawer/header items may need explicit `ml`/`mr` margins on native that web handles via CSS
 - **SafeArea**: always wrap screens in `SafeAreaView` or use `useSafeAreaInsets()` — not needed on web but critical on native
-- **Drawer/Header**: `DrawerToggleButton` and header buttons need explicit margins (`ml-3`, `mr-3`) on native
+- **Drawer/Header**: drawer header buttons need explicit margins (`ml-3`, `mr-3`) on native
 - **ScrollViews**: use `contentContainerStyle` not `className` for background colors on scroll containers
 - **SVG**: hardcoded hex colors (`#ffffff`) won't follow theme — use `useThemeColors()` or CSS variables for dynamic theming
 - **BottomSheet**: `@gorhom/bottom-sheet` needs `GestureHandlerRootView` wrapper — already in root layout
@@ -197,6 +198,7 @@ How: Essential Rules
 - Side-effect CSS: `import '@/global.css'`
 - URL polyfill (entry): `import 'react-native-url-polyfill/auto'`
 - Store selectors for perf: `useAuthStore((s) => s.isAuthenticated)`
+- Navigation config: `import { NAV_ITEMS, NAV_TITLE_MAP, NAV_TAB_ITEMS } from '@/config/navigation'`
 
 ### TypeScript
 - Strict mode, TSX for components, `.ts` for utilities
@@ -250,16 +252,18 @@ app/
 │   ├── _layout.tsx      — Auth stack (no header, redirect if authed)
 │   └── login.tsx        — Login screen
 └── (app)/
-    ├── _layout.tsx      — Drawer (left hamburger via DrawerToggleButton) + auth guard
-    ├── report.tsx       — Report Graphs
-    ├── preferences.tsx  — App Preferences 
+    ├── _layout.tsx      — Drawer (left PanelLeftOpen via custom Pressable) + auth guard
+    ├── report.tsx       — Drawer-only report route
+    ├── dev-preferences.tsx — Dev-only preferences
+    ├── dev-onboarding.tsx  — Dev-only onboarding
     └── (tabs)/
-        ├── _layout.tsx  — Tabs (Home, Search, Profile, Settings, Report) with lucide icons
-        ├── index.tsx    — Home tab
+        ├── _layout.tsx  — Tabs (Search, Report, Home, Settings, Device Info) sorted by tab.order
+        ├── index.tsx    — Home tab (floating center button)
         ├── search.tsx   — Search tab
-        ├── profile.tsx  — Profile tab
+        ├── profile.tsx  — Profile tab (drawer only, hidden from tabs)
         ├── report.tsx   — Report tab (charts, trends, project allocation)
-        └── settings.tsx — Settings tab (theme/lang bottom-sheets, app info)
+        ├── settings.tsx — Settings tab
+        └── device-info.tsx — Device info tab
 ```
 
 ## File Organization
@@ -321,12 +325,13 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 8. Tokens stored in MMKV, attached via Axios interceptor, refresh queue for 401s
 
 ## Navigation Patterns
-- **Left Drawer**: single `(tabs)` route group, accessible via `DrawerToggleButton` in header (top-left hamburger)
+- **Left Drawer**: single `(tabs)` route group, accessible via custom `PanelLeftOpen` Pressable in header (calls `navigation.toggleDrawer()`)
 - **Drawer-only routes**: Features — registered under `(app)/` (not inside `(tabs)`), no bottom tab
 - **Report routes**: `report` appears both as a drawer-only route (full-page report) and a tab route (compact chart view)
-- **Bottom Tabs**: Home, Search, Profile, Settings, Report with lucide icons
+- **Bottom Tabs**: Search, Report, Home, Settings, Device Info with lucide icons — sorted by `tab.order` from `src/config/navigation.ts`
+- **Profile tab**: drawer-only (route exists at `app/(app)/(tabs)/profile.tsx` but excluded from bottom tab bar)
 - **Auth guard**: redirect logic in `(app)/_layout.tsx` (check `isAuthenticated`, replace to login if false)
-- **Header**: custom `headerLeft` with `DrawerToggleButton` positioned via `ml-3`
+- **Header**: custom `headerLeft` with `PanelLeftOpen` icon via Pressable positioned at `ml-3`
 
 ## Component Patterns
 - All UI components use `className` + `cn()` for styling with Tailwind classes
@@ -364,7 +369,6 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - `react-native-mmkv` (v4) — fast KV storage (lazy, SSR-safe)
 - `i18next` (v26) + `react-i18next` — i18n
 - `lucide-react-native` — icons
-- `lottie-react-native` — Lottie animations (onboarding, loading)
 - `axios` — HTTP client with interceptors
 - `expo-haptics` — haptic feedback
 - `expo-splash-screen` — splash screen lifecycle

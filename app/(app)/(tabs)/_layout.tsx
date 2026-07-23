@@ -1,5 +1,5 @@
 import { Tabs, useRouter } from 'expo-router';
-import { BarChart3, Home, Search, Settings, Smartphone } from 'lucide-react-native';
+import { Home } from 'lucide-react-native';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
@@ -9,16 +9,23 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { NAV_TAB_ITEMS } from '@/config/navigation';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { useThemeColors } from '@/hooks/use-theme-color';
 
-const TAB_CONFIG = {
-  'search': { icon: Search, translationKey: 'navigation.search', href: '/(app)/(tabs)/search' as const },
-  'report': { icon: BarChart3, translationKey: 'navigation.charts', href: '/(app)/(tabs)/report' as const },
-  'index': { icon: Home, translationKey: 'navigation.home', href: '/' as const },
-  'settings': { icon: Settings, translationKey: 'navigation.settings', href: '/(app)/(tabs)/settings' as const },
-  'device-info': { icon: Smartphone, translationKey: 'navigation.deviceInfo', href: '/(app)/(tabs)/device-info' as const },
-} as const;
+type TabConfigEntry = {
+  icon: typeof NAV_TAB_ITEMS[number]['tab']['icon'];
+  translationKey: string;
+  href: string;
+};
+
+const TAB_CONFIG: Record<string, TabConfigEntry> = Object.fromEntries(
+  NAV_TAB_ITEMS.map(item => [item.tab.name, {
+    icon: item.tab.icon,
+    translationKey: item.translationKey,
+    href: `${item.href}`,
+  }]),
+);
 
 function TabItem({
   focused,
@@ -30,7 +37,7 @@ function TabItem({
   t,
 }: {
   focused: boolean;
-  icon: typeof Home;
+  icon: typeof NAV_TAB_ITEMS[number]['tab']['icon'];
   translationKey: string;
   href: string;
   primaryHex: string;
@@ -173,11 +180,16 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-      <Tabs.Screen name="search" options={{ headerTitle: t('navigation.search') }} />
-      <Tabs.Screen name="report" options={{ headerTitle: t('navigation.charts') }} />
-      <Tabs.Screen name="index" options={{ headerTitle: t('navigation.home') }} />
-      <Tabs.Screen name="settings" options={{ headerTitle: t('navigation.settings') }} />
-      <Tabs.Screen name="device-info" options={{ headerTitle: t('navigation.deviceInfo') }} />
+      {NAV_TAB_ITEMS
+        .slice()
+        .sort((a, b) => a.tab.order - b.tab.order)
+        .map(item => (
+          <Tabs.Screen
+            key={item.tab.name}
+            name={item.tab.name}
+            options={{ headerTitle: t(item.translationKey) }}
+          />
+        ))}
     </Tabs>
   );
 }

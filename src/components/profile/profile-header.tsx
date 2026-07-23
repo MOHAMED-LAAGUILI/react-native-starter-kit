@@ -1,3 +1,4 @@
+import { BadgeCheck } from 'lucide-react-native';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image, Text } from '@/components/ui';
@@ -38,9 +39,12 @@ function ProfileHeader({ gradientColor: _gradientColor, name: _name }: ProfileHe
           <Text variant="h4" className="text-white">
             {user?.name ?? 'James Martin'}
           </Text>
-          <Text variant="bodySmall" className="mt-1 text-white/80">
-            {user?.role ?? 'Administrator'}
-          </Text>
+          <View className="flex-row items-center gap-1">
+            <Text variant="bodySmall" className="text-white/80">
+              {user?.role ?? 'Administrator'}
+            </Text>
+            <BadgeCheck size={14} color="#fff" />
+          </View>
         </View>
       </View>
     </View>

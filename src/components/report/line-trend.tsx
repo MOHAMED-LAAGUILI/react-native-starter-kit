@@ -45,6 +45,7 @@ export function LineTrend({
                 width={chartWidth}
                 height={200}
                 onLayout={e => setChartWidth(e.nativeEvent.layout.width)}
+                hideLabels
               />
             )}
         <ChartLegend data={chartData} />

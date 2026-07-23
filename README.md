@@ -119,12 +119,12 @@ To run the app, use a development build instead:
 - **i18next** — Internationalization (English, French)
 - **MMKV** — High-performance key-value storage (SSR-safe lazy init)
 - **Authentication** — Login/register flow with token management, demo mode skip
-- **Drawer + Tabs** — Left drawer with hamburger menu header button, bottom tab bar (Home, Search, Profile, Settings, Report)
+- **Drawer + Tabs** — Left drawer with PanelLeftOpen header button, bottom tab bar (Search, Report, Home, Settings, Device Info) sorted by centralized config
 - **Bottom Sheet** — Reusable bottom sheet component via `@gorhom/bottom-sheet` with snap points, backdrop, pan-to-close
 - **Modal** — Three variants: bottom-sheet (slide-up), centered (scale-in with icon/title/description), centered-action (with action buttons). Uses Reanimated for enter/exit animations.
 - **Toast** — Notification toasts via `@backpackapp-io/react-native-toast` with success/error/info variants, callable from anywhere via `showToast()`
 - **Dark/Light/System theme** — CSS variables in oklch, persisted preference, follows system
-- **Accent Color System** — 7 color palettes (blue, purple, green, orange, red, teal, pink) switchable at runtime; all screens react instantly via `Uniwind.updateCSSVariables()`
+- **Accent Color System** — 8 color palettes (blue, purple, green, orange, red, teal, pink) switchable at runtime; all screens react instantly via `Uniwind.updateCSSVariables()`
 - **Splash Screen** — Custom splash with auto-hide after i18n + auth hydration ready
 - **System UI** — Background color synced with theme mode
 - **Charts** — Interactive donut and bar charts via `react-native-gifted-charts` for report screens
@@ -148,23 +148,25 @@ To run the app, use a development build instead:
 │   │   ├── _layout.tsx
 │   │   └── login.tsx
 │   └── (app)/                  # Authenticated routes
-│       ├── _layout.tsx         # Drawer (left hamburger menu) + auth guard
-│       ├── report.tsx          # Drawer-only report route
-│       ├── preferences.tsx
-│       └── (tabs)/             # Bottom tabs
-│           ├── _layout.tsx
-│           ├── index.tsx       # Home (component showcase)
-│           ├── search.tsx
-│           ├── profile.tsx
-│           ├── report.tsx      # Report (charts, trends, allocation)
-│           └── settings.tsx
+│       ├── _layout.tsx         # Drawer (left PanelLeftOpen via custom Pressable) + auth guard
+│   ├── report.tsx          # Drawer-only report route
+│   ├── dev-preferences.tsx # only in dev mode
+│   ├── dev-onboarding.tsx  # only in dev mode
+│   └── (tabs)/             # Bottom tabs
+│       ├── _layout.tsx
+│       ├── index.tsx       # Home (component showcase, floating center button)
+│       ├── search.tsx
+│       ├── profile.tsx     # Drawer-only, hidden from tab bar
+│       ├── report.tsx      # Report (charts, trends, allocation)
+│       ├── settings.tsx
+│       └── device-info.tsx
 ├── src/
 │   ├── api/                    # Axios client + TanStack Query hooks
 │   ├── components/
 │   │   ├── common/             # LoadingScreen, ErrorFallback
 │   │   ├── drawer/             # DrawerHeaderLeft, AppDrawerContent, etc.
 │   │   ├── home/               # Demo components (cards-demo, extended-demos, overview-cards, etc.)
-│   │   ├── report/             # ReportTabs, ReportSection, TrendSnapshot, HoursDistribution, TopProjectsChart, ProjectAllocation
+│   │   ├── report/             # ReportTabs, ReportSection, TrendSnapshot, HoursDistribution, LineTrend, UnifiedProjects, ProjectAllocation
 │   │   └── ui/                 # Button, Text, Input, BottomSheet, Modal, Calendar, Video, WebView, QRCode, Menu, ...
 │   ├── config/                 # Constants, env helpers, color-palettes.ts
 │   ├── data/                   # Mock data (report.ts)
@@ -236,6 +238,9 @@ This project uses [Context7](https://ctx7.ai) to provide AI coding agents with u
 ### Icon Generators
 - [Expo Assets Generator](https://expo-assets-generator.vercel.app/) — Generate splash, adaptive icon, favicon, and icon for Expo projects
 - [BuildIcon](https://buildicon.netlify.app/) — Generate mobile app icons for iOS, Android, and web
+### SVG Illustration 
+[undraw](https://undraw.co/illustrations)
+[flowbite](https://flowbite.com/illustrations/)
 
 ## EAS Lifecycle
 

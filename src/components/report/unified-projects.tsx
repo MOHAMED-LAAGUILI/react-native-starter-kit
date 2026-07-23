@@ -62,6 +62,7 @@ export function UnifiedProjects({
                 width={chartWidth}
                 height={200}
                 onLayout={handleLayout}
+                hideLabels
               />
             )}
 

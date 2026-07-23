@@ -1,13 +1,13 @@
-import { router, usePathname } from 'expo-router';
-import { DrawerToggleButton } from 'expo-router/drawer';
-import { ArrowLeft } from 'lucide-react-native';
-import { View } from 'react-native';
+import { router, useNavigation, usePathname } from 'expo-router';
+import { ArrowLeft, Menu } from 'lucide-react-native';
+import { Pressable, View } from 'react-native';
 import { Button } from '@/components/ui';
 
 const HEADER_ICON_COLOR = '#fff';
 
 export function DrawerHeaderLeft() {
   const pathname = usePathname();
+  const navigation = useNavigation();
 
   if (pathname.includes('/post/')) {
     return (
@@ -30,7 +30,15 @@ export function DrawerHeaderLeft() {
 
   return (
     <View className="ml-3">
-      <DrawerToggleButton tintColor={HEADER_ICON_COLOR} />
+      <Pressable
+        onPress={() => {
+          // @ts-expect-error - drawer navigation has toggleDrawer
+          navigation.toggleDrawer?.();
+        }}
+        className="size-10 items-center justify-center"
+      >
+        <Menu size={24} color={HEADER_ICON_COLOR} />
+      </Pressable>
     </View>
   );
 }

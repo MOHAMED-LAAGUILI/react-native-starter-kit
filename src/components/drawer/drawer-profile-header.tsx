@@ -1,5 +1,6 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
+import { BadgeCheck } from 'lucide-react-native';
 import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
@@ -59,9 +60,12 @@ export function DrawerProfileHeader() {
           <Text variant="h4" className="text-white">
             {user?.name ?? 'James Martin'}
           </Text>
-          <Text variant="bodySmall" className="mt-0.5 text-white/80">
-            {user?.role ?? 'Administrator'}
-          </Text>
+          <View className="flex-row items-center gap-1">
+            <Text variant="bodySmall" className="text-white/80">
+              {user?.role ?? 'Administrator'}
+            </Text>
+            <BadgeCheck size={14} color="#fff" />
+          </View>
         </View>
       </View>
     </View>

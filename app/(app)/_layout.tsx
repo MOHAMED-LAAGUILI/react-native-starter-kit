@@ -34,27 +34,6 @@ export default function AppLayout() {
         headerTitle: HeaderTitle,
         drawerStyle: { width: '75%' },
       }}
-    >
-      <Drawer.Screen
-        name="(tabs)"
-        options={{
-          drawerItemStyle: { display: 'none' },
-          headerShown: true,
-        }}
-      />
-      <Drawer.Screen
-        name="post/[id]"
-        options={{
-          drawerItemStyle: { display: 'none' },
-          headerShown: true,
-        }}
-      />
-      <Drawer.Screen
-        name="preferences"
-        options={{
-          headerShown: true,
-        }}
-      />
-    </Drawer>
+    />
   );
 }
