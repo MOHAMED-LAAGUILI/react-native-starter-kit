@@ -8,6 +8,7 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 
 import { PostCard } from '@/components/common/post-card';
 import { Text } from '@/components/ui';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
 import { useThemeColors } from '@/hooks/use-theme-color';
 
 function SearchResults({
@@ -20,6 +21,7 @@ function SearchResults({
   isLoading: boolean;
 }) {
   const { t } = useTranslation();
+  const primaryHex = usePrimaryHex();
   const { muted } = useThemeColors();
 
   const handlePress = useCallback((id: number) => {
@@ -51,8 +53,8 @@ function SearchResults({
       ListEmptyComponent={
         isLoading
           ? (
-              <View className="items-center justify-center pt-24">
-                <ActivityIndicator size="large" color="#3b82f6" />
+              <View className="flex-1 items-center justify-center bg-background pt-24">
+                <ActivityIndicator size="large" color={primaryHex} />
               </View>
             )
           : (

@@ -18,7 +18,7 @@ import {
   useThemeStore,
 } from '@/store';
 import { isAndroid } from '@/utils/platform';
-import '@/style/global.css';
+import '../global.css';
 
 export { ErrorBoundary } from 'expo-router';
 

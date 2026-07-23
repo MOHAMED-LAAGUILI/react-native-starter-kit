@@ -1,17 +1,12 @@
 import { ActivityIndicator, View } from 'react-native';
-import { useThemeStore } from '@/store';
+import { usePrimaryHex } from '@/hooks/use-primary-hex';
 
 function LoadingScreen() {
-  const isDark = useThemeStore(s => s.mode) === 'dark';
-  const background = isDark ? '#000000' : '#ffffff';
+  const primaryHex = usePrimaryHex();
 
   return (
-    <View
-      className="flex-1 items-center justify-center gap-4"
-      style={{ backgroundColor: background }}
-    >
-      <ActivityIndicator size="large" color="#73a8fd" />
-
+    <View className="flex-1 items-center justify-center gap-4 bg-background">
+      <ActivityIndicator size="large" color={primaryHex} />
     </View>
   );
 }

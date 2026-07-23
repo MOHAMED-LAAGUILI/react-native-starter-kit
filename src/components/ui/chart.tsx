@@ -40,7 +40,7 @@ function ChartLegend({ data }: { data: ChartDataItem[] }) {
   const total = data.reduce((sum, item) => sum + item.value, 0);
 
   return (
-    <View className="mt-6 gap-2">
+    <View className="gap-2">
       {data.map((item) => {
         const percent = total === 0 ? 0 : (item.value / total) * 100;
 

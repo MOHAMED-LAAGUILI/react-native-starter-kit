@@ -107,7 +107,7 @@ export default antfu(
     ...betterTailwindcss.configs.recommended,
     settings: {
       'better-tailwindcss': {
-        entryPoint: path.resolve(__dirname, './src/style/global.css'),
+        entryPoint: path.resolve(__dirname, './global.css'),
       },
       'import-x/resolver-next': [
         createTypeScriptImportResolver({

@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight, LogIn } from 'lucide-react-native';
 import { Pressable, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from '@/components/ui';
 import { usePrimaryHex } from '@/hooks/use-primary-hex';
 
@@ -23,14 +24,15 @@ export function OnboardingControls({
   const primaryHex = usePrimaryHex();
   const isLast = currentStep === steps.length - 1;
   const isFirst = currentStep === 0;
+  const insets = useSafeAreaInsets();
 
   return (
-    <View className="flex-row items-center justify-between px-6 pb-6">
+    <View className="flex-row items-center justify-between px-6" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
       <Pressable
         onPress={onBack}
         disabled={isFirst}
-        className="size-12 items-center justify-center rounded-full bg-muted"
-        style={{ opacity: isFirst ? 0.3 : 1 }}
+        className="size-12 items-center justify-center rounded-full border bg-muted"
+        style={{ opacity: isFirst ? 0.3 : 1, borderColor: primaryHex }}
       >
         <ArrowLeft size={20} color={primaryHex} />
       </Pressable>
