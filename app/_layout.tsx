@@ -115,7 +115,7 @@ function RootLayout() {
                   duration: 200,
                   flingPositionReturnDuration: 200,
                 }}
-                
+
               />
 
               <PortalHost />
