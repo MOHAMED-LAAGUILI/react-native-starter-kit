@@ -195,7 +195,6 @@ How: Essential Rules
 - `@/` path alias maps to `./src/` (tsconfig paths)
 - `@assets/*` path alias maps to `./assets/*` (tsconfig + Metro resolver)
 - Absolute imports: `import { cn } from '@/lib/utils'`
-- Side-effect CSS: `import '@/global.css'`
 - URL polyfill (entry): `import 'react-native-url-polyfill/auto'`
 - Store selectors for perf: `useAuthStore((s) => s.isAuthenticated)`
 - Navigation config: `import { NAV_ITEMS, NAV_TITLE_MAP, NAV_TAB_ITEMS } from '@/config/navigation'`
@@ -296,7 +295,7 @@ global.css            — Tailwind v4 entry + CSS vars (oklch light/dark, @varia
 - **Selectors**: Use arrow selectors for re-render perf: `useAuthStore((s) => s.isAuthenticated)`
 
 ## Theme System
-- CSS variables in `global.css` (oklch colors, `@variant light` / `@variant dark`)
+- CSS variables in `./src/style/global.css` (oklch colors, `@variant light` / `@variant dark`)
 - `ThemeProvider` syncs Zustand `themeStore.mode` → `Uniwind.setTheme()` + React Navigation theme
 - Modes: `light`, `dark`, `system` (follows `Appearance`)
 - **Accent Colors**: 7 palettes (blue, purple, green, orange, red, teal, pink) defined in `src/config/color-palettes.ts`; `themeStore.primaryColor` persisted in MMKV

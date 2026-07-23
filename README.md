@@ -162,6 +162,8 @@ To run the app, use a development build instead:
 │       └── device-info.tsx
 ├── src/
 │   ├── api/                    # Axios client + TanStack Query hooks
+│   ├── style/
+│   │   └── global.css          # Tailwind v4 + Uniwind entry, oklch CSS vars (light/dark)
 │   ├── components/
 │   │   ├── common/             # LoadingScreen, ErrorFallback
 │   │   ├── drawer/             # DrawerHeaderLeft, AppDrawerContent, etc.
@@ -179,7 +181,6 @@ To run the app, use a development build instead:
 │   ├── types/                  # Type declarations (uniwind.d.ts)
 │   ├── utils/                  # cn() utility, format helpers, platform helpers
 │   └── validation/             # Zod schemas (login, register, forgotPassword)
-├── global.css                  # Tailwind v4 + Uniwind entry, oklch CSS vars (light/dark)
 ├── app.config.ts               # Expo config (EAS, plugins, fonts, localization)
 ├── metro.config.js             # Expo + Uniwind Metro plugin
 ├── babel.config.js             # module-resolver, reanimated, dotenv
